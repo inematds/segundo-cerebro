@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="segundo-cerebro">
+  <title>Módulo 1.1 · Por que um segundo cérebro | Segundo Cérebro pro Claude Code</title>
+
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/learn.css">
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color:#059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,.18); }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#34d399; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#059669; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- NAV (T1 ativa) -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
+          <div class="relative">
+            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
+            <div data-inema-appearance class="inema-appearance-pop">
+              <p class="text-xs text-neutral-400 mb-1">Tema</p>
+              <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
+              <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
+              <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
+              <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
+              <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+              <div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+            </div>
+          </div>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
+      <span class="text-emerald-400">Módulo 1.1</span>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+    <article id="modulo-1-1" data-inema-module="1-1" data-inema-track="1">
+      <!-- HEADER -->
+      <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.1</span>
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧠 Por que o Claude Code precisa de um segundo cérebro</h1>
+          <p class="text-lg text-neutral-400 max-w-3xl">A diferença entre uma sessão que esquece tudo e um agente com memória externa consultável. Aqui você ganha o vocabulário e o "porquê" — sem nenhum termo solto.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+              <div data-inema-meter="modulo:1-1" class="inema-ring inema-ring--sm" aria-label="Progresso do módulo 1.1"><span class="inema-ring__value" data-inema-meter-pct>0%</span><svg viewBox="0 0 36 36"><circle class="inema-ring__track" r="16" cx="18" cy="18"/><circle data-inema-ring class="inema-ring__bar" r="16" cx="18" cy="18"/></svg></div>
+              <div class="text-xs text-neutral-400" data-inema-meter-frac>0 de 6</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+        <!-- TOC -->
+        <aside class="hidden lg:block">
+          <nav data-inema-toc aria-label="Índice do módulo" class="sticky top-24">
+            <p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">Neste módulo</p>
+            <p class="text-sm text-neutral-400 mb-3">Seção <span data-inema-section-counter>1 de 6</span></p>
+            <ol class="space-y-1 text-sm">
+              <li><a href="#topico-1" class="inema-toc-link text-neutral-400 hover:text-emerald-400">1. O agente e a memória</a></li>
+              <li><a href="#topico-2" class="inema-toc-link text-neutral-400 hover:text-emerald-400">2. A janela de contexto</a></li>
+              <li><a href="#topico-3" class="inema-toc-link text-neutral-400 hover:text-emerald-400">3. Por que grep não basta</a></li>
+              <li><a href="#topico-4" class="inema-toc-link text-neutral-400 hover:text-emerald-400">4. O segundo cérebro</a></li>
+              <li><a href="#topico-5" class="inema-toc-link text-neutral-400 hover:text-emerald-400">5. O que já é nativo</a></li>
+              <li><a href="#topico-6" class="inema-toc-link text-neutral-400 hover:text-emerald-400">6. A promessa do stack</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="inema-prose">
+          <!-- TÓPICO 1 -->
+          <section id="topico-1" data-inema-topic="modulo-1-1#topico-1" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+                <h2 class="text-2xl font-bold">🤖 O agente e a "memória" dele</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t1-p1">
+              O <strong class="text-emerald-400">Claude Code</strong> é um agente de IA que vive no seu terminal. Diferente de um chat comum, ele <em>age</em>: lê arquivos do projeto, edita código, roda comandos e encadeia passos para concluir uma tarefa. Quando falamos de "memória" dele, estamos falando de tudo que ele consegue ter diante dos olhos na hora de responder.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é um "agente"</h3>
+              <p class="text-neutral-300 text-sm">Um <strong>LLM</strong> é o modelo de IA que roda atrás do ChatGPT/Claude. Um <strong>agente</strong> é esse modelo com <strong>ferramentas</strong>: coisas que ele faz sozinho — abrir um arquivo, rodar um comando, editar uma linha. O Claude Code é exatamente isso, dentro do seu terminal.</p>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t1-p2">
+              A memória do agente tem duas fontes: a <strong>conversa atual</strong> (o que você falou e o que ele leu nesta sessão) e o que você <strong>aponta</strong> para ele consultar (arquivos, regras, índices). O problema: a conversa some quando a sessão termina, e apontar "o repositório inteiro" raramente cabe. É essa lacuna que o curso resolve.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+              <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+                <h4 class="font-bold text-emerald-400 mb-3">✓ Memória de verdade</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Persiste entre sessões.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>É consultável: o agente acha o que precisa.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Guarda relações, não só texto solto.</span></li>
+                </ul>
+              </div>
+              <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+                <h4 class="font-bold text-red-400 mb-3">✗ Só a sessão</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Esquece tudo ao fechar.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Recomeça do zero em projetos grandes.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Reaprende o mesmo contexto toda vez.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Agente</div><div class="text-xs text-neutral-400">LLM + ferramentas</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Sessão</div><div class="text-xs text-neutral-400">Conversa atual</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Memória externa</div><div class="text-xs text-neutral-400">Fora da sessão</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Consulta</div><div class="text-xs text-neutral-400">Achar sob demanda</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+                <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 2 -->
+          <section id="topico-2" data-inema-topic="modulo-1-1#topico-2" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+                <h2 class="text-2xl font-bold">🪟 A janela de contexto e seus limites</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t2-p1">
+              A <strong class="text-emerald-400">janela de contexto</strong> é o quanto de texto o modelo consegue ler de uma vez. É medida em <strong>tokens</strong> — pedaços de palavra (mais ou menos 3 a 4 caracteres cada). É grande, e os modelos mais novos chegam a 1 milhão de tokens, mas ainda assim é <strong>finita</strong>: um repositório inteiro, com centenas de arquivos, raramente cabe junto.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é um "token"</h3>
+              <p class="text-neutral-300 text-sm">Token é a unidade que o modelo lê. A palavra "memória" pode virar 2 ou 3 tokens. Quanto mais você enfia na janela, mais ele "paga" para ler — e há um teto. Por isso escolher <em>o que</em> ler importa tanto.</p>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+              <svg viewBox="0 0 1000 240" class="w-full h-auto" role="img" aria-label="Uma janela de contexto finita: cabem alguns arquivos dentro, mas o repositório inteiro transborda para fora">
+                <defs>
+                  <linearGradient id="m11a-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+                  <filter id="m11a-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <pattern id="m11a-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
+                </defs>
+                <rect x="0" y="0" width="1000" height="240" fill="url(#m11a-grid)"/>
+                <g filter="url(#m11a-glow)"><rect x="40" y="40" width="360" height="160" rx="16" fill="#0e2018" stroke="url(#m11a-grad)" stroke-width="2.5"/></g>
+                <text x="220" y="30" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="14" font-weight="600">Janela de contexto (finita)</text>
+                <g font-family="Inter,sans-serif" font-size="12">
+                  <rect x="64" y="64" width="150" height="30" rx="7" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.6"/><text x="139" y="84" text-anchor="middle" fill="#bfe6ff">arquivo lido</text>
+                  <rect x="226" y="64" width="150" height="30" rx="7" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.6"/><text x="301" y="84" text-anchor="middle" fill="#bfe6ff">arquivo lido</text>
+                  <rect x="64" y="104" width="150" height="30" rx="7" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.6"/><text x="139" y="124" text-anchor="middle" fill="#bfe6ff">arquivo lido</text>
+                  <rect x="226" y="104" width="150" height="30" rx="7" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.6"/><text x="301" y="124" text-anchor="middle" fill="#bfe6ff">arquivo lido</text>
+                  <rect x="64" y="144" width="312" height="40" rx="7" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.6" opacity="0.5"/><text x="220" y="168" text-anchor="middle" fill="#7fb6d6">…e o resto não cabe</text>
+                </g>
+                <text x="560" y="120" text-anchor="middle" fill="#9ca3af" font-family="Inter,sans-serif" font-size="30">»</text>
+                <g font-family="Inter,sans-serif" font-size="12">
+                  <text x="760" y="30" text-anchor="middle" fill="#f87171" font-size="14" font-weight="600">Repositório inteiro</text>
+                  <g opacity="0.8">
+                    <rect x="620" y="48" width="280" height="22" rx="5" fill="#2a0f16" stroke="#f87171" stroke-width="1.2"/>
+                    <rect x="620" y="76" width="280" height="22" rx="5" fill="#2a0f16" stroke="#f87171" stroke-width="1.2"/>
+                    <rect x="620" y="104" width="280" height="22" rx="5" fill="#2a0f16" stroke="#f87171" stroke-width="1.2"/>
+                    <rect x="620" y="132" width="280" height="22" rx="5" fill="#2a0f16" stroke="#f87171" stroke-width="1.2"/>
+                    <rect x="620" y="160" width="280" height="22" rx="5" fill="#2a0f16" stroke="#f87171" stroke-width="1.2"/>
+                    <rect x="620" y="188" width="280" height="22" rx="5" fill="#2a0f16" stroke="#f87171" stroke-width="1.2"/>
+                  </g>
+                  <text x="760" y="226" text-anchor="middle" fill="#fca5a5" font-size="11">centenas de arquivos — não cabe na janela</text>
+                </g>
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 mb-6">↑ Cabe um punhado de arquivos na janela; o repositório inteiro transborda. Por isso o agente precisa <strong class="text-emerald-400">escolher bem</strong> o que ler — e um mapa ajuda nessa escolha.</p>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Token</div><div class="text-xs text-neutral-400">Pedaço de palavra</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Janela</div><div class="text-xs text-neutral-400">Quanto cabe</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Custo</div><div class="text-xs text-neutral-400">Ler tem preço</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Seleção</div><div class="text-xs text-neutral-400">Escolher o que ler</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 3 -->
+          <section id="topico-3" data-inema-topic="modulo-1-1#topico-3" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+                <h2 class="text-2xl font-bold">🔍 Por que buscar por texto (grep) não basta</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t3-p1">
+              Quando o agente não tem um mapa, a ferramenta dele é o <strong class="text-emerald-400">grep</strong>: a busca literal por uma palavra dentro dos arquivos. Ele acha <em>onde</em> o termo aparece — mas não sabe o que se <strong>relaciona</strong> com o quê, nem o porquê. "Achar" não é "entender".
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "grep"</h3>
+              <p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">grep</code> é um comando clássico de terminal que procura uma palavra em arquivos e devolve as linhas onde ela aparece. Útil, mas burro: não conhece sinônimos, contexto ou conexões.</p>
+            </div>
+
+            <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+              <svg viewBox="0 0 1000 250" class="w-full h-auto" role="img" aria-label="À esquerda, grep devolve uma lista plana de ocorrências; à direita, o mapa mostra um conceito ligado aos conceitos vizinhos">
+                <defs>
+                  <linearGradient id="m11b-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+                  <filter id="m11b-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <pattern id="m11b-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
+                  <marker id="m11b-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+                </defs>
+                <rect x="0" y="0" width="1000" height="250" fill="url(#m11b-grid)"/>
+                <line x1="500" y1="20" x2="500" y2="230" stroke="#9ca3af" stroke-width="1.4" stroke-dasharray="6 7" opacity="0.4"/>
+                <!-- esquerda: grep lista plana -->
+                <text x="240" y="34" text-anchor="middle" fill="#9ca3af" font-family="Inter,sans-serif" font-size="14" font-weight="600">grep — lista plana</text>
+                <g font-family="Inter,sans-serif" font-size="12">
+                  <rect x="80" y="56" width="320" height="26" rx="5" fill="#26201a" stroke="#9ca3af" stroke-width="1.2"/><text x="92" y="74" fill="#e5e7eb">arquivo-a.md:12  …contexto…</text>
+                  <rect x="80" y="90" width="320" height="26" rx="5" fill="#26201a" stroke="#9ca3af" stroke-width="1.2"/><text x="92" y="108" fill="#e5e7eb">arquivo-c.md:88  …contexto…</text>
+                  <rect x="80" y="124" width="320" height="26" rx="5" fill="#26201a" stroke="#9ca3af" stroke-width="1.2"/><text x="92" y="142" fill="#e5e7eb">guia.md:5     …contexto…</text>
+                  <rect x="80" y="158" width="320" height="26" rx="5" fill="#26201a" stroke="#9ca3af" stroke-width="1.2"/><text x="92" y="176" fill="#e5e7eb">notas.md:34   …contexto…</text>
+                  <text x="240" y="210" text-anchor="middle" fill="#9ca3af" font-size="11">só posições — nenhuma relação</text>
+                </g>
+                <!-- direita: mapa -->
+                <text x="760" y="34" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="14" font-weight="600">mapa — conceito + vizinhos</text>
+                <g stroke="#38bdf8" stroke-width="1.8" fill="none" opacity="0.6">
+                  <path d="M700,130 C740,90 760,80 800,72" marker-end="url(#m11b-ahc)"/>
+                  <path d="M700,130 L800,130" marker-end="url(#m11b-ahc)"/>
+                  <path d="M700,130 C740,170 760,180 800,188" marker-end="url(#m11b-ahc)"/>
+                </g>
+                <g filter="url(#m11b-glow)"><rect x="584" y="104" width="116" height="52" rx="13" fill="#0e2018" stroke="url(#m11b-grad)" stroke-width="2.5"/></g>
+                <text x="642" y="135" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700">contexto</text>
+                <g font-family="Inter,sans-serif" font-size="12">
+                  <g class="wf-a"><rect x="800" y="56" width="130" height="32" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="865" y="77" text-anchor="middle" fill="#bfe6ff">subagente</text></g>
+                  <g class="wf-a"><rect x="800" y="114" width="130" height="32" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="865" y="135" text-anchor="middle" fill="#bfe6ff">hooks</text></g>
+                  <g class="wf-a"><rect x="800" y="172" width="130" height="32" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="865" y="193" text-anchor="middle" fill="#bfe6ff">janela 1M</text></g>
+                </g>
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 mb-6">↑ O grep devolve uma pilha de posições; o mapa devolve o conceito <em>e</em> seus vizinhos. É a diferença entre uma lista de endereços e um mapa do bairro.</p>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">grep</div><div class="text-xs text-neutral-400">Busca literal</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Semântica</div><div class="text-xs text-neutral-400">Pelo sentido</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Relação</div><div class="text-xs text-neutral-400">O que liga a quê</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Mapa</div><div class="text-xs text-neutral-400">≠ índice</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 4 -->
+          <section id="topico-4" data-inema-topic="modulo-1-1#topico-4" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+                <h2 class="text-2xl font-bold">🧩 O que é um "segundo cérebro"</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t4-p1">
+              "Segundo cérebro" é um termo de produtividade pessoal: uma base de conhecimento <strong class="text-emerald-400">externa e organizada</strong> que você consulta em vez de tentar lembrar de tudo. Aqui, adaptamos a ideia para o agente: o segundo cérebro é o <strong>grafo</strong> + o <strong>vault</strong> que guardam o entendimento de um projeto fora da sessão efêmera.
+            </p>
+
+            <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+              <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">💡</span> A ideia central do curso</h3>
+              <p class="text-neutral-300 mb-4">Tirar o conhecimento de dentro de uma conversa que some e colocá-lo num lugar persistente, navegável e consultável — por você <em>e</em> pelo agente.</p>
+              <ul class="space-y-2 text-neutral-300 text-sm">
+                <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Persistente:</strong> não some quando a sessão fecha.</span></li>
+                <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Navegável:</strong> conceitos ligados por links, não arquivos soltos.</span></li>
+                <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Consultável:</strong> o agente acha o que precisa sem varrer tudo.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "PKM"</h3>
+              <p class="text-neutral-300 text-sm"><strong>PKM</strong> (Personal Knowledge Management, gestão pessoal de conhecimento) é a prática de guardar e conectar o que você aprende. O Obsidian é uma ferramenta de PKM — e é por isso que ele encaixa tão bem aqui.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">PKM</div><div class="text-xs text-neutral-400">Conhecimento pessoal</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Persistência</div><div class="text-xs text-neutral-400">Não some</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Navegável</div><div class="text-xs text-neutral-400">Links entre ideias</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Consultável</div><div class="text-xs text-neutral-400">Achar sob demanda</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 5 -->
+          <section id="topico-5" data-inema-topic="modulo-1-1#topico-5" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+                <h2 class="text-2xl font-bold">📝 O que o Claude Code já tem nativo</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t5-p1">
+              O Claude Code não é amnésico de fábrica. Ele já lê um arquivo <code class="font-mono text-xs bg-dark-900 px-1 rounded">CLAUDE.md</code> na raiz do projeto com instruções e preferências, e tem sua própria memória. Isso é ótimo para <strong>regras</strong> ("sempre rode os testes", "use português") — mas não é um <strong>mapa de um repositório inteiro</strong>.
+            </p>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">CLAUDE.md (exemplo ilustrativo)</span></div>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># Projeto X
+
+- Sempre responda em português.
+- Rode os testes antes de dizer "pronto".
+- A documentação de referência está em ./docs.</pre>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t5-p2">
+              Repare: o <code class="font-mono text-xs bg-dark-900 px-1 rounded">CLAUDE.md</code> diz "a doc está em ./docs", mas não diz <em>como os conceitos da doc se conectam</em>. É aí que o Graphify entra — ele não compete com o nativo, ele <strong class="text-emerald-400">complementa</strong>: o nativo guarda regras; o grafo guarda o mapa.
+            </p>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">CLAUDE.md</div><div class="text-xs text-neutral-400">Regras do projeto</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Memória nativa</div><div class="text-xs text-neutral-400">Preferências</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Limite</div><div class="text-xs text-neutral-400">Não é mapa</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Complemento</div><div class="text-xs text-neutral-400">Soma, não compete</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 6 -->
+          <section id="topico-6" data-inema-topic="modulo-1-1#topico-6" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+                <h2 class="text-2xl font-bold">🎯 A promessa do stack Graphify + Obsidian</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-1-t6-p1">
+              Juntando tudo: o <strong class="text-emerald-400">Graphify</strong> cria o mapa a partir de um repositório ou de documentos; o <strong class="text-emerald-400">Obsidian</strong> guarda esse mapa como markdown navegável; o <strong class="text-emerald-400">Claude Code</strong> consulta o mapa <em>no contexto do seu projeto</em>. Juntos, são o segundo cérebro.
+            </p>
+
+            <div class="space-y-5 mb-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">1</div>
+                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Graphify cria o mapa</h4><p class="text-sm text-neutral-300">Extrai entidades, relações e comunidades de uma fonte. Saída: o grafo.</p></div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">2</div>
+                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Obsidian guarda o mapa</h4><p class="text-sm text-neutral-300">Um markdown por conceito, com backlinks. Persistente e navegável.</p></div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">3</div>
+                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Claude Code consulta o mapa</h4><p class="text-sm text-neutral-300">Responde sobre o projeto no contexto certo, sem reler tudo.</p></div>
+              </div>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Stack</div><div class="text-xs text-neutral-400">3 peças juntas</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Mapa→vault→agente</div><div class="text-xs text-neutral-400">O fluxo</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Contexto</div><div class="text-xs text-neutral-400">Do seu projeto</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Roteiro</div><div class="text-xs text-neutral-400">As 3 trilhas</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- CHECAGEM LEVE -->
+          <div data-inema-check="modulo-1-1#q1" class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6">
+            <p class="font-medium mb-4">✋ Auto-recuperação (opcional, não bloqueia): por que um mapa do conhecimento ajuda mais que só <code class="font-mono text-xs bg-dark-900 px-1 rounded">grep</code>?</p>
+            <div class="inema-check-options space-y-2">
+              <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Porque o grep é lento em arquivos grandes.</button>
+              <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Porque o mapa guarda as relações entre conceitos, não só onde a palavra aparece.</button>
+              <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Porque o grep não funciona em markdown.</button>
+            </div>
+            <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+          </div>
+
+          <!-- RESUMO -->
+          <section class="mb-12">
+            <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+              <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do módulo</h2>
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Agente ≠ chat:</strong> <span class="text-neutral-400">o Claude Code age com ferramentas e tem memória limitada à sessão.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">A janela de contexto é finita:</strong> <span class="text-neutral-400">por isso escolher o que ler importa.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">grep acha, mapa entende:</strong> <span class="text-neutral-400">relações é o que falta na busca literal.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Segundo cérebro:</strong> <span class="text-neutral-400">memória externa, persistente, navegável e consultável.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">O stack complementa o nativo:</strong> <span class="text-neutral-400">CLAUDE.md guarda regras; o grafo guarda o mapa.</span></div></div>
+              </div>
+              <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+                <h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo</h3>
+                <p class="text-neutral-300">1.2 · Grafo de conhecimento sem mistério — nós, arestas, comunidades e god nodes.</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para a Trilha 1</a>
+                <a href="modulo-1-2.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo: 1.2 Grafo de conhecimento →</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Segundo Cérebro pro Claude Code · Módulo 1.1 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-1-1#q1', { answer: 1, explain: { 0: 'Velocidade não é o ponto — o grep até é rápido; falta a ele entender relações.', 1: 'Isso. O mapa guarda como os conceitos se ligam, então o agente navega o sentido, não só posições de texto.', 2: 'O grep funciona em markdown normalmente; o problema é que ele só acha texto, não conexões.' } });
+    }
+  </script>
+</body>
+</html>

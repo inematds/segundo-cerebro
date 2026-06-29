@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="segundo-cerebro">
+  <title>Módulo 2.6 · As 4 estratégias de integração | Segundo Cérebro pro Claude Code</title>
+
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/learn.css">
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-blue-400 { color:#2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,.18); }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#60a5fa; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#2563eb; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- NAV (T2 ativa) -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
+          <div class="relative">
+            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
+            <div data-inema-appearance class="inema-appearance-pop">
+              <p class="text-xs text-neutral-400 mb-1">Tema</p>
+              <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
+              <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
+              <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
+              <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
+              <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+              <div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+            </div>
+          </div>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.6</span>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+    <article id="modulo-2-6" data-inema-module="2-6" data-inema-track="2">
+      <!-- HEADER -->
+      <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.6</span>
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧩 As 4 estratégias de integração</h1>
+          <p class="text-lg text-neutral-400 max-w-3xl">Você tem o vault gerado — e agora? Quanto desse conhecimento entra no seu cérebro principal? São quatro caminhos, do totalmente isolado ao totalmente diluído, com um trade-off claro entre coerência e reversibilidade. Aqui você decide o seu.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~35</div><div class="text-xs text-neutral-400">Minutos</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+              <div data-inema-meter="modulo:2-6" class="inema-ring inema-ring--sm" aria-label="Progresso do módulo 2.6"><span class="inema-ring__value" data-inema-meter-pct>0%</span><svg viewBox="0 0 36 36"><circle class="inema-ring__track" r="16" cx="18" cy="18"/><circle data-inema-ring class="inema-ring__bar" r="16" cx="18" cy="18"/></svg></div>
+              <div class="text-xs text-neutral-400" data-inema-meter-frac>0 de 6</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+        <!-- TOC -->
+        <aside class="hidden lg:block">
+          <nav data-inema-toc aria-label="Índice do módulo" class="sticky top-24">
+            <p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">Neste módulo</p>
+            <p class="text-sm text-neutral-400 mb-3">Seção <span data-inema-section-counter>1 de 6</span></p>
+            <ol class="space-y-1 text-sm">
+              <li><a href="#topico-1" class="inema-toc-link text-neutral-400 hover:text-blue-400">1. Vault standalone (isolado)</a></li>
+              <li><a href="#topico-2" class="inema-toc-link text-neutral-400 hover:text-blue-400">2. Subpasta-quarentena</a></li>
+              <li><a href="#topico-3" class="inema-toc-link text-neutral-400 hover:text-blue-400">3. Importação seletiva (harvest)</a></li>
+              <li><a href="#topico-4" class="inema-toc-link text-neutral-400 hover:text-blue-400">4. Redistribuição (case a case)</a></li>
+              <li><a href="#topico-5" class="inema-toc-link text-neutral-400 hover:text-blue-400">5. Mover pro vault principal</a></li>
+              <li><a href="#topico-6" class="inema-toc-link text-neutral-400 hover:text-blue-400">6. Qual escolher</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="inema-prose">
+          <!-- TÓPICO 1 -->
+          <section id="topico-1" data-inema-topic="modulo-2-6#topico-1" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
+                <h2 class="text-2xl font-bold">🧪 Vault standalone (isolado)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-6-t1-p1">
+              A estratégia mais simples é não integrar nada: mantenha o vault gerado pelo Graphify como um <strong class="text-blue-400">vault próprio e separado</strong> do seu vault principal. Ele vive sozinho — você abre quando precisa daquele conhecimento e fecha quando termina. É o comportamento <strong>padrão</strong> e o mais seguro de todos.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Lembrete: o que é um "vault"</h3>
+              <p class="text-neutral-300 text-sm">No Obsidian, um <strong>vault</strong> é só uma pasta de arquivos markdown que ele trata como uma base de conhecimento. Ter dois vaults é ter duas pastas independentes — abrir um não mexe no outro. Por isso "standalone" é à prova de erro: nada do gerado toca o que você já tinha.</p>
+            </div>
+
+            <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+              <svg viewBox="0 0 1000 200" class="w-full h-auto" role="img" aria-label="Espectro das quatro estratégias da esquerda para a direita: standalone (mais reversível e isolado), quarentena, harvest e redistribuição (mais integrado e coerente)">
+                <defs>
+                  <linearGradient id="m26a-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+                  <filter id="m26a-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <pattern id="m26a-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+                  <marker id="m26a-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+                </defs>
+                <rect x="0" y="0" width="1000" height="200" fill="url(#m26a-grid)"/>
+                <text x="500" y="28" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="600">Do isolado ao integrado</text>
+                <g fill="none" stroke="#60a5fa" stroke-width="1.8" opacity="0.55">
+                  <path d="M244,86 L268,86" marker-end="url(#m26a-ah)"/>
+                  <path d="M488,86 L512,86" marker-end="url(#m26a-ah)"/>
+                  <path d="M732,86 L756,86" marker-end="url(#m26a-ah)"/>
+                </g>
+                <g font-family="Inter,sans-serif">
+                  <rect x="24" y="52" width="220" height="68" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="134" y="82" text-anchor="middle" fill="#bfe6ff" font-size="13" font-weight="600">Standalone</text>
+                  <text x="134" y="102" text-anchor="middle" fill="#9ad6ff" font-size="11">vault à parte</text>
+                  <rect x="268" y="52" width="220" height="68" rx="11" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="378" y="82" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">Quarentena</text>
+                  <text x="378" y="102" text-anchor="middle" fill="#7db0f5" font-size="11">subpasta deletável</text>
+                  <rect x="512" y="52" width="220" height="68" rx="11" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="622" y="82" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">Harvest</text>
+                  <text x="622" y="102" text-anchor="middle" fill="#7db0f5" font-size="11">só o que serve</text>
+                  <g filter="url(#m26a-glow)"><rect x="756" y="48" width="220" height="76" rx="13" fill="#0e1622" stroke="url(#m26a-grad)" stroke-width="2.5"/></g>
+                  <text x="866" y="82" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="700">Redistribuição</text>
+                  <text x="866" y="102" text-anchor="middle" fill="#bcd7ff" font-size="11">diluído no vault</text>
+                </g>
+                <g font-family="Inter,sans-serif" font-size="11" fill="#7db0f5">
+                  <text x="24" y="160">↤ mais reversível</text>
+                  <text x="976" y="160" text-anchor="end">mais coerente ↦</text>
+                </g>
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 mb-6">↑ As quatro estratégias num eixo só: à esquerda você desfaz com um clique; à direita o conhecimento se funde ao seu — mais valioso, mais difícil de reverter. O <strong class="text-blue-400">standalone</strong> é a ponta esquerda.</p>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Standalone</div><div class="text-xs text-neutral-400">Vault à parte</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Isolado</div><div class="text-xs text-neutral-400">Não toca o principal</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Default</div><div class="text-xs text-neutral-400">O padrão</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Seguro</div><div class="text-xs text-neutral-400">Zero risco</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+                <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 2 -->
+          <section id="topico-2" data-inema-topic="modulo-2-6#topico-2" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
+                <h2 class="text-2xl font-bold">🚧 Subpasta-quarentena (deletável)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-6-t2-p1">
+              Um passo a mais que o standalone: jogue tudo numa <strong class="text-blue-400">subpasta do seu vault principal</strong> — por exemplo <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/claude-code-docs</code> — que você pode apagar inteira a qualquer momento. O conhecimento fica perto, no mesmo contexto que o resto, mas <strong>isolável</strong>: se não gostar, deleta a pasta e acabou. É o meio-termo perfeito.
+            </p>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-blue-500/60"></span><span class="ml-2 font-mono">seu-vault-principal/ (exemplo ilustrativo)</span></div>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">meu-vault/
+├── Projetos/
+├── Diário/
+└── graph-imports/          ← a quarentena
+    └── claude-code-docs/    ← apague esta pasta e nada mais é afetado
+        ├── Hooks.md
+        ├── Subagents.md
+        └── Context-Window.md</pre>
+            </div>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Por que "quarentena"</h3>
+              <p class="text-neutral-300 text-sm">A ideia vem de testar algo novo sem deixá-lo se espalhar. Como os arquivos ficam todos sob uma única pasta-raiz, eles não se misturam às suas notas — e a reversão é uma operação só: apagar a pasta. Você ganha o contexto do vault principal sem o compromisso da integração total.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Quarentena</div><div class="text-xs text-neutral-400">Isolável</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Subpasta</div><div class="text-xs text-neutral-400">Uma raiz só</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Deletável</div><div class="text-xs text-neutral-400">Reverte fácil</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Meio-termo</div><div class="text-xs text-neutral-400">Perto, mas isolado</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 3 -->
+          <section id="topico-3" data-inema-topic="modulo-2-6#topico-3" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
+                <h2 class="text-2xl font-bold">🌾 Importação seletiva (harvest)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-6-t3-p1">
+              Em vez de trazer tudo, você <strong class="text-blue-400">colhe um recorte</strong>: peça ao Claude Code para importar só as notas relevantes — por exemplo as ~100 que falam de <em>subagents</em> — e ignorar o resto. É curadoria: o vault principal cresce só com o que você realmente vai usar, e os 500 arquivos que nunca consultaria ficam de fora.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+              <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+                <h4 class="font-bold text-blue-400 mb-3">✓ Harvest (curadoria)</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Só o que serve entra no vault.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Mantém o principal enxuto e navegável.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Você decide o tema; o agente filtra.</span></li>
+                </ul>
+              </div>
+              <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+                <h4 class="font-bold text-red-400 mb-3">✗ Despejar tudo</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>600 arquivos, a maioria nunca aberta.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Ruído na graph view e na busca.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Difícil achar o que importa depois.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- PROMPT COPY-RUN (b) harvest -->
+            <div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3"><span class="text-lg">💬</span><span class="font-semibold text-blue-400">Prompt copy-run · colher só um tema</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-neutral-300">Objetivo:</strong> trazer para o vault principal apenas as notas de um tema, deixando o resto fora.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-200 bg-black/40 rounded-lg p-4 overflow-x-auto leading-relaxed border border-dark-600">No vault gerado em ~/vault/graphify/claude-code, traga apenas as
+notas relacionadas a &lt;tema&gt; (ex.: subagents) para a subpasta
+graph-imports/&lt;tema&gt; do meu vault principal em &lt;caminho-do-vault&gt;
+e ignore o resto. Preserve os wikilinks entre as notas que vieram.
+Liste o que trouxe e o que ficou de fora.</pre>
+              <p class="text-sm text-neutral-400 mt-3"><strong class="text-neutral-300">Como verificar:</strong> abra <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/&lt;tema&gt;</code> no Obsidian e conte os arquivos — deve ser o recorte (dezenas), não o corpus inteiro (centenas). Confira que os backlinks internos ainda funcionam.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Harvest</div><div class="text-xs text-neutral-400">Colher um recorte</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Seleção</div><div class="text-xs text-neutral-400">Por tema</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Curadoria</div><div class="text-xs text-neutral-400">Vault enxuto</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Filtro</div><div class="text-xs text-neutral-400">Ignora o resto</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 4 -->
+          <section id="topico-4" data-inema-topic="modulo-2-6#topico-4" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
+                <h2 class="text-2xl font-bold">🔀 Redistribuição (case a case)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-6-t4-p1">
+              A integração máxima: o Claude Code <strong class="text-blue-400">redistribui cada nota</strong> para a subpasta do seu vault que faz mais sentido — uma nota de hooks vai pra sua pasta de automação, uma de contexto vai pra de fundamentos. O conhecimento se <strong>dilui na sua estrutura existente</strong>, como se sempre tivesse estado lá. Coerência total — e o caminho mais difícil de desfazer.
+            </p>
+
+            <div class="space-y-5 mb-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">1</div>
+                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">O agente lê cada nota</h4><p class="text-sm text-neutral-300">Analisa o assunto de cada arquivo gerado, um por um.</p></div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">2</div>
+                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Decide o destino</h4><p class="text-sm text-neutral-300">Casa cada nota com a subpasta do seu vault que melhor combina.</p></div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">3</div>
+                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Move e religa</h4><p class="text-sm text-neutral-300">Distribui os arquivos e ajusta os wikilinks para os novos caminhos.</p></div>
+              </div>
+            </div>
+
+            <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-red-400 mb-2 flex items-center"><span class="mr-2">⚠️</span> O custo da redistribuição</h3>
+              <p class="text-neutral-300 text-sm">Depois que as notas se espalham por dezenas de pastas, não há mais "uma pasta para apagar". Reverter vira um trabalho manual de caçar arquivo por arquivo. É uma troca consciente: você ganha coerência máxima e perde a saída fácil. Faça com o vault versionado (git) ou um backup à mão.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Redistribuição</div><div class="text-xs text-neutral-400">Nota a nota</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Coerência</div><div class="text-xs text-neutral-400">Funde-se ao seu</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Risco</div><div class="text-xs text-neutral-400">Difícil reverter</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Backup</div><div class="text-xs text-neutral-400">git antes</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 5 -->
+          <section id="topico-5" data-inema-topic="modulo-2-6#topico-5" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
+                <h2 class="text-2xl font-bold">🚚 Mover pro vault principal (o prompt)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-6-t5-p1">
+              Escolheu a <strong class="text-blue-400">quarentena</strong>? Aqui está a execução prática. Em vez de arrastar pasta a pasta no explorador de arquivos, você descreve o que quer e o Claude Code transfere a estrutura inteira por você — em menos de um minuto, preservando os wikilinks.
+            </p>
+
+            <!-- PROMPT COPY-RUN (a) move -->
+            <div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3"><span class="text-lg">💬</span><span class="font-semibold text-blue-400">Prompt copy-run · mover o vault inteiro</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-neutral-300">Objetivo:</strong> mover a estrutura do vault gerado para dentro do principal, numa subpasta de quarentena.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-200 bg-black/40 rounded-lg p-4 overflow-x-auto leading-relaxed border border-dark-600">Mova a estrutura do vault em ~/vault/graphify/claude-code para
+dentro do meu vault principal em &lt;caminho-do-vault&gt;, numa subpasta
+graph-imports/claude-code-docs. Preserve os wikilinks [[...]] e não
+sobrescreva nada que já exista lá. Ao terminar, liste o que foi
+movido e avise se algum link quebrou.</pre>
+              <p class="text-sm text-neutral-400 mt-3"><strong class="text-neutral-300">Como verificar:</strong> abra o Obsidian no vault principal, navegue até <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/claude-code-docs</code> e clique num backlink — ele deve abrir a nota vizinha sem erro de "arquivo não encontrado".</p>
+            </div>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Dica: peça em linguagem natural</h3>
+              <p class="text-neutral-300 text-sm">Você não precisa decorar comandos de terminal. O Claude Code entende o pedido em português e executa os <code class="font-mono text-xs bg-dark-900 px-1 rounded">mv</code> por você. Troque <code class="font-mono text-xs bg-dark-900 px-1 rounded">&lt;caminho-do-vault&gt;</code> pelo caminho real do seu vault antes de colar.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Mover</div><div class="text-xs text-neutral-400">Estrutura inteira</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Subpasta</div><div class="text-xs text-neutral-400">graph-imports/</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Wikilinks</div><div class="text-xs text-neutral-400">Preservados</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Prompt</div><div class="text-xs text-neutral-400">Em português</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 6 -->
+          <section id="topico-6" data-inema-topic="modulo-2-6#topico-6" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
+                <h2 class="text-2xl font-bold">🌳 Qual escolher (árvore de decisão)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-6-t6-p1">
+              Quatro opções podem travar a decisão. Esta árvore resolve em segundos: responda sim/não e ela te leva à estratégia certa. A regra de fundo é sempre a mesma — <strong class="text-blue-400">quanto mais integrado, mais coerente e menos reversível</strong>.
+            </p>
+
+            <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+              <svg viewBox="0 0 1000 470" class="w-full h-auto" role="img" aria-label="Árvore de decisão das estratégias de integração: se for um code base, pare no Graphify; senão, se quiser só no Obsidian isolado escolha vault standalone; senão, se quiser integrar com segurança escolha a subpasta-quarentena; senão, se quiser curar escolha a importação seletiva (harvest); senão, redistribuição case a case">
+                <defs>
+                  <linearGradient id="m26b-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+                  <filter id="m26b-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <pattern id="m26b-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+                  <marker id="m26b-as" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#4ade80"/></marker>
+                  <marker id="m26b-an" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#f87171"/></marker>
+                </defs>
+                <rect x="0" y="0" width="1000" height="470" fill="url(#m26b-grid)"/>
+                <!-- conectores sim (verde) -->
+                <g fill="none" stroke="#4ade80" stroke-width="1.8" opacity="0.7">
+                  <path d="M280,68 L612,68" marker-end="url(#m26b-as)"/>
+                  <path d="M280,168 L612,168" marker-end="url(#m26b-as)"/>
+                  <path d="M280,268 L612,268" marker-end="url(#m26b-as)"/>
+                  <path d="M280,368 L612,368" marker-end="url(#m26b-as)"/>
+                </g>
+                <!-- conectores não (vermelho) -->
+                <g fill="none" stroke="#f87171" stroke-width="1.8" opacity="0.7">
+                  <path d="M160,96 L160,140" marker-end="url(#m26b-an)"/>
+                  <path d="M160,196 L160,240" marker-end="url(#m26b-an)"/>
+                  <path d="M160,296 L160,340" marker-end="url(#m26b-an)"/>
+                  <path d="M280,388 C440,388 470,434 612,434" marker-end="url(#m26b-an)"/>
+                </g>
+                <!-- rótulos sim/não -->
+                <g font-family="Inter,sans-serif" font-size="11" font-weight="600">
+                  <text x="298" y="60" fill="#4ade80">sim</text>
+                  <text x="298" y="160" fill="#4ade80">sim</text>
+                  <text x="298" y="260" fill="#4ade80">sim</text>
+                  <text x="298" y="360" fill="#4ade80">sim</text>
+                  <text x="170" y="124" fill="#f87171">não</text>
+                  <text x="170" y="224" fill="#f87171">não</text>
+                  <text x="170" y="324" fill="#f87171">não</text>
+                  <text x="300" y="420" fill="#f87171">não</text>
+                </g>
+                <!-- perguntas (azul) -->
+                <g font-family="Inter,sans-serif">
+                  <rect x="40" y="40" width="240" height="56" rx="12" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="160" y="66" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">É um code base?</text>
+                  <text x="160" y="84" text-anchor="middle" fill="#7db0f5" font-size="11">código, não docs</text>
+                  <rect x="40" y="140" width="240" height="56" rx="12" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="160" y="166" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">Só no Obsidian, isolado?</text>
+                  <text x="160" y="184" text-anchor="middle" fill="#7db0f5" font-size="11">sem misturar</text>
+                  <rect x="40" y="240" width="240" height="56" rx="12" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="160" y="266" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">Integrar com segurança?</text>
+                  <text x="160" y="284" text-anchor="middle" fill="#7db0f5" font-size="11">poder voltar atrás</text>
+                  <rect x="40" y="340" width="240" height="56" rx="12" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="160" y="366" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">Quer curar (só o que serve)?</text>
+                  <text x="160" y="384" text-anchor="middle" fill="#7db0f5" font-size="11">recorte, não tudo</text>
+                </g>
+                <!-- destinos (ciano + foco) -->
+                <g font-family="Inter,sans-serif" font-size="12.5">
+                  <rect x="612" y="46" width="344" height="44" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="784" y="73" text-anchor="middle" fill="#bfe6ff" font-weight="600">Pare no Graphify — use o grafo direto</text>
+                  <rect x="612" y="146" width="344" height="44" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="784" y="173" text-anchor="middle" fill="#bfe6ff" font-weight="600">Vault standalone (isolado)</text>
+                  <g filter="url(#m26b-glow)"><rect x="612" y="244" width="344" height="48" rx="11" fill="#0e1622" stroke="url(#m26b-grad)" stroke-width="2.5"/></g>
+                  <text x="784" y="273" text-anchor="middle" fill="#60a5fa" font-weight="700">Subpasta-quarentena (deletável)</text>
+                  <rect x="612" y="346" width="344" height="44" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="784" y="373" text-anchor="middle" fill="#bfe6ff" font-weight="600">Importação seletiva (harvest)</text>
+                  <rect x="612" y="412" width="344" height="44" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="784" y="439" text-anchor="middle" fill="#bfe6ff" font-weight="600">Redistribuição (case a case)</text>
+                </g>
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 mb-6">↑ Siga as setas verdes (sim) e vermelhas (não). Repare: a primeira pergunta nem é sobre o vault — se a fonte era <strong>código</strong>, o grafo do Graphify já basta e você nem exporta pro Obsidian.</p>
+
+            <!-- TABELA COMPARATIVA -->
+            <div class="overflow-x-auto mb-6 rounded-xl border border-dark-600">
+              <table class="w-full text-sm text-left">
+                <thead class="bg-dark-700/50 text-blue-400">
+                  <tr>
+                    <th class="px-4 py-3 font-semibold">Estratégia</th>
+                    <th class="px-4 py-3 font-semibold">O que faz</th>
+                    <th class="px-4 py-3 font-semibold">Quando usar</th>
+                    <th class="px-4 py-3 font-semibold">Reverter</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-dark-600 text-neutral-300">
+                  <tr>
+                    <td class="px-4 py-3 font-semibold text-neutral-100">🧪 Standalone</td>
+                    <td class="px-4 py-3">Vault à parte, não toca o principal</td>
+                    <td class="px-4 py-3">Só quer no Obsidian, sem misturar</td>
+                    <td class="px-4 py-3 text-blue-400">Trivial — apaga o vault</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold text-neutral-100">🚧 Quarentena</td>
+                    <td class="px-4 py-3">Tudo numa subpasta isolável</td>
+                    <td class="px-4 py-3">Integrar com segurança</td>
+                    <td class="px-4 py-3 text-blue-400">Fácil — apaga a subpasta</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold text-neutral-100">🌾 Harvest</td>
+                    <td class="px-4 py-3">Traz só as notas que servem</td>
+                    <td class="px-4 py-3">Quer curadoria, vault enxuto</td>
+                    <td class="px-4 py-3">Médio — apaga o recorte</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 font-semibold text-neutral-100">🔀 Redistribuição</td>
+                    <td class="px-4 py-3">Dilui cada nota na sua estrutura</td>
+                    <td class="px-4 py-3">Quer coerência total</td>
+                    <td class="px-4 py-3 text-red-400">Difícil — espalhado</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Decisão</div><div class="text-xs text-neutral-400">Sim/não</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Trade-off</div><div class="text-xs text-neutral-400">Coerência × reverter</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Reversibilidade</div><div class="text-xs text-neutral-400">A saída fácil</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Code base</div><div class="text-xs text-neutral-400">Nem vai pro vault</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- CHECAGEM LEVE -->
+          <div data-inema-check="modulo-2-6#q1" class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6">
+            <p class="font-medium mb-4">✋ Auto-recuperação (opcional, não bloqueia): você quer integrar o conhecimento ao vault principal, mas sem perder a chance de voltar atrás. Qual estratégia é a <strong>mais fácil de desfazer</strong>?</p>
+            <div class="inema-check-options space-y-2">
+              <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Redistribuição (case a case): cada nota vai pra sua pasta certa.</button>
+              <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Subpasta-quarentena: tudo sob uma pasta que você apaga de uma vez.</button>
+              <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Importação seletiva (harvest): traz só as notas de um tema.</button>
+            </div>
+            <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+          </div>
+
+          <!-- RESUMO -->
+          <section class="mb-12">
+            <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+              <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do módulo</h2>
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Standalone:</strong> <span class="text-neutral-400">vault à parte, padrão e à prova de erro.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Quarentena:</strong> <span class="text-neutral-400">subpasta isolável no principal — perto, mas deletável.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Harvest:</strong> <span class="text-neutral-400">colhe só as notas que servem; vault enxuto.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Redistribuição:</strong> <span class="text-neutral-400">coerência total, difícil de reverter — faça com backup.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">A regra de ouro:</strong> <span class="text-neutral-400">mais integrado = mais coerente e menos reversível.</span></div></div>
+              </div>
+              <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+                <h3 class="font-semibold text-blue-400 mb-2">Próxima trilha</h3>
+                <p class="text-neutral-300">Você terminou a Trilha 2 — do zero ao vault integrado. Na <strong>Trilha 3 · Uso real e avançado</strong> você sai do "como montar" para o "como usar todo dia": perguntar ao grafo, montar um command center e manter tudo em forma.</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para a Trilha 2</a>
+                <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo: Trilha 3 →</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Segundo Cérebro pro Claude Code · Módulo 2.6 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-2-6#q1', { answer: 1, explain: { 0: 'A redistribuição é justamente a mais difícil de desfazer — as notas se espalham por dezenas de pastas, sem uma única pasta para apagar.', 1: 'Isso. Como tudo fica sob uma subpasta de quarentena, reverter é uma operação só: apagar a pasta e nada mais é afetado.', 2: 'O harvest até é reversível, mas dá mais trabalho que a quarentena — você selecionou notas espalhadas, não uma pasta única.' } });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="segundo-cerebro">
+  <title>Módulo 2.1 · Pré-requisitos e instalação | Segundo Cérebro pro Claude Code</title>
+
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/learn.css">
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-blue-400 { color:#2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,.18); }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#60a5fa; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#2563eb; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- NAV (T2 ativa) -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
+          <div class="relative">
+            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
+            <div data-inema-appearance class="inema-appearance-pop">
+              <p class="text-xs text-neutral-400 mb-1">Tema</p>
+              <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
+              <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
+              <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
+              <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
+              <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+              <div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+            </div>
+          </div>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.1</span>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+    <article id="modulo-2-1" data-inema-module="2-1" data-inema-track="2">
+      <!-- HEADER -->
+      <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧰 Pré-requisitos e instalação</h1>
+          <p class="text-lg text-neutral-400 max-w-3xl">Este é o módulo mais "mão na massa" da trilha: você confere o Python, instala o <code class="font-mono text-base bg-dark-900 px-1 rounded">uv</code>, põe a CLI <strong>graphifyy</strong> no terminal, registra a skill no Claude Code e deixa o Obsidian pronto. Cada comando vem numa caixa <em>copiar e rodar</em>, com objetivo e como verificar.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~45</div><div class="text-xs text-neutral-400">Minutos</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Nível</div></div>
+            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+              <div data-inema-meter="modulo:2-1" class="inema-ring inema-ring--sm" aria-label="Progresso do módulo 2.1"><span class="inema-ring__value" data-inema-meter-pct>0%</span><svg viewBox="0 0 36 36"><circle class="inema-ring__track" r="16" cx="18" cy="18"/><circle data-inema-ring class="inema-ring__bar" r="16" cx="18" cy="18"/></svg></div>
+              <div class="text-xs text-neutral-400" data-inema-meter-frac>0 de 6</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+        <!-- TOC -->
+        <aside class="hidden lg:block">
+          <nav data-inema-toc aria-label="Índice do módulo" class="sticky top-24">
+            <p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">Neste módulo</p>
+            <p class="text-sm text-neutral-400 mb-3">Seção <span data-inema-section-counter>1 de 6</span></p>
+            <ol class="space-y-1 text-sm">
+              <li><a href="#topico-1" class="inema-toc-link text-neutral-400 hover:text-blue-400">1. Python e o uv</a></li>
+              <li><a href="#topico-2" class="inema-toc-link text-neutral-400 hover:text-blue-400">2. Instalar a CLI graphifyy</a></li>
+              <li><a href="#topico-3" class="inema-toc-link text-neutral-400 hover:text-blue-400">3. Registrar a skill</a></li>
+              <li><a href="#topico-4" class="inema-toc-link text-neutral-400 hover:text-blue-400">4. Instalar o Obsidian</a></li>
+              <li><a href="#topico-5" class="inema-toc-link text-neutral-400 hover:text-blue-400">5. API keys: quando precisa</a></li>
+              <li><a href="#topico-6" class="inema-toc-link text-neutral-400 hover:text-blue-400">6. Verificar tudo</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="inema-prose">
+          <!-- TÓPICO 1 -->
+          <section id="topico-1" data-inema-topic="modulo-2-1#topico-1" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
+                <h2 class="text-2xl font-bold">🐍 Checar Python e instalar o uv</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-1-t1-p1">
+              O <strong class="text-blue-400">Graphify</strong> é escrito em <strong>Python</strong> e pede a versão <strong>3.10 ou mais nova</strong>. Antes de instalar qualquer coisa, confira o que você já tem com <code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code>. Se aparecer 3.10, 3.11, 3.12 ou superior, você está pronto. Em seguida instalamos o <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv</code>, a forma recomendada de instalar a CLI.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é o "uv"</h3>
+              <p class="text-neutral-300 text-sm">O <strong>uv</strong> é um instalador de pacotes e ferramentas Python — rápido e moderno, criado pela Astral. Pense nele como uma loja de aplicativos do mundo Python: você pede uma ferramenta e ele a deixa disponível como comando no terminal. É o caminho mais limpo para instalar o Graphify sem bagunçar o seu Python.</p>
+            </div>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-blue-500/60"></span><span class="ml-2 font-mono">terminal · ilustrativo</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-blue-400">Objetivo:</strong> confirmar que o Python é 3.10+ e instalar o <code class="font-mono text-xs bg-dark-800 px-1 rounded">uv</code>.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed bg-dark-800 rounded-lg p-3 mb-3"># 1) checar a versão do Python (precisa ser 3.10+)
+python --version
+
+# 2) instalar o uv (instalador oficial da Astral)
+curl -LsSf https://astral.sh/uv/install.sh | sh</pre>
+              <p class="text-sm text-neutral-400"><strong class="text-blue-400">Como verificar:</strong> o primeiro comando imprime algo como <code class="font-mono text-xs bg-dark-800 px-1 rounded">Python 3.11.x</code>; o instalador do <code class="font-mono text-xs bg-dark-800 px-1 rounded">uv</code> termina com uma mensagem de sucesso. Feche e reabra o terminal para o comando <code class="font-mono text-xs bg-dark-800 px-1 rounded">uv</code> passar a responder.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Python 3.10+</div><div class="text-xs text-neutral-400">Versão mínima</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">uv</div><div class="text-xs text-neutral-400">Instalador rápido</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">--version</div><div class="text-xs text-neutral-400">Confere o que há</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">PATH</div><div class="text-xs text-neutral-400">Onde o comando mora</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+                <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 2 -->
+          <section id="topico-2" data-inema-topic="modulo-2-1#topico-2" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
+                <h2 class="text-2xl font-bold">📦 Instalar a CLI graphifyy</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-1-t2-p1">
+              O pacote no <strong>PyPI</strong> chama-se <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code> — com <strong>dois "y"</strong>. Ele instala o binário <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> (um "y"), que é o comando que você vai chamar. Um cuidado de digitação que evita o erro mais comum: o que você <em>instala</em> tem dois y; o que você <em>roda</em> tem um.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é uma "CLI"</h3>
+              <p class="text-neutral-300 text-sm">Uma <strong>CLI</strong> (Command Line Interface) é um programa que você usa por comandos de texto no terminal, em vez de cliques. <strong>PyPI</strong> é o repositório oficial de pacotes Python — a "prateleira" de onde o <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv</code>/<code class="font-mono text-xs bg-dark-900 px-1 rounded">pip</code> baixa o graphifyy.</p>
+            </div>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-blue-500/60"></span><span class="ml-2 font-mono">terminal · ilustrativo</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-blue-400">Objetivo:</strong> deixar o comando <code class="font-mono text-xs bg-dark-800 px-1 rounded">graphify</code> disponível no terminal.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed bg-dark-800 rounded-lg p-3 mb-3"># recomendado (com uv)
+uv tool install graphifyy
+
+# alternativas, se você não usa uv
+pipx install graphifyy
+pip install graphifyy
+
+# se o comando "graphify" não for encontrado depois:
+uv tool update-shell</pre>
+              <p class="text-sm text-neutral-400"><strong class="text-blue-400">Como verificar:</strong> abrir um novo terminal e digitar <code class="font-mono text-xs bg-dark-800 px-1 rounded">graphify</code> deve responder (a checagem completa fica no tópico 6). Se "comando não encontrado" persistir, rode <code class="font-mono text-xs bg-dark-800 px-1 rounded">uv tool update-shell</code> e reabra o terminal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+              <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+                <h4 class="font-bold text-blue-400 mb-3">✓ O jeito recomendado</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span><code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool install graphifyy</code> isola a ferramenta.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Não mistura com o Python do sistema.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Atualizar e remover é simples depois.</span></li>
+                </ul>
+              </div>
+              <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+                <h4 class="font-bold text-red-400 mb-3">✗ Erros comuns</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Digitar <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> (um y) no install.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Esquecer de reabrir o terminal.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Confundir o pacote com a skill.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">graphifyy</div><div class="text-xs text-neutral-400">Pacote (2 y)</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">graphify</div><div class="text-xs text-neutral-400">Comando (1 y)</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">uv tool</div><div class="text-xs text-neutral-400">Instala isolado</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">update-shell</div><div class="text-xs text-neutral-400">Conserta o PATH</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 3 -->
+          <section id="topico-3" data-inema-topic="modulo-2-1#topico-3" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
+                <h2 class="text-2xl font-bold">🔌 Registrar a skill (graphify install)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-1-t3-p1">
+              Ter a CLI não basta: para usar o Graphify <em>dentro</em> do Claude Code você precisa <strong>registrar a skill</strong>. O comando <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify install</code> escreve um arquivo <code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code> no lugar onde o Claude Code procura suas skills — e é isso que liga o slash command <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é uma "skill" e o SKILL.md</h3>
+              <p class="text-neutral-300 text-sm">Uma <strong>skill</strong> é uma habilidade que você ensina ao Claude Code: um arquivo <code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code> que descreve o que ela faz e como acioná-la. Quando esse arquivo existe em <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/</code>, o comando <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> aparece dentro da sessão.</p>
+            </div>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-blue-500/60"></span><span class="ml-2 font-mono">terminal · ilustrativo</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-blue-400">Objetivo:</strong> ativar o comando <code class="font-mono text-xs bg-dark-800 px-1 rounded">/graphify</code> no Claude Code.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed bg-dark-800 rounded-lg p-3 mb-3"># registra a skill para todos os projetos (escreve ~/.claude/skills/graphify/SKILL.md)
+graphify install
+
+# versão por-projeto (grava .claude/skills/graphify/ no repo atual, dá pra commitar)
+graphify install --project</pre>
+              <p class="text-sm text-neutral-400"><strong class="text-blue-400">Como verificar:</strong> confirme que o arquivo existe com <code class="font-mono text-xs bg-dark-800 px-1 rounded">ls ~/.claude/skills/graphify/SKILL.md</code>. Numa sessão nova do Claude Code, digitar <code class="font-mono text-xs bg-dark-800 px-1 rounded">/graphify</code> deve mostrar a skill.</p>
+            </div>
+
+            <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+              <svg viewBox="0 0 1000 200" class="w-full h-auto" role="img" aria-label="Pipeline de instalação da esquerda para a direita: uv tool install graphifyy gera a CLI graphify, graphify install escreve o SKILL.md em destaque, e o resultado é o comando barra-graphify pronto dentro do Claude Code">
+                <defs>
+                  <linearGradient id="m21a-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+                  <filter id="m21a-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <pattern id="m21a-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+                  <marker id="m21a-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+                </defs>
+                <rect x="0" y="0" width="1000" height="200" fill="url(#m21a-grid)"/>
+                <text x="500" y="28" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="600">Pipeline de instalação: da CLI ao /graphify</text>
+                <g fill="none" stroke="#60a5fa" stroke-width="1.8" opacity="0.55">
+                  <path d="M214,108 L262,108" marker-end="url(#m21a-ah)"/>
+                  <path d="M452,108 L500,108" marker-end="url(#m21a-ah)"/>
+                  <path d="M690,108 L738,108" marker-end="url(#m21a-ah)"/>
+                </g>
+                <!-- box 1: uv tool install (ciano = processo/comando) -->
+                <g font-family="Inter,sans-serif">
+                  <rect x="44" y="80" width="170" height="56" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="129" y="104" text-anchor="middle" fill="#bfe6ff" font-size="12" font-weight="600">uv tool install</text>
+                  <text x="129" y="122" text-anchor="middle" fill="#9ad6ff" font-size="11">graphifyy</text>
+                </g>
+                <!-- box 2: CLI graphify (azul = artefato) -->
+                <g font-family="Inter,sans-serif">
+                  <rect x="262" y="80" width="190" height="56" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="357" y="104" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">CLI graphify</text>
+                  <text x="357" y="122" text-anchor="middle" fill="#7db0f5" font-size="11">comando no terminal</text>
+                </g>
+                <!-- box 3: SKILL.md (FOCO - glow + gradiente) -->
+                <g filter="url(#m21a-glow)"><rect x="500" y="76" width="190" height="64" rx="12" fill="#0e1622" stroke="url(#m21a-grad)" stroke-width="2.5"/></g>
+                <text x="595" y="102" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="700">SKILL.md</text>
+                <text x="595" y="122" text-anchor="middle" fill="#bcd7ff" font-family="Inter,sans-serif" font-size="11">graphify install</text>
+                <!-- box 4: /graphify pronto (azul) -->
+                <g font-family="Inter,sans-serif">
+                  <rect x="738" y="80" width="218" height="56" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="847" y="104" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">/graphify pronto</text>
+                  <text x="847" y="122" text-anchor="middle" fill="#7db0f5" font-size="11">dentro do Claude Code</text>
+                </g>
+                <g font-family="Inter,sans-serif" font-size="11" fill="#7db0f5" text-anchor="middle">
+                  <text x="129" y="162">você instala</text>
+                  <text x="357" y="162">vira comando</text>
+                  <text x="595" y="162">registra a skill</text>
+                  <text x="847" y="162">já dá pra usar</text>
+                </g>
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 mb-6">↑ A instalação tem dois passos distintos: <strong class="text-blue-400">instalar a CLI</strong> (tópico 2) e <strong class="text-blue-400">registrar a skill</strong> (este). O <code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code> é a ponte que faz o <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> existir dentro do Claude Code.</p>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">skill</div><div class="text-xs text-neutral-400">Habilidade ensinada</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">SKILL.md</div><div class="text-xs text-neutral-400">Arquivo da skill</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">graphify install</div><div class="text-xs text-neutral-400">Registra global</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">--project</div><div class="text-xs text-neutral-400">Registra no repo</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 4 -->
+          <section id="topico-4" data-inema-topic="modulo-2-1#topico-4" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
+                <h2 class="text-2xl font-bold">🔮 Instalar e abrir o Obsidian</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-1-t4-p1">
+              O <strong class="text-blue-400">Obsidian</strong> é onde o mapa gerado vai morar e ser navegado. Baixe-o em <code class="font-mono text-xs bg-dark-900 px-1 rounded">obsidian.md</code>, instale e abra — é gratuito e roda no desktop (Windows, macOS, Linux). Aqui não há comando de terminal: é clicar, baixar e instalar como qualquer aplicativo. Ainda não precisa criar nada; só deixá-lo pronto para quando o markdown chegar (módulo 2.4).
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "Obsidian" e "vault"</h3>
+              <p class="text-neutral-300 text-sm">O <strong>Obsidian</strong> é um aplicativo de notas em <strong>markdown</strong> com links entre páginas (PKM — gestão pessoal de conhecimento). Um <strong>vault</strong> é simplesmente uma pasta de notas que ele abre — nada mais que arquivos <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> numa pasta. O Graphify vai gerar exatamente esses arquivos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+              <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+                <h4 class="font-bold text-blue-400 mb-3">✓ Faça agora</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Baixar em <code class="font-mono text-xs bg-dark-900 px-1 rounded">obsidian.md</code> e instalar.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Abrir o app ao menos uma vez.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Conferir que é a versão desktop, grátis.</span></li>
+                </ul>
+              </div>
+              <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+                <h4 class="font-bold text-neutral-300 mb-3">○ Ainda não precisa</h4>
+                <ul class="space-y-2 text-neutral-300 text-sm">
+                  <li class="flex items-start gap-2"><span class="text-neutral-500">○</span><span>Criar um vault (o Graphify gera depois).</span></li>
+                  <li class="flex items-start gap-2"><span class="text-neutral-500">○</span><span>Instalar plugins ou pagar nada.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-neutral-500">○</span><span>Configurar sincronização na nuvem.</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Obsidian</div><div class="text-xs text-neutral-400">App de markdown</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">vault</div><div class="text-xs text-neutral-400">Pasta de notas</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">desktop</div><div class="text-xs text-neutral-400">Grátis, local</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">obsidian.md</div><div class="text-xs text-neutral-400">Onde baixar</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 5 -->
+          <section id="topico-5" data-inema-topic="modulo-2-1#topico-5" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
+                <h2 class="text-2xl font-bold">🔑 API keys: quando precisa (e quando não)</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-1-t5-p1">
+              Esta é a dúvida que mais trava gente. A regra curta: rodando via <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> <strong>dentro do Claude Code</strong>, você <strong class="text-blue-400">não precisa de chave</strong> — a própria sessão fornece o modelo. Só o modo <strong>headless</strong> (terminal puro, sobre documentos) pede a <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>. E extração de <strong>código</strong> não usa chave nenhuma — ela é feita pela AST, sem LLM.
+            </p>
+
+            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? "API key", "headless" e "AST"</h3>
+              <p class="text-neutral-300 text-sm">Uma <strong>API key</strong> é uma senha que autoriza um programa a chamar o modelo cobrando da sua conta. <strong>Headless</strong> é rodar sem interface, direto no terminal. <strong>AST</strong> (árvore sintática) é a leitura estrutural do código — o Graphify usa a biblioteca tree-sitter para isso, então código vira grafo <em>sem</em> chamar um LLM.</p>
+            </div>
+
+            <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+              <svg viewBox="0 0 1000 230" class="w-full h-auto" role="img" aria-label="Decisão sobre API key: a partir de uma execução do Graphify, o caminho dentro do Claude Code dispensa chave; o caminho headless sobre documentos precisa de ANTHROPIC_API_KEY; e código por AST dispensa chave">
+                <defs>
+                  <linearGradient id="m21b-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+                  <filter id="m21b-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  <pattern id="m21b-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
+                  <marker id="m21b-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+                </defs>
+                <rect x="0" y="0" width="1000" height="230" fill="url(#m21b-grid)"/>
+                <text x="500" y="28" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="600">Preciso de API key?</text>
+                <!-- nó central -->
+                <g filter="url(#m21b-glow)"><rect x="60" y="92" width="180" height="56" rx="13" fill="#0e1622" stroke="url(#m21b-grad)" stroke-width="2.5"/></g>
+                <text x="150" y="116" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="700">rodar o Graphify</text>
+                <text x="150" y="134" text-anchor="middle" fill="#bcd7ff" font-family="Inter,sans-serif" font-size="11">como você executa?</text>
+                <!-- conectores -->
+                <g fill="none" stroke="#38bdf8" stroke-width="1.8" opacity="0.6">
+                  <path d="M240,108 C320,70 360,60 440,56" marker-end="url(#m21b-ah)"/>
+                  <path d="M240,120 L440,120" marker-end="url(#m21b-ah)"/>
+                  <path d="M240,132 C320,170 360,180 440,184" marker-end="url(#m21b-ah)"/>
+                </g>
+                <!-- ramo 1: dentro do Claude Code = sem chave -->
+                <g font-family="Inter,sans-serif" class="wf-a">
+                  <rect x="440" y="36" width="490" height="40" rx="9" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="458" y="61" fill="#bcd7ff" font-size="12.5"><tspan fill="#60a5fa" font-weight="700">/graphify dentro do Claude Code</tspan> — sem chave (a sessão fornece o modelo)</text>
+                </g>
+                <!-- ramo 2: headless = precisa chave -->
+                <g font-family="Inter,sans-serif" class="wf-a">
+                  <rect x="440" y="100" width="490" height="40" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="458" y="125" fill="#bfe6ff" font-size="12.5"><tspan fill="#9ad6ff" font-weight="700">headless sobre documentos</tspan> — precisa de ANTHROPIC_API_KEY</text>
+                </g>
+                <!-- ramo 3: código AST = sem chave -->
+                <g font-family="Inter,sans-serif" class="wf-a">
+                  <rect x="440" y="164" width="490" height="40" rx="9" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
+                  <text x="458" y="189" fill="#bcd7ff" font-size="12.5"><tspan fill="#60a5fa" font-weight="700">código via AST (tree-sitter)</tspan> — sem chave, sem LLM</text>
+                </g>
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 mb-6">↑ Dois dos três caminhos <strong class="text-blue-400">não pedem chave</strong>. Você só precisa exportar a <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code> quando roda o Graphify de forma headless sobre documentos.</p>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-blue-500/60"></span><span class="ml-2 font-mono">terminal · ilustrativo</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-blue-400">Objetivo:</strong> só para o caso headless — fornecer a chave ao terminal. Troque <code class="font-mono text-xs bg-dark-800 px-1 rounded">&lt;sua-chave&gt;</code> pela sua.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed bg-dark-800 rounded-lg p-3 mb-3"># só no modo headless sobre documentos (NÃO precisa dentro do /graphify)
+export ANTHROPIC_API_KEY=&lt;sua-chave&gt;</pre>
+              <p class="text-sm text-neutral-400"><strong class="text-blue-400">Como verificar:</strong> com a variável exportada, o Graphify headless para de reclamar de chave ausente e processa os documentos. Dentro do Claude Code você pode pular este passo inteiro.</p>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">/graphify</div><div class="text-xs text-neutral-400">Sem chave</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">headless</div><div class="text-xs text-neutral-400">Pede a chave</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">AST</div><div class="text-xs text-neutral-400">Código sem LLM</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">ANTHROPIC_API_KEY</div><div class="text-xs text-neutral-400">A variável</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- TÓPICO 6 -->
+          <section id="topico-6" data-inema-topic="modulo-2-1#topico-6" class="mb-16">
+            <div class="flex items-center justify-between mb-6 gap-4">
+              <div class="flex items-center space-x-4">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
+                <h2 class="text-2xl font-bold">✅ Verificar que tudo funciona</h2>
+              </div>
+              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+            </div>
+
+            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-1-t6-p1">
+              Antes de seguir para o módulo 2.2, faça o <strong class="text-blue-400">sanity check</strong>: dois comandos confirmam que a CLI responde e que a skill está registrada. Pegar um problema agora custa segundos; descobri-lo no meio de uma extração custa muito mais.
+            </p>
+
+            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-blue-500/60"></span><span class="ml-2 font-mono">terminal · ilustrativo</span></div>
+              <p class="text-sm text-neutral-400 mb-3"><strong class="text-blue-400">Objetivo:</strong> confirmar CLI + skill antes de extrair qualquer grafo.</p>
+              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed bg-dark-800 rounded-lg p-3 mb-3"># a CLI responde e lista os subcomandos?
+graphify --help
+
+# a skill foi registrada no lugar certo?
+ls ~/.claude/skills/graphify/SKILL.md</pre>
+              <p class="text-sm text-neutral-400"><strong class="text-blue-400">Como verificar:</strong> o primeiro comando imprime a lista de subcomandos; o segundo imprime o caminho do <code class="font-mono text-xs bg-dark-800 px-1 rounded">SKILL.md</code> (e não "arquivo não encontrado"). Se os dois respondem, o ambiente está pronto.</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+              <h3 class="text-lg font-semibold text-blue-400 mb-3 flex items-center"><span class="mr-2">✅</span> Checklist do ambiente</h3>
+              <ul class="space-y-2 text-neutral-300 text-sm">
+                <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span><span><code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code> mostra 3.10+.</span></li>
+                <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span><span><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify --help</code> lista os subcomandos.</span></li>
+                <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span><span><code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/SKILL.md</code> existe.</span></li>
+                <li class="flex items-start gap-2"><span class="text-blue-400 mt-0.5">✓</span><span>Obsidian instalado e aberto ao menos uma vez.</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+              <h4 class="font-semibold text-blue-400 mb-3">🔑 Conceitos-chave</h4>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">--help</div><div class="text-xs text-neutral-400">Lista subcomandos</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">ls SKILL.md</div><div class="text-xs text-neutral-400">Confirma a skill</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">sanity check</div><div class="text-xs text-neutral-400">Conferir antes</div></div>
+                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">checklist</div><div class="text-xs text-neutral-400">4 pontos prontos</div></div>
+              </div>
+            </div>
+
+            <div class="flex justify-start mt-6">
+              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors">
+                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- CHECAGEM LEVE -->
+          <div data-inema-check="modulo-2-1#q1" class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6">
+            <p class="font-medium mb-4">✋ Auto-recuperação (opcional, não bloqueia): você vai rodar <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code. Precisa exportar a <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>?</p>
+            <div class="inema-check-options space-y-2">
+              <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Sim — sem a chave o Graphify nunca roda.</button>
+              <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Não — dentro do Claude Code a própria sessão fornece o modelo; a chave só entra no modo headless.</button>
+              <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm">Só se o Python for menor que 3.10.</button>
+            </div>
+            <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
+          </div>
+
+          <!-- RESUMO -->
+          <section class="mb-12">
+            <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+              <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do módulo</h2>
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Base certa:</strong> <span class="text-neutral-400">Python 3.10+ conferido com <code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code> e o <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv</code> instalado.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">CLI instalada:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool install graphifyy</code> (dois y) deixa o comando <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> no terminal.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Skill registrada:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify install</code> escreve o <code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code> e liga o <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Obsidian pronto:</strong> <span class="text-neutral-400">baixado de <code class="font-mono text-xs bg-dark-900 px-1 rounded">obsidian.md</code> e aberto, esperando o vault.</span></div></div>
+                <div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Chave: só no headless:</strong> <span class="text-neutral-400">dentro do Claude Code não precisa; código por AST nunca precisa.</span></div></div>
+              </div>
+              <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+                <h3 class="font-semibold text-blue-400 mb-2">Próximo módulo</h3>
+                <p class="text-neutral-300">2.2 · Escolher e preparar a fonte — decidir entre código e documentos, baixar o corpus e organizar a pasta que o Graphify vai ler.</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para a Trilha 2</a>
+                <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo: 2.2 Escolher e preparar a fonte →</a>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Segundo Cérebro pro Claude Code · Módulo 2.1 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+  <script src="../../assets/learn.js"></script>
+  <script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-2-1#q1', { answer: 1, explain: { 0: 'Não é isso: dentro do Claude Code a sessão já fornece o modelo, então o /graphify roda sem chave.', 1: 'Isso. Dentro do Claude Code a sessão fornece o modelo; a ANTHROPIC_API_KEY só é necessária no modo headless sobre documentos.', 2: 'A versão do Python é um pré-requisito separado; não tem relação com precisar ou não de API key.' } });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="segundo-cerebro">
+  <title>Trilha 1 · Fundamentos | Segundo Cérebro pro Claude Code</title>
+
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/learn.css">
+
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+
+  <style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    /* T1 Emerald */
+    html:not(.dark) .text-emerald-400 { color:#059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,.18); }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .group:hover .group-hover\:text-emerald-400 { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s} .wf-a:nth-child(5){animation-delay:1.2s}
+    }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- NAV (T1 ativa) -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
+          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
+          <div class="relative">
+            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
+            <div data-inema-appearance class="inema-appearance-pop">
+              <p class="text-xs text-neutral-400 mb-1">Tema</p>
+              <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
+              <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
+              <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
+              <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
+              <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+              <p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+              <div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+            </div>
+          </div>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Alternar tema claro/escuro">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+    <!-- HEADER -->
+    <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="1">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">TRILHA 1</span>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4">🧠 Fundamentos</h1>
+        <p class="text-lg text-neutral-400 max-w-3xl">Antes de instalar nada: por que dar memória ao Claude Code muda o jogo, o que é um grafo de conhecimento (sem mistério), o que o Graphify faz e por que o Obsidian é o lar certo pra tudo isso. Cada termo é definido na primeira vez que aparece.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~3h</div><div class="text-xs text-neutral-400">Duração</div></div>
+          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-3">
+            <div data-inema-meter="trilha:1" class="inema-ring inema-ring--sm" aria-label="Progresso da trilha 1"><span class="inema-ring__value" data-inema-meter-pct>0%</span><svg viewBox="0 0 36 36"><circle class="inema-ring__track" r="16" cx="18" cy="18"/><circle data-inema-ring class="inema-ring__bar" r="16" cx="18" cy="18"/></svg></div>
+            <div class="text-xs text-neutral-400">Seu<br>progresso</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+      <!-- HERO SVG -->
+      <section class="mb-12">
+        <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-5 overflow-hidden">
+          <svg viewBox="0 0 1000 260" class="w-full h-auto" role="img" aria-label="Documentos viram um grafo: várias entidades conectadas por relações, agrupadas em comunidades, com um nó central muito conectado (god node)">
+            <defs>
+              <linearGradient id="t1h-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+              <filter id="t1h-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <pattern id="t1h-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
+            </defs>
+            <rect x="0" y="0" width="1000" height="260" fill="url(#t1h-grid)"/>
+            <!-- coluna esquerda: documentos -->
+            <g font-family="Inter,sans-serif">
+              <rect x="28" y="60" width="120" height="40" rx="8" fill="#0e2018" stroke="#34d399" stroke-width="2"/><text x="88" y="85" text-anchor="middle" fill="#9fe8c8" font-size="13">doc.md</text>
+              <rect x="28" y="112" width="120" height="40" rx="8" fill="#0e2018" stroke="#34d399" stroke-width="2"/><text x="88" y="137" text-anchor="middle" fill="#9fe8c8" font-size="13">guia.pdf</text>
+              <rect x="28" y="164" width="120" height="40" rx="8" fill="#0e2018" stroke="#34d399" stroke-width="2"/><text x="88" y="189" text-anchor="middle" fill="#9fe8c8" font-size="13">README</text>
+              <text x="88" y="40" text-anchor="middle" fill="#34d399" font-size="13" font-weight="600">Fonte</text>
+            </g>
+            <!-- setas para o grafo -->
+            <g stroke="#34d399" stroke-width="1.8" fill="none" opacity="0.5"><path d="M148,80 C220,80 240,120 300,120"/><path d="M148,132 L300,132"/><path d="M148,184 C220,184 240,140 300,140"/></g>
+            <!-- grafo: nós + arestas -->
+            <text x="560" y="40" text-anchor="middle" fill="#34d399" font-size="13" font-weight="600">Grafo de conhecimento</text>
+            <g stroke="#38bdf8" stroke-width="1.6" opacity="0.45">
+              <line x1="470" y1="120" x2="600" y2="70"/><line x1="470" y1="120" x2="610" y2="160"/><line x1="470" y1="120" x2="540" y2="205"/>
+              <line x1="600" y1="70" x2="720" y2="95"/><line x1="610" y1="160" x2="720" y2="95"/><line x1="610" y1="160" x2="700" y2="210"/><line x1="540" y1="205" x2="700" y2="210"/>
+            </g>
+            <g font-family="Inter,sans-serif" font-size="12">
+              <g class="wf-a"><circle cx="600" cy="70" r="22" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="600" y="74" text-anchor="middle" fill="#bfe6ff">nó</text></g>
+              <g class="wf-a"><circle cx="610" cy="160" r="22" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="610" y="164" text-anchor="middle" fill="#bfe6ff">nó</text></g>
+              <g class="wf-a"><circle cx="540" cy="205" r="20" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="540" y="209" text-anchor="middle" fill="#bfe6ff">nó</text></g>
+              <g class="wf-a"><circle cx="720" cy="95" r="20" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="720" y="99" text-anchor="middle" fill="#bfe6ff">nó</text></g>
+              <g class="wf-a"><circle cx="700" cy="210" r="20" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="700" y="214" text-anchor="middle" fill="#bfe6ff">nó</text></g>
+            </g>
+            <!-- god node central -->
+            <g filter="url(#t1h-glow)"><circle cx="470" cy="120" r="30" fill="#0e2018" stroke="url(#t1h-grad)" stroke-width="2.5"/></g>
+            <text x="470" y="116" text-anchor="middle" fill="#34d399" font-size="12" font-weight="700">god</text>
+            <text x="470" y="130" text-anchor="middle" fill="#9fe8c8" font-size="10">node</text>
+            <!-- comunidade contorno -->
+            <ellipse cx="660" cy="135" rx="115" ry="105" fill="none" stroke="#34d399" stroke-width="1.4" stroke-dasharray="6 7" opacity="0.4"/>
+            <text x="660" y="252" text-anchor="middle" fill="#7fd9b3" font-size="11">comunidade (Leiden)</text>
+            <!-- agente lê o mapa -->
+            <g font-family="Inter,sans-serif"><rect x="852" y="100" width="120" height="60" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/><text x="912" y="126" text-anchor="middle" fill="#34d399" font-size="13" font-weight="600">Claude</text><text x="912" y="144" text-anchor="middle" fill="#9fe8c8" font-size="12">consulta o mapa</text></g>
+            <path d="M790,130 L852,130" stroke="#34d399" stroke-width="1.8" fill="none" opacity="0.6" marker-end=""/>
+          </svg>
+        </div>
+        <p class="text-sm text-neutral-400 mt-3">↑ O caminho da trilha em uma imagem: documentos viram <strong class="text-emerald-400">entidades</strong> ligadas por <strong>relações</strong>, agrupadas em <strong>comunidades</strong>, com um <strong>god node</strong> no centro — e o Claude Code consulta esse mapa em vez de reler tudo.</p>
+      </section>
+
+      <!-- MAPA DA TRILHA -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a href="#modulo-1-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+            <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.1</span><span class="text-xs text-neutral-500">~40 min</span></div>
+            <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🧠 Segundo cérebro</h3>
+            <p class="text-xs text-neutral-400">Memória vs sessão</p>
+          </a>
+          <a href="#modulo-1-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+            <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+            <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🕸️ Grafo de conhecimento</h3>
+            <p class="text-xs text-neutral-400">Nó, aresta, comunidade</p>
+          </a>
+          <a href="#modulo-1-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+            <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.3</span><span class="text-xs text-neutral-500">~40 min</span></div>
+            <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">⚙️ Graphify por dentro</h3>
+            <p class="text-xs text-neutral-400">Mapa, não busca</p>
+          </a>
+          <a href="#modulo-1-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-emerald-500/30 p-5 transition-all">
+            <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold text-sm">1.4</span><span class="text-xs text-neutral-500">~35 min</span></div>
+            <h3 class="font-semibold mb-1 group-hover:text-emerald-400 transition-colors">🔮 Obsidian como memória</h3>
+            <p class="text-xs text-neutral-400">Markdown que o agente lê</p>
+          </a>
+        </div>
+      </section>
+
+      <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+      <!-- MÓDULO 1.1 -->
+      <div id="modulo-1-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="1-1" data-inema-track="1">
+        <div class="p-6 border-b border-dark-600">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.1</span><span class="text-xs text-neutral-500">~40 min</span></div>
+          <h3 class="text-2xl font-bold mb-2">🧠 Por que o Claude Code precisa de um segundo cérebro</h3>
+          <p class="text-neutral-400 text-sm">A diferença entre uma sessão que esquece tudo e um agente com memória externa consultável.</p>
+        </div>
+        <div class="divide-y divide-dark-600">
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+              <span class="text-lg">🤖</span><div><span class="font-medium">O que é o Claude Code (e o que é "memória" pra ele)</span><span class="text-neutral-500 text-sm ml-2">- Agente no terminal</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Claude Code é um <strong>agente</strong> de IA que roda no seu terminal — lê arquivos, edita código e roda comandos por você. "Memória" aqui é tudo que ele consegue ter em mente para responder: o que está na conversa atual mais o que você apontar.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem uma memória externa, cada sessão começa do zero sobre projetos grandes. Entender o que ele "lembra" é o primeiro passo para dar a ele um cérebro persistente.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Agente · sessão · contexto · memória externa.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+              <span class="text-lg">🪟</span><div><span class="font-medium">A janela de contexto e seus limites</span><span class="text-neutral-500 text-sm ml-2">- Por que ele "esquece"</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A <strong>janela de contexto</strong> é o quanto de texto o modelo consegue ler de uma vez (medido em <strong>tokens</strong> — pedaços de palavra). É grande, mas finita: um repositório inteiro raramente cabe.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Quando o conteúdo não cabe, o agente precisa escolher o que ler. Um mapa do conhecimento ajuda ele a escolher bem, em vez de varrer tudo às cegas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Token · janela de contexto · custo · seleção de contexto.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+              <span class="text-lg">🔍</span><div><span class="font-medium">Por que buscar por texto (grep) não basta</span><span class="text-neutral-500 text-sm ml-2">- Achar ≠ entender</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><strong>grep</strong> é a busca literal por uma palavra nos arquivos. Acha onde o termo aparece, mas não sabe o que se <em>relaciona</em> com o quê nem o porquê.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É exatamente a lacuna que o grafo preenche: ele guarda as <strong>conexões</strong> e o significado, não só a localização do texto.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Busca literal vs semântica · relação · "mapa, não índice".</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+              <span class="text-lg">🧩</span><div><span class="font-medium">O que é um "segundo cérebro"</span><span class="text-neutral-500 text-sm ml-2">- Memória fora da cabeça</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">"Segundo cérebro" é uma base de conhecimento externa e organizada que você (ou um agente) consulta. Aqui, é o grafo + o vault que guardam o entendimento de um projeto.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a ideia central do curso: tirar o conhecimento de dentro da sessão efêmera e colocá-lo num lugar persistente e navegável.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">PKM · memória externa · persistência · base consultável.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+              <span class="text-lg">📝</span><div><span class="font-medium">O que o Claude Code já tem nativo (CLAUDE.md, /memory)</span><span class="text-neutral-500 text-sm ml-2">- E onde para</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Claude Code já lê um arquivo <code class="font-mono text-xs bg-dark-900 px-1 rounded">CLAUDE.md</code> com instruções e tem memória própria. É ótimo para regras, mas não é um mapa de um repositório inteiro.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Para saber onde o nativo termina e o Graphify+Obsidian começa — eles se complementam, não competem.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">CLAUDE.md · memória nativa · limites · complemento.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+              <span class="text-lg">🎯</span><div><span class="font-medium">A promessa do stack Graphify + Obsidian</span><span class="text-neutral-500 text-sm ml-2">- Onde tudo encaixa</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Graphify cria o mapa; Obsidian o guarda como markdown navegável; o Claude Code o consulta no contexto do seu projeto. Juntos = segundo cérebro.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o roteiro do curso inteiro. Saber o destino faz cada passo prático adiante fazer sentido.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Stack · mapa → vault → agente · contexto do projeto.</p></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+          <button onclick="openModal('modal-1-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+          <a href="modulo-1-1.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+        </div>
+      </div>
+
+      <!-- MÓDULO 1.2 -->
+      <div id="modulo-1-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="1-2" data-inema-track="1">
+        <div class="p-6 border-b border-dark-600">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+          <h3 class="text-2xl font-bold mb-2">🕸️ Grafo de conhecimento sem mistério</h3>
+          <p class="text-neutral-400 text-sm">Nós, arestas, comunidades e god nodes — o vocabulário que torna o resto do curso óbvio.</p>
+        </div>
+        <div class="divide-y divide-dark-600">
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">⚪</span><div><span class="font-medium">O que é um grafo (nós e arestas)</span><span class="text-neutral-500 text-sm ml-2">- A forma básica</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um <strong>grafo</strong> são pontos (<strong>nós</strong>) ligados por linhas (<strong>arestas</strong>). Pense em estações de metrô (nós) e trilhos (arestas) entre elas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a estrutura que o Graphify produz. Sem essa imagem mental, o resto vira jargão.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Nó · aresta · vizinhança · grau (quantas conexões).</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🔗</span><div><span class="font-medium">Entidades, relações e procedência</span><span class="text-neutral-500 text-sm ml-2">- O vocabulário real</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">No Graphify, os nós são <strong>entidades</strong> (uma ideia, função, pessoa) e as arestas são <strong>relações</strong> tipadas. Cada uma carrega <strong>procedência</strong>: de qual arquivo veio.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O vídeo fala "conceitos/conexões"; a ferramenta diz "entidades/relações". Saber os dois evita confusão na prática.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entidade · relação tipada · procedência · reconciliação (juntar apelidos).</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🫧</span><div><span class="font-medium">Comunidades e o algoritmo Leiden</span><span class="text-neutral-500 text-sm ml-2">- Agrupar o que conversa</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma <strong>comunidade</strong> é um grupo de nós muito conectados entre si. O <strong>Leiden</strong> é o algoritmo que acha esses grupos automaticamente.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Comunidades viram "temas" do projeto — e, no Obsidian, grupos nomeados no canvas. É como o grafo fica navegável.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Comunidade · clustering · Leiden · tema/assunto.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🌟</span><div><span class="font-medium">God nodes (os hubs do grafo)</span><span class="text-neutral-500 text-sm ml-2">- Onde tudo se cruza</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um <strong>god node</strong> é a entidade mais conectada — o hub que toca muitas outras. Ex.: "Context Window" puxando dezenas de conceitos relacionados.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">São os melhores pontos de partida para perguntar ao agente — e o GRAPH_REPORT.md os lista pra você.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">God node · grau alto · hub · ponto de entrada.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🗺️</span><div><span class="font-medium">GraphRAG: mapa vs busca</span><span class="text-neutral-500 text-sm ml-2">- Por que é diferente</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><strong>RAG</strong> é "buscar trechos e dar pro modelo". <strong>GraphRAG</strong> faz isso por um grafo: além dos trechos, entrega as <em>relações</em> entre eles.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a diferença entre o agente receber uma pilha de páginas e receber um mapa anotado. Mapa responde mais rápido e melhor.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">RAG · GraphRAG · recuperação · contexto estruturado.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">⚡</span><div><span class="font-medium">Por que o mapa ajuda o agente</span><span class="text-neutral-500 text-sm ml-2">- O payoff</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Com o mapa, o Claude Code sabe <em>o que está perto de quê</em>. Pergunta sobre sub-agentes → ele acha "agent teams", "contexto separado" etc. sem varrer tudo.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o argumento de venda do stack inteiro — respostas melhores em repositórios grandes.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Vizinhança · navegação · resposta no contexto · eficiência.</p></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+          <button onclick="openModal('modal-1-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+          <a href="modulo-1-2.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+        </div>
+      </div>
+
+      <!-- MÓDULO 1.3 -->
+      <div id="modulo-1-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="1-3" data-inema-track="1">
+        <div class="p-6 border-b border-dark-600">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.3</span><span class="text-xs text-neutral-500">~40 min</span></div>
+          <h3 class="text-2xl font-bold mb-2">⚙️ Graphify por dentro</h3>
+          <p class="text-neutral-400 text-sm">O que a ferramenta faz, como extrai conhecimento, o que ela cospe — e a limitação que o Obsidian resolve.</p>
+        </div>
+        <div class="divide-y divide-dark-600">
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">⚙️</span><div><span class="font-medium">O que é o Graphify (CLI + skill)</span><span class="text-neutral-500 text-sm ml-2">- Duas faces</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Graphify é uma <strong>CLI</strong> (programa de terminal, o pacote <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code>) que também instala uma <strong>skill</strong> (um arquivo de instruções) dentro do Claude Code.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">As duas faces fazem coisas diferentes: a skill (<code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>) tem o modo Obsidian; a CLI headless tem <code class="font-mono text-xs bg-dark-900 px-1 rounded">extract/query</code>. Você vai usar as duas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">CLI · skill · <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code> · slash command.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🌳</span><div><span class="font-medium">Como ele extrai (AST vs LLM)</span><span class="text-neutral-500 text-sm ml-2">- Código x texto</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Para <strong>código</strong>, o Graphify lê a estrutura (a <strong>AST</strong>, a "árvore" do código, via tree-sitter) — rápido e sem API key. Para <strong>documentos</strong>, usa um <strong>LLM</strong> para extrair o sentido.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Define se você precisa de chave de API e quão "literal" ou "semântica" será a extração.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">AST · tree-sitter · extração semântica · LLM.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">📂</span><div><span class="font-medium">As saídas: graph.json, graph.html, GRAPH_REPORT.md</span><span class="text-neutral-500 text-sm ml-2">- O que aparece</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Tudo cai numa pasta <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code>: o <strong>graph.json</strong> (a verdade), o <strong>graph.html</strong> (visual interativo) e o <strong>GRAPH_REPORT.md</strong> (auditoria com perguntas sugeridas).</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber qual arquivo é o quê evita pânico na primeira execução e mostra por onde explorar.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graph.json · graph.html · GRAPH_REPORT.md · cache.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🧱</span><div><span class="font-medium">Código vs documentos</span><span class="text-neutral-500 text-sm ml-2">- Dois corpora</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Graphify aponta tanto para um <strong>code base</strong> quanto para um <strong>corpus de documentos</strong> (PDFs, markdown, etc.). No curso, usamos documentos: a doc do Claude Code.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A escolha muda o tipo de grafo e se você leva pro Obsidian ou para no próprio Graphify (tema da Trilha 3).</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Code base · corpus · markdown · PDF.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">📦</span><div><span class="font-medium">O modo Obsidian e o modo wiki</span><span class="text-neutral-500 text-sm ml-2">- Como exporta</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A skill tem <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> (um markdown por nó com backlinks + um canvas) e <code class="font-mono text-xs bg-dark-900 px-1 rounded">--wiki</code> (artigos por comunidade, estilo Wikipédia).</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o pulo do gato do vídeo: transformar o grafo num vault que o Obsidian (e o agente) entende.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> · <code class="font-mono text-xs bg-dark-900 px-1 rounded">--wiki</code> · graph.canvas · backlink.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🫙</span><div><span class="font-medium">O grafo no vácuo: a limitação que o Obsidian resolve</span><span class="text-neutral-500 text-sm ml-2">- O gap</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Sozinho, o grafo do Graphify vive isolado — só sabe daquele corpus. Não se conecta ao resto do que você guarda.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É exatamente por isso que levamos pro Obsidian: para encaixar esse conhecimento no contexto maior do seu projeto.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Silo · vácuo · contexto maior · integração.</p></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+          <button onclick="openModal('modal-1-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+          <a href="modulo-1-3.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+        </div>
+      </div>
+
+      <!-- MÓDULO 1.4 -->
+      <div id="modulo-1-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="1-4" data-inema-track="1">
+        <div class="p-6 border-b border-dark-600">
+          <div class="flex items-center justify-between mb-2"><span class="text-emerald-400 font-bold">1.4</span><span class="text-xs text-neutral-500">~35 min</span></div>
+          <h3 class="text-2xl font-bold mb-2">🔮 Obsidian, o vault que vira memória</h3>
+          <p class="text-neutral-400 text-sm">O que é um vault, por que markdown casa com o agente, e como o graph.json vira um cérebro navegável.</p>
+        </div>
+        <div class="divide-y divide-dark-600">
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🔮</span><div><span class="font-medium">O que é o Obsidian e um vault</span><span class="text-neutral-500 text-sm ml-2">- Pasta de notas</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O <strong>Obsidian</strong> é um app de notas. Um <strong>vault</strong> é simplesmente uma pasta de arquivos <strong>markdown</strong> (texto simples com formatação) que ele abre.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Como é só uma pasta de arquivos, o Claude Code também lê tudo — sem formato proprietário no caminho.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Obsidian · vault · markdown · pasta local.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🔗</span><div><span class="font-medium">Markdown e wikilinks [[...]]</span><span class="text-neutral-500 text-sm ml-2">- Como conecta</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um <strong>wikilink</strong> é <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[nome-da-nota]]</code>: liga uma nota a outra. O Obsidian cria os <strong>backlinks</strong> (quem aponta pra cá) sozinho.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É assim que as arestas do grafo viram links navegáveis. Cada relação do Graphify vira um <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[...]]</code>.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Wikilink · backlink · nota · ligação bidirecional.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🌐</span><div><span class="font-medium">O grafo do Obsidian (não é o mesmo grafo)</span><span class="text-neutral-500 text-sm ml-2">- Cuidado com o nome</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Obsidian tem uma "graph view" — mas é só um desenho dos links entre notas markdown. Não é o grafo de conhecimento do Graphify, é uma representação visual dele.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O vídeo alerta pra isso: "não é exatamente um knowledge graph, é um monte de markdown conectado". Saber a diferença evita expectativa errada.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Graph view · links de notas · representação · ≠ grafo original.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🤝</span><div><span class="font-medium">Por que markdown casa com o Claude Code</span><span class="text-neutral-500 text-sm ml-2">- Lê sem fricção</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Markdown é texto puro. O agente lê, faz grep, segue os <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[links]]</code> — nenhuma camada binária no meio.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É por isso que o vault é o lar ideal: o mesmo arquivo serve para você ler no Obsidian e para o Claude Code consultar.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Texto puro · legível por humano e máquina · sem lock-in.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🧰</span><div><span class="font-medium">Plugins, canvas e a infraestrutura</span><span class="text-neutral-500 text-sm ml-2">- O ecossistema</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O <strong>Canvas</strong> é um quadro visual; os <strong>plugins</strong> estendem o Obsidian. O Graphify gera um <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> com as comunidades já agrupadas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Muita gente quer o stack só pela infra do Obsidian (UI, add-ons). Saber o que tem disponível ajuda a decidir.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Canvas · plugin · UI · add-ons.</p></div>
+            </div></div>
+          </div>
+          <div class="topic-item">
+            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+              <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🌉</span><div><span class="font-medium">O encaixe: do graph.json ao vault</span><span class="text-neutral-500 text-sm ml-2">- A ponte</span></div>
+            </button>
+            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O export Obsidian lê o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> e escreve um markdown por nó. É a ponte entre o mundo do grafo e o mundo das notas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Fecha a Trilha 1: você entende as duas margens e a ponte. A Trilha 2 atravessa essa ponte na prática.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graph.json → .md · ponte · regeneração · próximo passo prático.</p></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+          <button onclick="openModal('modal-1-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+          <a href="modulo-1-4.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo</a>
+        </div>
+      </div>
+
+      <!-- NAV TRILHAS -->
+      <div class="flex flex-col sm:flex-row gap-4 mt-10">
+        <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Início</a>
+        <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 2 · Passo a passo →</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-1-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.1</span><span class="font-semibold">Por que um segundo cérebro</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-1-1.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-1-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.2</span><span class="font-semibold">Grafo de conhecimento</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-1-2.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-1-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.3</span><span class="font-semibold">Graphify por dentro</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-1-3.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-1-4" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-emerald-400 font-bold">1.4</span><span class="font-semibold">Obsidian como memória</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-1-4.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Segundo Cérebro pro Claude Code · Trilha 1 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+  <script src="../../assets/learn.js"></script>
+  <script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>
