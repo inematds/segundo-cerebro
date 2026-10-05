@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Module 1.2 · Knowledge Graph | Second Brain for Claude Code</title>
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+<style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-emerald-400 { color:#059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5,150,105,.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5,150,105,.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5,150,105,.18); }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#34d399; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#059669; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha1/modulo-1-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha1/modulo-1-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha1/modulo-1-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha1/modulo-1-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-1-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha1/modulo-1-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Skip to content</a>
+<!-- NAV (T1 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Second Brain</span></a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentals</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Step by step</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Advanced use</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>My journey</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Appearance</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Theme</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Dark</button><button data-inema-set-theme="claro">Clear</button><button data-inema-set-theme="sepia">Sepia</button><button data-inema-set-theme="foco">Focus</button><button data-inema-set-theme="contraste">High contrast</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Source</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">System</button><button data-inema-set-font="leitura">Reading</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Size</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Width</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Narrow</button><button data-inema-set-linewidth="68">Medium</button><button data-inema-set-linewidth="75">Wide</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">In-between line</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compact</button><button data-inema-set-leading="1.7">Comfortable</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Accent</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Toggle light/dark theme">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-emerald-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-emerald-400" href="index.html">Track 1</a><span>/</span>
+<span class="text-emerald-400">Module 1.2</span>
+</div>
+</nav>
+<main id="conteudo">
+<article data-inema-module="1-2" data-inema-track="1" id="modulo-1-2">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MODULE 1.2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🕸️ Knowledge graph, demystified</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Nodes, edges, communities, and god nodes — the vocabulary that makes the rest of the course obvious. Each word is defined the first time it appears; by the end, “graph” stops being jargon and becomes a mental image.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~45</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Basic</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+<div aria-label="Module 1.2 progress" class="inema-ring inema-ring--sm" data-inema-meter="modulo:1-2"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400" data-inema-meter-frac="">0 of 6</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+<!-- TOC -->
+<aside class="hidden lg:block">
+<nav aria-label="Module index" class="sticky top-24" data-inema-toc="">
+<p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">In this module</p>
+<p class="text-sm text-neutral-400 mb-3">Section <span data-inema-section-counter="">1 of 6</span></p>
+<ol class="space-y-1 text-sm">
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-1">1. What is a graph</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-2">2. Entities and relationships</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-3">3. Communities and Leiden</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-4">4. God nodes (the hubs)</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-5">5. GraphRAG: map vs. search</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-6">6. Why the map helps</a></li>
+</ol>
+</nav>
+</aside>
+<div class="inema-prose">
+<!-- TÓPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-1-2#topico-1" id="topico-1">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold">⚪ What a graph is (nodes and edges)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t1-p1">
+              At its core, the whole course revolves around a simple structure: the <strong class="text-emerald-400">graph</strong>. There’s no mystery—it’s the oldest way to draw “things and how they connect.” Think of a subway map: each station is a point, and each track is a line connecting two stations. The Graphify graph is exactly that, except instead of stations it stores <em>ideas</em>, and instead of tracks it stores <em>relationships between ideas</em>.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is a "graph"</h3>
+<p class="text-neutral-300 text-sm">A <strong>graph</strong> is a set of points connected by lines. The points are called <strong>nodes</strong> (in English, <em>nodes</em>) and the lines are called <strong>edges</strong> (in English, <em>edges</em>). Nothing more than that: a node = a thing, an edge = a link between two things. Forget the scary word “graph”—it’s a subway map.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t1-p2">
+              Two details give the graph its power. The first is <strong class="text-emerald-400">neighborhood</strong>: from one node, you can immediately see everything connected to it — its direct neighbors. The second is the <strong class="text-emerald-400">degree</strong> of a node: how many edges leave it, or in other words, how many other things it connects to. A high-degree node is a busy intersection; a low-degree node is a dead end. Remember these two—they come up again in topics 3 and 4.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? "Neighborhood" and "degree"</h3>
+<p class="text-neutral-300 text-sm"><strong>Neighborhood</strong> of a node = all nodes connected to it by an edge. <strong>Degree</strong> = o <em>number</em> of these connections. A central station with many lines → high degree. An end-of-line station → low degree. Simple as that.</p>
+</div>
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="A small knowledge graph: several nodes connected by edges, a group surrounded by a dashed outline forming a community, and a bright central node with a high degree that is the god node" class="w-full h-auto" role="img" viewbox="0 0 1000 340">
+<defs>
+<lineargradient id="m12a-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#34d399"></stop><stop offset="1" stop-color="#10b981"></stop></lineargradient>
+<filter height="180%" id="m12a-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m12a-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#10b981" opacity="0.12" r="1.3"></circle></pattern>
+</defs>
+<rect fill="url(#m12a-grid)" height="340" width="1000" x="0" y="0"></rect>
+<!-- arestas -->
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<line x1="500" x2="250" y1="170" y2="80"></line>
+<line x1="500" x2="250" y1="170" y2="260"></line>
+<line x1="500" x2="760" y1="170" y2="100"></line>
+<line x1="500" x2="800" y1="170" y2="240"></line>
+<line x1="500" x2="500" y1="170" y2="300"></line>
+<line x1="250" x2="250" y1="80" y2="260"></line>
+<line x1="760" x2="800" y1="100" y2="240"></line>
+</g>
+<!-- contorno de comunidade (tracejado) -->
+<rect fill="none" height="232" opacity="0.7" rx="26" stroke="#34d399" stroke-dasharray="8 8" stroke-width="1.6" width="240" x="700" y="56"></rect>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="12" font-weight="600" text-anchor="middle" x="820" y="46">community</text>
+<!-- nós vizinhos (ciano) -->
+<g font-family="Inter,sans-serif" font-size="12">
+<g><circle cx="250" cy="80" fill="#0e1b26" r="30" stroke="#38bdf8" stroke-width="2"></circle><text fill="#bfe6ff" text-anchor="middle" x="250" y="84">Hooks</text></g>
+<g><circle cx="250" cy="260" fill="#0e1b26" r="30" stroke="#38bdf8" stroke-width="2"></circle><text fill="#bfe6ff" text-anchor="middle" x="250" y="264">Session</text></g>
+<g><circle cx="500" cy="300" fill="#0e1b26" r="30" stroke="#38bdf8" stroke-width="2"></circle><text fill="#bfe6ff" text-anchor="middle" x="500" y="304">Memory</text></g>
+<g><circle cx="760" cy="100" fill="#0e1b26" r="32" stroke="#38bdf8" stroke-width="2"></circle><text fill="#bfe6ff" text-anchor="middle" x="760" y="104">Subagents</text></g>
+<g><circle cx="800" cy="240" fill="#0e1b26" r="30" stroke="#38bdf8" stroke-width="2"></circle><text fill="#bfe6ff" text-anchor="middle" x="800" y="244">MCP</text></g>
+</g>
+<!-- god node (foco, glow) -->
+<g filter="url(#m12a-glow)"><circle cx="500" cy="170" fill="#0e2018" r="46" stroke="url(#m12a-grad)" stroke-width="2.5"></circle></g>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="500" y="166">Context</text>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="500" y="184">Window</text>
+<text fill="#6ee7b7" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="500" y="120">god node (high degree)</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ The circles are <strong class="text-emerald-400">nodes</strong>; the lines are <strong class="text-emerald-400">edges</strong>. The bright circle in the center has many connections (high degree) — it is the <em>god node</em>. The dashed line surrounds a well-connected group — a <em>community</em>. Everything that follows is in this one figure.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Node</div><div class="text-xs text-neutral-400">A thing/idea</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Edge</div><div class="text-xs text-neutral-400">Connects two nodes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Neighborhood</div><div class="text-xs text-neutral-400">Connected nodes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Degree</div><div class="text-xs text-neutral-400">How many connections</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
+<span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-1-2#topico-2" id="topico-2">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold">🔗 Entities, relationships, and provenance</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t2-p1">
+              "Node" and "edge" are generic names. When Graphify actually looks at your content, it gives them more specific names: each node becomes a <strong class="text-emerald-400">entity</strong> and each edge becomes a <strong class="text-emerald-400">typed relationship</strong>. It's the same graph from topic 1 — just with precise terminology layered on top.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? "Entity" and "typed relationship"</h3>
+<p class="text-neutral-300 text-sm">A <strong>entity</strong> is an identifiable thing: an idea, a code function, a person, a concept ("Context Window," "Hooks"). A <strong>typed relationship</strong> is an edge that <em>says what it is</em> — not just “A links to B,” but “A <em>uses</em> B", "A <em>is part of</em> B", "A <em>depends on</em> B". The "type" is the label for the connection.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t2-p2">
+              Each entity and relationship also carries an invisible label: the <strong class="text-emerald-400">provenance</strong> — which file it came from. This lets the agent say “I read this in <code class="font-mono text-xs bg-dark-900 px-1 rounded">hooks.md</code>, line such-and-such” instead of making it up. Provenance is what separates a reliable map from a pretty guess.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? "Provenance" and "reconciliation"</h3>
+<p class="text-neutral-300 text-sm"><strong>Provenance</strong> (in English, <em>provenance</em>) = the record of the origin of each piece of knowledge: which document produced it. <strong>Reconciliation</strong> = combine aliases for the same concept into a single node (e.g., “context window,” “context window,” and “ctx window” become <em>one</em> entity, not three). Without reconciling them, the same concept would appear scattered.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t2-p3">
+              Here’s a vocabulary trap worth remembering: the video that inspires the course talks about “concepts” and “connections”; in practice, the tool says “entities” and “relationships.” They’re the same thing with different names. Knowing both keeps you from getting stuck when the <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> using one term while the video uses another.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-3">🛠️ What the tool says</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">›</span><span><strong>Entity</strong> — a named, typed node.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">›</span><span><strong>Relationship</strong> — a labeled edge (uses, contains…).</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">›</span><span><strong>Provenance</strong> — the source file for each item.</span></li>
+</ul>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+<h4 class="font-bold text-neutral-200 mb-3">🎬 What the video calls it</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-neutral-400">›</span><span><strong>Concept</strong> — the same as entity.</span></li>
+<li class="flex items-start gap-2"><span class="text-neutral-400">›</span><span><strong>Connection</strong> — the same as relationship.</span></li>
+<li class="flex items-start gap-2"><span class="text-neutral-400">›</span><span><strong>"Where It Came From"</strong> — the same as provenance.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Entity</div><div class="text-xs text-neutral-400">Named node</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Typed relationship</div><div class="text-xs text-neutral-400">Labeled edge</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Provenance</div><div class="text-xs text-neutral-400">Which file it came from</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Reconciliation</div><div class="text-xs text-neutral-400">Combine aliases</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-1-2#topico-3" id="topico-3">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold">🫧 Communities and the Leiden algorithm</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t3-p1">
+              When you have hundreds of nodes, you’ll notice that some groups interact a lot with each other and little with the rest — like cliques at a party. These groups have a name: <strong class="text-emerald-400">communities</strong>. In the diagram in topic 1, the dashed line circled one of them. Communities are what turn a tangle of points into a set of <em>themes</em> readable.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? "Community" and "clustering"</h3>
+<p class="text-neutral-300 text-sm">A <strong>community</strong> is a group of nodes that are closely connected to one another and loosely connected to those outside the group. <strong>Clustering</strong> (clustering) is the general name for the task of "finding the natural groups" in a set of data. Community detection is clustering on a graph.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t3-p2">
+              But who decides where one community begins and another ends? An algorithm—and the one Graphify uses is called <strong class="text-emerald-400">Leiden</strong>. You don't need to understand its math; you just need to know that it scans the graph on its own and returns the groups, without you having to label anything by hand.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "Leiden"</h3>
+<p class="text-neutral-300 text-sm"><strong>Leiden</strong> is the name of a community detection algorithm (named after the Dutch city). For you, it’s a useful black box: a graph goes in, cohesive groups come out. It’s the successor to an older algorithm (Louvain), with more "tightly knit" groups.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t3-p3">
+              Under the hood, in plain language, Leiden repeats three steps until it can’t improve any further:
+            </p>
+<div class="space-y-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">1</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Each node in its own group</h4><p class="text-sm text-neutral-300">Start with everyone isolated—no cliques yet.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">2</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Bring together what connects strongly</h4><p class="text-sm text-neutral-300">Each node “moves” to the group of neighbors it has the most edges with.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">3</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Repeat until stable</h4><p class="text-sm text-neutral-300">Refines and starts over as long as the groups become more cohesive. Then it stops.</p></div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">💡</span> Why this matters to you</h3>
+<p class="text-neutral-300">Each community becomes a <strong>theme</strong> of your project — and, in the Obsidian export, a <strong>named group on the canvas</strong>. That's how a graph of 600 nodes becomes less intimidating: you navigate dozens of topics instead of hundreds of disconnected points.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Community</div><div class="text-xs text-neutral-400">Cohesive group</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Clustering</div><div class="text-xs text-neutral-400">Find groups</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Leiden</div><div class="text-xs text-neutral-400">The algorithm</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Theme</div><div class="text-xs text-neutral-400">Named community</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-1-2#topico-4" id="topico-4">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold">🌟 God nodes: the graph's hubs</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t4-p1">
+              Remember the bright node at the center of the diagram? That was the <strong class="text-emerald-400">god node</strong>: the most connected entity in the graph, the intersection that almost everything passes through. In a graph of Claude Code documentation, "Context Window" is often a god node — dozens of other concepts point to it.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is a "god node" / "hub"</h3>
+<p class="text-neutral-300 text-sm">A <strong>god node</strong> (literally "god node") is simply the node with <strong>degree</strong> higher—the one with the most edges. Another name for it is <strong>hub</strong> (center). There's nothing mystical about it: it's the graph's connection hub. The <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> already lists the god nodes for you.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t4-p2">
+              Why should you care? Because god nodes are the <strong>best starting points</strong> to ask the agent. Instead of starting with an obscure concept tucked away in a corner, you start with a hub and let the agent “go down” through the neighborhood. It’s like entering a city through the central station, not through an alley.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-3">✓ Start with a god node</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Covers many topics at once.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Gives the agent a rich neighborhood to navigate.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Already listed in the report — no treasure hunt.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Start with a leaf node</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Low degree: few connections to follow.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>The agent hits a dead end.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>You lose sight of the big picture.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">💡</span> Usage tip</h3>
+<p class="text-neutral-300">When you open the graph for the first time, go straight to <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>, read the list of god nodes and use the first one as the starting point for your first question. It’s the fastest shortcut to “understanding what project this graph is about.”</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">God node</div><div class="text-xs text-neutral-400">The most connected</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Hub</div><div class="text-xs text-neutral-400">Central intersection</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">High degree</div><div class="text-xs text-neutral-400">Many edges</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Entry point</div><div class="text-xs text-neutral-400">Where to start</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-1-2#topico-5" id="topico-5">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold">🗺️ GraphRAG: map vs. search</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t5-p1">
+              Now let's bring it all together in an acronym you'll hear a lot: <strong class="text-emerald-400">GraphRAG</strong>. To understand it, start with simple "RAG." When an agent needs to answer questions about documents that don't fit in the context window, it <em>search</em> the most relevant passages and pastes them into the context before answering. This is RAG.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "RAG"</h3>
+<p class="text-neutral-300 text-sm"><strong>RAG</strong> = <em>Retrieval-Augmented Generation</em> (retrieval-augmented generation). In plain English: before answering, the system <strong>retrieves</strong> (search) retrieves useful text snippets and delivers them to the model. The <strong>retrieval</strong> is just this step of "fetching what matters." Standard RAG works with <em>chunks</em> — loose snippets of text.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t5-p2">
+              The problem with ordinary RAG: it returns a <strong>pile of unrelated snippets</strong>. The model receives standalone pages and has to guess how they connect. The <strong class="text-emerald-400">GraphRAG</strong> solves this by retrieving <em>on top of the graph</em>: beyond the excerpts, it provides the <strong>relationships</strong> between them—neighborhood, community, god nodes. Text + map, not isolated text.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "GraphRAG"</h3>
+<p class="text-neutral-300 text-sm"><strong>GraphRAG</strong> is RAG that uses a <strong>knowledge graph</strong> as a source. Instead of returning only passages similar to the question, it returns the passages <em>e</em> how they connect. It’s the difference between getting newspaper clippings and getting an annotated infographic. Graphify is, at its core, a tool for building this GraphRAG graph.</p>
+</div>
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="On the left, conventional RAG: a stack of unconnected chunks. On the right, GraphRAG: the same chunks, connected by relationships, with a central node highlighted" class="w-full h-auto" role="img" viewbox="0 0 1000 260">
+<defs>
+<lineargradient id="m12b-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#34d399"></stop><stop offset="1" stop-color="#10b981"></stop></lineargradient>
+<filter height="180%" id="m12b-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m12b-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#10b981" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m12b-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m12b-grid)" height="260" width="1000" x="0" y="0"></rect>
+<line opacity="0.4" stroke="#9ca3af" stroke-dasharray="6 7" stroke-width="1.4" x1="500" x2="500" y1="24" y2="236"></line>
+<!-- esquerda: RAG trechos planos -->
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="240" y="36">RAG · flat chunks</text>
+<g font-family="Inter,sans-serif" font-size="12">
+<rect fill="#26201a" height="30" rx="6" stroke="#9ca3af" stroke-width="1.2" width="300" x="90" y="60"></rect><text fill="#e5e7eb" x="105" y="80">snippet about hooks…</text>
+<rect fill="#26201a" height="30" rx="6" stroke="#9ca3af" stroke-width="1.2" width="300" x="90" y="100"></rect><text fill="#e5e7eb" x="105" y="120">snippet about context…</text>
+<rect fill="#26201a" height="30" rx="6" stroke="#9ca3af" stroke-width="1.2" width="300" x="90" y="140"></rect><text fill="#e5e7eb" x="105" y="160">snippet about subagents…</text>
+<rect fill="#26201a" height="30" rx="6" stroke="#9ca3af" stroke-width="1.2" width="300" x="90" y="180"></rect><text fill="#e5e7eb" x="105" y="200">snippet about MCP…</text>
+<text fill="#9ca3af" font-size="11" text-anchor="middle" x="240" y="232">standalone pages — unrelated to one another</text>
+</g>
+<!-- direita: GraphRAG trechos + relações -->
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="760" y="36">GraphRAG — chunks + relationships</text>
+<g fill="none" opacity="0.6" stroke="#38bdf8" stroke-width="1.8">
+<path d="M700,130 C740,90 760,82 800,74" marker-end="url(#m12b-ahc)"></path>
+<path d="M700,130 L800,130" marker-end="url(#m12b-ahc)"></path>
+<path d="M700,130 C740,170 760,178 800,186" marker-end="url(#m12b-ahc)"></path>
+</g>
+<g filter="url(#m12b-glow)"><rect fill="#0e2018" height="52" rx="13" stroke="url(#m12b-grad)" stroke-width="2.5" width="116" x="584" y="104"></rect></g>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="642" y="135">context</text>
+<g font-family="Inter,sans-serif" font-size="12">
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="130" x="800" y="58"></rect><text fill="#bfe6ff" text-anchor="middle" x="865" y="79">hooks</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="130" x="800" y="114"></rect><text fill="#bfe6ff" text-anchor="middle" x="865" y="135">subagents</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="130" x="800" y="170"></rect><text fill="#bfe6ff" text-anchor="middle" x="865" y="191">MCP</text></g>
+</g>
+<text fill="#6ee7b7" font-size="11" text-anchor="middle" x="760" y="232">the concept and its neighbors together</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ Same question, two answers. Standard RAG dumps disconnected passages; GraphRAG delivers the concept <em>e</em> its neighborhood. That’s why the map answers faster and with fewer hallucinations.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">RAG</div><div class="text-xs text-neutral-400">Search + answer</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Recovery</div><div class="text-xs text-neutral-400">Go fetch snippets</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">GraphRAG</div><div class="text-xs text-neutral-400">RAG over a graph</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Structured context</div><div class="text-xs text-neutral-400">Excerpts + relationships</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-1-2#topico-6" id="topico-6">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold">⚡ Why the map helps the agent</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t6-p1">
+              To wrap up the module, here’s the practical payoff. With the map in hand, Claude Code knows <em>what's close to what</em>. You ask about subagents; instead of scanning the entire repository with <code class="font-mono text-xs bg-dark-900 px-1 rounded">grep</code>, it jumps straight to the “Subagents” node, reads the <strong class="text-emerald-400">neighborhood</strong> from it—“agent teams,” “separate context,” “orchestration”—and responds in the right context.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Quick reminder: “browse the neighborhood”</h3>
+<p class="text-neutral-300 text-sm"><strong>Explore the neighborhood</strong> is going from a node to its direct neighbors, then to their neighbors — following edges as if they were corridors. That's exactly what grep <em>no</em> does: it finds where the word appears, but doesn’t know how to follow the connections. The map does.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-2-t6-p2">
+              The benefits grow with the size of the project. In large repositories, reading everything is expensive and slow; following the map is cheap and direct. That's the selling point of the whole stack: <strong>better answers from large codebases</strong>, because the agent spends its context window on what matters, guided by relationships instead of guessing.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-3">✓ With the map</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Goes straight to the right node and its neighborhood.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Uses the window only for what’s relevant.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Answers with relationships, not just snippets.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Without the map</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Scans files with grep, aimlessly.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Fills the window with irrelevant text.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Loses the connections between concepts.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Neighborhood</div><div class="text-xs text-neutral-400">What’s nearby</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Navigation</div><div class="text-xs text-neutral-400">Follow edges</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Right context</div><div class="text-xs text-neutral-400">On-point answer</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Efficiency</div><div class="text-xs text-neutral-400">Low-cost for large datasets</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- CHECAGEM LEVE -->
+<div class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-1-2#q1">
+<p class="font-medium mb-4">✋ Self-recovery (optional, non-blocking): what is a <strong>god node</strong> in the graph?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">The node that the Leiden algorithm marks as the starting point for each community.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">The most connected entity (highest degree)—the hub that almost everything passes through.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">A special node created by hand to store the project rules.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<!-- RESUMO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module summary</h2>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Graph = nodes + edges:</strong> <span class="text-neutral-400">the subway map of ideas, with neighborhoods and degree.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Entities and relationships:</strong> <span class="text-neutral-400">the tool's actual vocabulary; each item carries provenance.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Communities via Leiden:</strong> <span class="text-neutral-400">cohesive groups become navigable themes without you tagging them by hand.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">God nodes:</strong> <span class="text-neutral-400">the high-degree hubs — the best starting points.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">GraphRAG:</strong> <span class="text-neutral-400">retrieval that returns excerpts <em>e</em> relationships — a map, not a pile of pages.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-emerald-400 mb-2">Next module</h3>
+<p class="text-neutral-300">1.3 · Graphify under the hood — the CLI and skill, how it extracts (AST vs. LLM), and what it outputs to the folder <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code>.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track 1</a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-3.html">Next: 1.3 Graphify under the hood →</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</article>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Second Brain for Claude Code · Module 1.2 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-1-2#q1', { answer: 1, explain: { 0: 'Não — o Leiden detecta comunidades, mas não "elege" god nodes; o god node é só o nó de grau mais alto, independente de comunidade.', 1: 'Isso. God node = a entidade mais conectada (grau mais alto), o hub do grafo e o melhor ponto de partida para perguntar.', 2: 'Não — god nodes não são feitos à mão nem guardam regras; eles emergem das conexões. Regras ficam no CLAUDE.md (módulo 1.1).' } });
+    }
+  </script>
+</body>
+</html>

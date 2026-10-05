@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Module 3.4 · Maintenance and troubleshooting | Second Brain for Claude Code</title>
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+<style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-purple-400 { color:#7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,.18); }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#c084fc; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#7c3aed; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha3/modulo-3-4.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha3/modulo-3-4.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha3/modulo-3-4.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/modulo-3-4.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-3-4.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha3/modulo-3-4.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Skip to content</a>
+<!-- NAV (T3 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Second Brain</span></a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentals</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Step by step</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Advanced use</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>My journey</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Appearance</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Theme</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Dark</button><button data-inema-set-theme="claro">Clear</button><button data-inema-set-theme="sepia">Sepia</button><button data-inema-set-theme="foco">Focus</button><button data-inema-set-theme="contraste">High contrast</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Source</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">System</button><button data-inema-set-font="leitura">Reading</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Size</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Width</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Narrow</button><button data-inema-set-linewidth="68">Medium</button><button data-inema-set-linewidth="75">Wide</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">In-between line</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compact</button><button data-inema-set-leading="1.7">Comfortable</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Accent</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Toggle light/dark theme">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-purple-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-purple-400" href="index.html">Track 3</a><span>/</span>
+<span class="text-purple-400">Module 3.4</span>
+</div>
+</nav>
+<main id="conteudo">
+<article data-inema-module="3-4" data-inema-track="3" id="modulo-3-4">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MODULE 3.4</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🛠️ Maintenance, updates, and troubleshooting</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Keep the graph and vault healthy over time—and know exactly what to do when something goes wrong. Every issue comes with its cause and a fix ready to copy and run.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~30</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Practical</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+<div aria-label="Module 3.4 progress" class="inema-ring inema-ring--sm" data-inema-meter="modulo:3-4"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400" data-inema-meter-frac="">0 of 6</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+<!-- TOC -->
+<aside class="hidden lg:block">
+<nav aria-label="Module index" class="sticky top-24" data-inema-toc="">
+<p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">In this module</p>
+<p class="text-sm text-neutral-400 mb-3">Section <span data-inema-section-counter="">1 of 6</span></p>
+<ol class="space-y-1 text-sm">
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-1">1. Rerun when the source changes</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-2">2. Regenerated vault vs. your edits</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-3">3. graphify not found (PATH)</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-4">4. API key errors (headless)</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-5">5. Noisy or shallow graph</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-6">6. Version and export the journey</a></li>
+</ol>
+</nav>
+</aside>
+<div class="inema-prose">
+<!-- TÓPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-3-4#topico-1" id="topico-1">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold">🔄 Rerun when the source changes (incremental)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t1-p1">
+              Your project doesn't stand still: the documentation changes, the code grows, files come and go. The graph needs to keep up — but rebuilding everything from scratch with every commit would be slow and expensive. The answer is the <strong class="text-purple-400">incremental</strong>: <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify update .</code> reprocesses <em>only what changed</em> and reuse the rest of the cache.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "incremental"</h3>
+<p class="text-neutral-300 text-sm">Incremental means “only the difference.” Graphify stores a <strong>per-file cache</strong> (a hash of the content) in <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/cache/</code>. If the file hasn't changed, it doesn't call the LLM again — saving time and money. Only new or changed files are reprocessed.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t1-p2">
+              The maintenance cycle has two steps. First, update the graph (<code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/graph.json</code> is the source of truth). Then, if you use the Obsidian vault, export again with <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> to regenerate the notes. Remember: the export is <strong>derived</strong> of the graph — updating the graph doesn’t update the vault by itself.
+            </p>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">fix · update the graph</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-purple-400">Objective:</strong> keep the current graph after the source changes, without rebuilding everything.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># headless (terminal puro): só reprocessa o que mudou
+graphify update .
+
+# usando a skill dentro do Claude Code, e já re-exportando o vault:
+# /graphify . --update --obsidian --obsidian-dir ~/vault/graphify/meu-projeto</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-purple-400">Verify:</strong> the log shows "N files changed" (not the total), and the <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> gets a <code class="font-mono text-xs bg-dark-900 px-1 rounded">mtime</code> new. Untouched files appear as "cache hit".</p>
+</div>
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="Incremental maintenance cycle: the source changes, graphify update runs, the vault is re-exported and brought up to date, then the cycle starts again" class="w-full h-auto" role="img" viewbox="0 0 1000 270">
+<defs>
+<lineargradient id="m34a-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="m34a-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m34a-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m34a-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"></path></marker>
+<marker id="m34a-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m34a-grid)" height="270" width="1000" x="0" y="0"></rect>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="500" y="142">incremental cycle</text>
+<!-- arestas do loop -->
+<g fill="none">
+<path d="M330,66 L660,66" marker-end="url(#m34a-ahc)" opacity="0.6" stroke="#38bdf8" stroke-width="1.8"></path>
+<path d="M812,96 L812,176" marker-end="url(#m34a-ahc)" opacity="0.6" stroke="#38bdf8" stroke-width="1.8"></path>
+<path d="M660,204 L350,204" marker-end="url(#m34a-ahc)" opacity="0.6" stroke="#38bdf8" stroke-width="1.8"></path>
+<path d="M200,176 L200,96" marker-end="url(#m34a-ah)" opacity="0.6" stroke="#c084fc" stroke-width="1.8"></path>
+</g>
+<!-- nó A: fonte muda -->
+<rect fill="#1a1230" height="52" rx="13" stroke="url(#m34a-grad)" stroke-width="2" width="250" x="80" y="40"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="205" y="71">① the source changes</text>
+<!-- nó B: graphify update -->
+<g class="wf-a"><rect fill="#0e1b26" height="52" rx="11" stroke="#38bdf8" stroke-width="2" width="265" x="660" y="40"></rect><text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13.5" text-anchor="middle" x="792" y="71">② graphify update .</text></g>
+<!-- nó C: re-export -->
+<g class="wf-a"><rect fill="#0e1b26" height="52" rx="11" stroke="#38bdf8" stroke-width="2" width="265" x="660" y="178"></rect><text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13.5" text-anchor="middle" x="792" y="209">③ re-export --obsidian</text></g>
+<!-- nó D: vault atual (foco) -->
+<g filter="url(#m34a-glow)"><rect fill="#1a1230" height="52" rx="13" stroke="url(#m34a-grad)" stroke-width="2.5" width="270" x="80" y="178"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="215" y="209">④ current vault ✓</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ The cycle closes: every time the source changes, you run <strong class="text-purple-400">update</strong> and re-exports. The graph is the source of truth; the vault is derived from it—which is why you need both steps.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">update</div><div class="text-xs text-neutral-400">Only what changed</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">cache</div><div class="text-xs text-neutral-400">Hash per file</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">re-export</div><div class="text-xs text-neutral-400">Derived vault</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">incremental</div><div class="text-xs text-neutral-400">Fast and cheap</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
+<span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-3-4#topico-2" id="topico-2">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold">🧯 Regenerated vault vs. your edits</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t2-p1">
+              Here’s the pitfall that hurts the most: the Obsidian export is <strong class="text-purple-400">regenerated from scratch</strong> with each run. If you opened a generated note, wrote your own reflection in it, and then ran the export again, <strong>that edit is overwritten</strong>. Graphify doesn’t merge your changes—it recreates the file.
+            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-3">✓ Secure vault</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Notes generated in a Graphify-only folder (e.g., <code class="font-mono text-xs bg-dark-900 px-1 rounded">/imports</code>).</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Your reflections in a separate folder (e.g., <code class="font-mono text-xs bg-dark-900 px-1 rounded">/minhas-notas</code>).</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>You <em>links</em> from your notes to the generated ones—it never edits the generated ones.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Vault at risk</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Edit the notes generated by the export directly.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Mix your notes with the imports in the same folder.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Re-export over the top and lose hours of work.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Golden rule</h3>
+<p class="text-neutral-300 text-sm">Treat the imports folder as <strong>read-only</strong>: it's a projection of the graph, not your notebook. If you always export to <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian-dir ~/vault/graphify/&lt;projeto&gt;</code>, your personal notes stay outside it and are never touched by the re-export.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Regeneration</div><div class="text-xs text-neutral-400">Recreates, doesn't merge</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Separation</div><div class="text-xs text-neutral-400">Imports ≠ your notes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Read-only</div><div class="text-xs text-neutral-400">Don’t edit imports</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Link</div><div class="text-xs text-neutral-400">Connect, don’t copy</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-3-4#topico-3" id="topico-3">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold">🐛 "graphify: command not found" (PATH)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t3-p1">
+              You installed with <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool install graphifyy</code>, but the terminal responds <code class="font-mono text-xs bg-dark-900 px-1 rounded">command not found</code>. No worries: the package was installed; it just isn’t in the <strong class="text-purple-400">PATH</strong> of your shell. The <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv</code> has a command that fixes this in one step.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "PATH"</h3>
+<p class="text-neutral-300 text-sm">O <strong>PATH</strong> is the list of folders where the shell looks for programs when you type a command. If the binary for <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> is in a folder that isn’t on this list, the shell won’t find it—even though it exists. <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool update-shell</code> add the right folder and reopen the terminal.</p>
+</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">fix · PATH</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-purple-400">Objective:</strong> run the command <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> be found.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># adiciona o diretório de tools do uv ao PATH do shell
+uv tool update-shell
+
+# feche e reabra o terminal (ou recarregue o perfil), depois confirme:
+graphify --help</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-purple-400">Verify:</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify --help</code> lists the subcommands. If it still fails, open a new terminal—the PATH only reloads in a new session.</p>
+</div>
+<p class="text-neutral-300 mb-4 leading-relaxed" data-inema-block="m3-4-t3-p2">
+              This isn’t the only common pitfall during installation and everyday use. The table below is your “symptom → cause → fix” map:
+            </p>
+<div class="overflow-x-auto rounded-xl border border-dark-600 mb-6">
+<table class="w-full text-sm text-left">
+<thead class="bg-dark-700/60 text-neutral-300">
+<tr>
+<th class="px-4 py-3 font-semibold">Symptom</th>
+<th class="px-4 py-3 font-semibold">Likely cause</th>
+<th class="px-4 py-3 font-semibold text-purple-400">Correction</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-dark-600">
+<tr class="bg-dark-800">
+<td class="px-4 py-3 text-neutral-300"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify: command not found</code></td>
+<td class="px-4 py-3 text-neutral-400">Binary outside PATH</td>
+<td class="px-4 py-3 text-neutral-300"><code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool update-shell</code> + reopening the terminal</td>
+</tr>
+<tr class="bg-dark-800/50">
+<td class="px-4 py-3 text-neutral-300"><code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> doesn't appear in Claude Code</td>
+<td class="px-4 py-3 text-neutral-400">Skill not registered</td>
+<td class="px-4 py-3 text-neutral-300"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify install</code> and check <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/SKILL.md</code></td>
+</tr>
+<tr class="bg-dark-800">
+<td class="px-4 py-3 text-neutral-300">Key error outside Claude Code</td>
+<td class="px-4 py-3 text-neutral-400">Headless without an API key</td>
+<td class="px-4 py-3 text-neutral-300">Export <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code> (see topic 4)</td>
+</tr>
+<tr class="bg-dark-800/50">
+<td class="px-4 py-3 text-neutral-300"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> "doesn't exist"</td>
+<td class="px-4 py-3 text-neutral-400">Tried in headless mode</td>
+<td class="px-4 py-3 text-neutral-300">Use the skill <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify … --obsidian</code> inside Claude Code</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">PATH</div><div class="text-xs text-neutral-400">Where the shell looks</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">shell</div><div class="text-xs text-neutral-400">Reloads when reopened</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">uv</div><div class="text-xs text-neutral-400">update-shell</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">install</div><div class="text-xs text-neutral-400">Registers the skill</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-3-4#topico-4" id="topico-4">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold">🔑 API key errors (headless only)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t4-p1">
+              An API key error almost always means one thing: you’re running Graphify <strong class="text-purple-400">headless</strong> (in the plain terminal) to extract documents, and semantic extraction requires a model. <strong>Inside Claude Code</strong>, via <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>, the session already provides the model—you <em>no</em> doesn’t need any key.
+            </p>
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="Two execution paths: inside Claude Code, the graphify skill runs without a key; in the headless terminal, document extraction requires the ANTHROPIC_API_KEY variable" class="w-full h-auto" role="img" viewbox="0 0 1000 250">
+<defs>
+<lineargradient id="m34b-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="m34b-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m34b-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m34b-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m34b-grid)" height="250" width="1000" x="0" y="0"></rect>
+<line opacity="0.4" stroke="#9ca3af" stroke-dasharray="6 7" stroke-width="1.4" x1="500" x2="500" y1="20" y2="230"></line>
+<!-- esquerda: dentro do Claude Code -->
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="240" y="34">Inside Claude Code</text>
+<g filter="url(#m34b-glow)"><rect fill="#1a1230" height="56" rx="13" stroke="url(#m34b-grad)" stroke-width="2.5" width="308" x="86" y="60"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="240" y="86">/graphify ./docs</text>
+<text fill="#d8b4fe" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="240" y="105">the session provides the model</text>
+<g font-family="Inter,sans-serif" font-size="12.5">
+<rect fill="#0e2018" height="34" rx="9" stroke="#34d399" stroke-width="1.8" width="240" x="120" y="140"></rect><text fill="#9af0c8" text-anchor="middle" x="240" y="162">✓ no API key</text>
+</g>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="240" y="206">here live --obsidian, --mode deep, --update</text>
+<!-- direita: headless -->
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="760" y="34">Headless (terminal only)</text>
+<rect fill="#0e1b26" height="56" rx="13" stroke="#38bdf8" stroke-width="2" width="308" x="606" y="60"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="760" y="86">graphify extract ./docs</text>
+<text fill="#9ad6ff" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="760" y="105">semantic extraction via LLM</text>
+<path d="M760,116 L760,140" fill="none" marker-end="url(#m34b-ahc)" opacity="0.6" stroke="#38bdf8" stroke-width="1.8"></path>
+<g font-family="Inter,sans-serif" font-size="12.5">
+<rect fill="#2a0f16" height="34" rx="9" stroke="#f87171" stroke-width="1.8" width="272" x="624" y="144"></rect><text fill="#fca5a5" text-anchor="middle" x="760" y="166">⚠ requires ANTHROPIC_API_KEY</text>
+</g>
+<text fill="#fca5a5" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="760" y="206">code only (tree-sitter/AST) doesn’t require the key</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ The key only enters the path for <strong class="text-purple-400">right</strong> (headless + documents). Extracting <em>code</em> uses tree-sitter (AST) and doesn't need a key even on this path.</p>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">fix · headless API key</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-purple-400">Objective:</strong> run document extraction in a plain terminal without a key error.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># defina a chave na sessão (troque pelo seu valor real)
+export ANTHROPIC_API_KEY=&lt;sua-chave&gt;
+
+# agora a extração semântica de documentos funciona headless
+graphify extract ./docs</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-purple-400">Verify:</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">echo $ANTHROPIC_API_KEY</code> shows the key and extraction starts without complaint. Inside Claude Code, skip this entirely—it isn’t needed.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-3">✓ No key required</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Run <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> within Claude Code.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Extract <strong>code</strong> (tree-sitter/AST), on any path.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Requires a key</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Extract <strong>documents/PDF</strong> via LLM…</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>…in the <strong>plain terminal</strong> (CI, headless scripts).</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">headless</div><div class="text-xs text-neutral-400">Terminal only</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">skill</div><div class="text-xs text-neutral-400">Session model</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">API key</div><div class="text-xs text-neutral-400">Headless docs only</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">AST</div><div class="text-xs text-neutral-400">Code without a key</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-3-4#topico-5" id="topico-5">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold">🧹 Noisy or shallow graph</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t5-p1">
+              Sometimes the graph comes out <strong class="text-purple-400">noisy</strong> (too many entities, many irrelevant) or <strong class="text-purple-400">shallow</strong> (few relationships, nothing connects). Most of the time, Graphify isn't to blame—it's the <strong>corpus</strong>: the graph's quality mirrors the source's quality. "Garbage in, garbage out." The fix starts at the source, not with the command.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Three levers, in this order</h3>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-primary mt-0.5">1.</span><span><strong>Clean the source:</strong> remove changelogs, auto-generated files, boilerplate, and duplicates — they clutter the graph with noise.</span></li>
+<li class="flex items-start gap-2"><span class="text-primary mt-0.5">2.</span><span><strong>Rescope:</strong> point to the relevant subfolder (<code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify extract ./src</code>) instead of the entire repository.</span></li>
+<li class="flex items-start gap-2"><span class="text-primary mt-0.5">3.</span><span><strong>Increase the depth:</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">--mode deep</code> performs a more thorough extraction when the graph is too shallow.</span></li>
+</ul>
+</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">fix · depth</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-purple-400">Objective:</strong> re-extract with greater depth when the graph is too shallow.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># dentro do Claude Code — extração minuciosa (--mode deep é da skill)
+/graphify ./docs --mode deep
+
+# alternativa: re-escopar para a parte que importa (headless)
+# graphify extract ./src</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-purple-400">Verify:</strong> compare the <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> before/after — more relationships per entity and <strong>god nodes</strong> that make sense point to a deeper graph.</p>
+</div>
+<p class="text-sm text-neutral-400 mb-6">Always read the <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>: it lists god nodes, connections between communities, and suggested questions — it's your gauge for "did the graph turn out well?".</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">corpus</div><div class="text-xs text-neutral-400">Source = quality</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">scope</div><div class="text-xs text-neutral-400">Point to ./src</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">--mode deep</div><div class="text-xs text-neutral-400">More thorough</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">REPORT</div><div class="text-xs text-neutral-400">Thermometer</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-3-4#topico-6" id="topico-6">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold">📦 Version and export the journey</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-4-t6-p1">
+              You built a second brain — now <strong class="text-purple-400">don't miss it</strong>. Two fronts: version the Graphify artifacts in git (so the graph is reproducible and you can go back in time), and export your reading progress here in the course (the <code class="font-mono text-xs bg-dark-900 px-1 rounded">.json</code> of “My journey”). A backup is what separates “I had it” from “I have it.”
+            </p>
+<div class="space-y-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">1</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Commit the graph</h4><p class="text-sm text-neutral-300">Version <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> (or at least the <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>) in git — it’s the source of truth from which everything derives.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">2</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Back up the vault</h4><p class="text-sm text-neutral-300">The Obsidian vault can be regenerated from the graph, but your personal notes <em>no</em> — keep their folder versioned separately from the imports.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">3</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Export your journey</h4><p class="text-sm text-neutral-300">In the panel <strong>My journey</strong> from this course, export the <code class="font-mono text-xs bg-dark-900 px-1 rounded">.json</code> with readings, questions, and notes — and reimport them on another device.</p></div>
+</div>
+</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">fix · version the graph</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-purple-400">Objective:</strong> save the graph in git so you never lose it and can reproduce it.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># versione os artefatos do Graphify (o cache pode ficar fora)
+echo "graphify-out/cache/" &gt;&gt; .gitignore
+git add graphify-out/ .gitignore
+git commit -m "chore: snapshot do segundo cérebro (graphify-out)"</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-purple-400">Verify:</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">git log --stat</code> shows the <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> committed. In a fresh clone, the graph is there — no re-extraction needed.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">git</div><div class="text-xs text-neutral-400">Version the graph</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">backup</div><div class="text-xs text-neutral-400">Vault + notes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">export</div><div class="text-xs text-neutral-400">.journey JSON</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">reproducible</div><div class="text-xs text-neutral-400">Go back in time</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- CHECAGEM LEVE -->
+<div class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-3-4#q1">
+<p class="font-medium mb-4">✋ Self-recovery (optional, non-blocking): the flag <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> exists in the headless subcommands (<code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify extract</code> / <code class="font-mono text-xs bg-dark-900 px-1 rounded">update</code>)?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Yes, it works from any execution path.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">No — <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> only exists in the skill <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> within Claude Code.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Yes, but only if the variable <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code> is set.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<!-- RESUMO + CONCLUSÃO DO CURSO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module summary</h2>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Incremental:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify update .</code> reprocesses only what changed; re-export the vault afterward.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Vault regenerates:</strong> <span class="text-neutral-400">never edit the imports—keep your notes in a separate folder.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">command not found:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool update-shell</code> and reopen the terminal.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">API key:</strong> <span class="text-neutral-400">only in headless mode with documents; inside the <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> doesn't need to.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Shallow graph:</strong> <span class="text-neutral-400">clean up the corpus, rescope, or move up to <code class="font-mono text-xs bg-dark-900 px-1 rounded">--mode deep</code>.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Don’t miss:</strong> <span class="text-neutral-400">version <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> in git and export your journey.</span></div></div>
+</div>
+<div class="bg-dark-900/60 rounded-xl border border-purple-500/30 p-6 mb-8 text-center">
+<div class="text-4xl mb-3">🎉</div>
+<h3 class="text-2xl font-bold text-purple-400 mb-2">You completed the course!</h3>
+<p class="text-neutral-300 max-w-2xl mx-auto">From the theory of a second brain (Path 1), through the practical step-by-step guide (Path 2), to real-world use and maintenance (Path 3)—you now know how to build, query, and maintain a second brain you can query with Claude Code. Version it, export it, and keep building.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track 3</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="../../index.html">Complete—return to the beginning →</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</article>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Second Brain for Claude Code · Module 3.4 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-3-4#q1', { answer: 1, explain: { 0: 'Não. O --obsidian (e --mode deep, --update, --wiki, --watch) só existem na skill /graphify dentro do Claude Code.', 1: 'Isso. No terminal puro você usa os subcomandos (extract/update/query) — o export Obsidian é da skill /graphify.', 2: 'A chave nem entra nessa conta: --obsidian não existe no headless, e dentro do /graphify não se usa ANTHROPIC_API_KEY.' } });
+    }
+  </script>
+</body>
+</html>

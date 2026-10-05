@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Module 3.2 · Claude OS command center | Second Brain for Claude Code</title>
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+<style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-purple-400 { color:#7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,.18); }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#c084fc; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#7c3aed; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha3/modulo-3-2.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha3/modulo-3-2.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha3/modulo-3-2.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/modulo-3-2.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-3-2.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha3/modulo-3-2.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Skip to content</a>
+<!-- NAV (T3 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Second Brain</span></a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentals</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Step by step</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Advanced use</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>My journey</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Appearance</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Theme</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Dark</button><button data-inema-set-theme="claro">Clear</button><button data-inema-set-theme="sepia">Sepia</button><button data-inema-set-theme="foco">Focus</button><button data-inema-set-theme="contraste">High contrast</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Source</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">System</button><button data-inema-set-font="leitura">Reading</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Size</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Width</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Narrow</button><button data-inema-set-linewidth="68">Medium</button><button data-inema-set-linewidth="75">Wide</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">In-between line</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compact</button><button data-inema-set-leading="1.7">Comfortable</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Accent</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Toggle light/dark theme">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-purple-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-purple-400" href="index.html">Track 3</a><span>/</span>
+<span class="text-purple-400">Module 3.2</span>
+</div>
+</nav>
+<main id="conteudo">
+<article data-inema-module="3-2" data-inema-track="3" id="modulo-3-2">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MODULE 3.2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🏛️ Building a Claude OS command center</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Stop treating each graph as a loose file. Here you turn the vault into a <em>command center</em>: projects, imported knowledge, notes, and questions all in one place — with the agent as your copilot inside it.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~45</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Advanced</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+<div aria-label="Module 3.2 progress" class="inema-ring inema-ring--sm" data-inema-meter="modulo:3-2"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400" data-inema-meter-frac="">0 of 6</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+<!-- TOC -->
+<aside class="hidden lg:block">
+<nav aria-label="Module index" class="sticky top-24" data-inema-toc="">
+<p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">In this module</p>
+<p class="text-sm text-neutral-400 mb-3">Section <span data-inema-section-counter="">1 of 6</span></p>
+<ol class="space-y-1 text-sm">
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-1">1. What is a command center</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-2">2. Organize by projects and areas</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-3">3. Plug new graphs into the center</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-4">4. Connect imports to the larger context</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-5">5. Claude Code as a copilot</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-6">6. When NOT to turn it into a command center</a></li>
+</ol>
+</nav>
+</aside>
+<div class="inema-prose">
+<!-- TÓPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-3-2#topico-1" id="topico-1">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold">🧱 What is a "command center"</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t1-p1">
+              So far, you’ve generated isolated graphs: you ran Graphify in a folder, opened the vault, and asked a question. It works—but turns into a drawer full of loose graphs. A <strong class="text-purple-400">command center</strong> (command center) is the next step: <strong>a main vault</strong> that brings your projects, the knowledge you’ve imported, and your own notes together in one coherent system where everything can link to everything else.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is a "command center"</h3>
+<p class="text-neutral-300 text-sm">The term comes from “command center”—a single room where you can see and control everything. Applied to the vault: instead of one Obsidian vault per project, you have <strong>a parent vault</strong> (o <em>main vault</em>) that houses multiple projects, multiple imported graphs, and your notes, all linkable to one another.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t1-p2">
+              Why go to this trouble? Because the Graphify + Obsidian + Claude Code stack <strong>shines when it's part of a whole</strong>, not as standalone graphs. When imported knowledge lives alongside your real projects, the agent starts answering in the <em>your</em> context — "how does concept X from the docs apply to my project Y?" — instead of just reciting the docs in isolation.
+            </p>
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="A main vault in the center, glowing and branching out to four connected boxes: projects, imported graph, notes, and questions — all connected to the center" class="w-full h-auto" role="img" viewbox="0 0 1000 300">
+<defs>
+<lineargradient id="m32a-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="m32a-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m32a-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m32a-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m32a-grid)" height="300" width="1000" x="0" y="0"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="500" y="28">Command center—the main vault connects everything</text>
+<!-- conexões centro <-> ramos (ciano, bidirecional pela seta nas pontas) -->
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<path d="M430,150 C300,110 240,95 196,86" marker-end="url(#m32a-ahc)"></path>
+<path d="M430,150 C300,190 240,205 196,214" marker-end="url(#m32a-ahc)"></path>
+<path d="M570,150 C700,110 760,95 804,86" marker-end="url(#m32a-ahc)"></path>
+<path d="M570,150 C700,190 760,205 804,214" marker-end="url(#m32a-ahc)"></path>
+</g>
+<!-- centro: vault principal (caixa-foco com glow) -->
+<g filter="url(#m32a-glow)"><rect fill="#1a1230" height="64" rx="16" stroke="url(#m32a-grad)" stroke-width="2.5" width="148" x="426" y="118"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="15" font-weight="700" text-anchor="middle" x="500" y="146">main vault</text>
+<text fill="#d8b4fe" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="500" y="166">the hub</text>
+<!-- ramos (ciano) -->
+<g font-family="Inter,sans-serif" font-size="13">
+<g class="wf-a"><rect fill="#0e1b26" height="36" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="60" y="64"></rect><text fill="#bfe6ff" text-anchor="middle" x="128" y="87">projects</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="36" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="60" y="192"></rect><text fill="#bfe6ff" text-anchor="middle" x="128" y="215">notes</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="36" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="804" y="64"></rect><text fill="#bfe6ff" text-anchor="middle" x="872" y="87">imported graph</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="36" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="804" y="192"></rect><text fill="#bfe6ff" text-anchor="middle" x="872" y="215">questions</text></g>
+</g>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="500" y="282">everything in the same vault — and everything linkable to one another</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ O <strong class="text-purple-400">main vault</strong> in the center; the four branches (projects, imported graph, notes, questions) hang from it and can intersect. That intersection is what distinguishes a command center from a graph drawer.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Command center</div><div class="text-xs text-neutral-400">Command center</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Main vault</div><div class="text-xs text-neutral-400">The parent vault</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">System</div><div class="text-xs text-neutral-400">Everything is coherent</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Linkable</div><div class="text-xs text-neutral-400">Everything cross-references</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
+<span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-3-2#topico-2" id="topico-2">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold">🗃️ Organize by projects and areas</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t2-p1">
+              A command center without structure becomes a dumping ground. The simple recipe: structure the vault into <strong class="text-purple-400">projects</strong> e <strong class="text-purple-400">areas</strong>, and reserve a separate folder for <strong>imports</strong> for everything Graphify generates. Everything in its place — easy for you to find and easy for the agent to navigate.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "PARA"</h3>
+<p class="text-neutral-300 text-sm"><strong>FOR</strong> (Projects, Areas, Resources, Archive) is a classic PKM organization method. <strong>Project</strong> = something with an end and a deadline (“launch the app”). <strong>Area</strong> = ongoing responsibility (“health,” “client X”). Here we use a version <em>PARA-like</em>: the point isn't to memorize the 4 letters, but to separate active work (projects) from reference material (imports/resources).</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t2-p2">
+              Keep Graphify imports <strong>physically isolated</strong> in a folder of their own (e.g., <code class="font-mono text-xs bg-dark-900 px-1 rounded">imports/</code>). That way, you can regenerate a graph without worrying about overwriting your notes, and quickly see what’s external knowledge versus your own work. The <em>bridges</em> between the two worlds are in a third place (topic 4).
+            </p>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">vault-principal/ (illustrative example)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">vault-principal/
+├── projetos/          ← trabalho ativo (com prazo)
+│   ├── app-mobile/
+│   └── curso-inema/
+├── areas/             ← responsabilidades contínuas
+│   └── cliente-x/
+├── imports/           ← saídas do Graphify (regeneráveis)
+│   ├── claude-code-docs/
+│   └── obsidian-api/
+├── pontes/            ← notas que ligam import ↔ projeto
+└── duvidas/           ← perguntas em aberto</pre>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-3">✓ Function-based structure</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>You know right away where each note lives.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Regenerating an import doesn't touch your work.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>The agent gets a predictable folder map.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Everything in the root</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Imports and personal notes get mixed together.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Regenerating the graph risks deleting your text.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>No one — neither you nor the agent — can find anything.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">PARA-like</div><div class="text-xs text-neutral-400">Projects/areas</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Projects</div><div class="text-xs text-neutral-400">Active work</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Imports</div><div class="text-xs text-neutral-400">Isolated folder</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Regenerable</div><div class="text-xs text-neutral-400">No fear</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-3-2#topico-3" id="topico-3">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold">➕ Plug new graphs into the center</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t3-p1">
+              The center is alive: it grows. Every new Graphify run becomes part of a <strong class="text-purple-400">its own import subfolder</strong> inside <code class="font-mono text-xs bg-dark-900 px-1 rounded">imports/</code> and then gains at least one <strong>link</strong> to what already exists. The golden rule: <em>plug in, don’t dump</em>. Without curation, the brain becomes a junkyard.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "curation"</h3>
+<p class="text-neutral-300 text-sm"><strong>Curation</strong> is the conscious decision about what goes in, how it connects, and what stays out. Importing 10 graphs without curation gives you 10 islands. Importing 3 and connecting them to your work gives you a system. Less but connected beats more but disconnected.</p>
+</div>
+<div class="space-y-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">1</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Run Graphify targeting the subfolder</h4><p class="text-sm text-neutral-300">Export the graph’s vault directly to <code class="font-mono text-xs bg-dark-900 px-1 rounded">imports/&lt;nome&gt;/</code> — a subfolder of its own.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">2</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Identify the god nodes</h4><p class="text-sm text-neutral-300">Open the <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>: the most connected nodes are the best candidates to become bridges.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">3</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Connect it to what already exists</h4><p class="text-sm text-neutral-300">Create 1–3 bridges from the new graph to one of your projects. Curated growth, not a dump.</p></div>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is a "god node"</h3>
+<p class="text-neutral-300 text-sm">In Graphify terminology, <strong>god node</strong> is the most connected entity in a graph — the "hub" that many relationships point to. Connecting your center to a god node usually pays off more than connecting to a peripheral node, because it gives you access to the entire neighborhood.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Subfolder</div><div class="text-xs text-neutral-400">One import per folder</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Connection</div><div class="text-xs text-neutral-400">Plug in, don’t dump</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">God node</div><div class="text-xs text-neutral-400">Better anchor</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Curation</div><div class="text-xs text-neutral-400">Less and more connected</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-3-2#topico-4" id="topico-4">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold">🧩 Link imports to the bigger picture</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t4-p1">
+              Here’s the heart of the module—and the <strong class="text-purple-400">video thesis</strong>: an isolated graph is a silo. Its value emerges when you take it out of a vacuum and connect it to your real context. The tool for that is the <strong>bridge note</strong>: a short note that connects an imported concept to one of your projects, explaining <em>why</em> they touch.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is a "bridge note"</h3>
+<p class="text-neutral-300 text-sm">A <strong>bridge note</strong> (bridge note) is a note that exists only to connect two others. It contains a wikilink <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[conceito-importado]]</code>, another <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[meu-projeto]]</code> and a glue sentence: "concept X explains project decision Y". In the Obsidian graph, it becomes the visible link between the two worlds.</p>
+</div>
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="On the left, an imported concept and a real project sit isolated; in the center, a glowing bridge note connects the two; on the right, the knowledge is integrated" class="w-full h-auto" role="img" viewbox="0 0 1000 230">
+<defs>
+<lineargradient id="m32b-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="m32b-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m32b-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m32b-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m32b-grid)" height="230" width="1000" x="0" y="0"></rect>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="500" y="28">The bridge note takes the graph out of the silo</text>
+<!-- nó import (ciano) -->
+<g font-family="Inter,sans-serif" font-size="13">
+<rect fill="#0e1b26" height="46" rx="11" stroke="#38bdf8" stroke-width="2" width="170" x="60" y="92"></rect><text fill="#bfe6ff" text-anchor="middle" x="145" y="112">imported concept</text><text fill="#7fb6d6" font-size="11" text-anchor="middle" x="145" y="129">imports/…</text>
+</g>
+<!-- nó projeto (ciano) -->
+<g font-family="Inter,sans-serif" font-size="13">
+<rect fill="#0e1b26" height="46" rx="11" stroke="#38bdf8" stroke-width="2" width="170" x="770" y="92"></rect><text fill="#bfe6ff" text-anchor="middle" x="855" y="112">real project</text><text fill="#7fb6d6" font-size="11" text-anchor="middle" x="855" y="129">projects/…</text>
+</g>
+<!-- conexões para a ponte -->
+<g fill="none" opacity="0.6" stroke="#38bdf8" stroke-width="1.8">
+<path d="M230,115 L416,115" marker-end="url(#m32b-ahc)"></path>
+<path d="M584,115 L770,115" marker-end="url(#m32b-ahc)"></path>
+</g>
+<!-- ponte (caixa-foco com glow) -->
+<g filter="url(#m32b-glow)"><rect fill="#1a1230" height="54" rx="14" stroke="url(#m32b-grad)" stroke-width="2.5" width="168" x="416" y="88"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="500" y="112">bridge note</text>
+<text fill="#d8b4fe" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="500" y="130">[[import]] ↔ [[projeto]]</text>
+<text fill="#9ca3af" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="500" y="186">without the bridge, two nodes never see each other; with it, they become a single system</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ Without the bridge, the imported concept and your project are two nodes that never intersect. The bridge note is the link—and that’s literally what the video argues for: knowledge <strong class="text-purple-400">integrated</strong> is worth more than being isolated.</p>
+<!-- COPY-RUN: prompt de notas-ponte -->
+<div class="bg-dark-900 rounded-xl border border-purple-500/30 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-2 flex items-center"><span class="mr-2">▶</span> Copy-run: ask Claude Code to generate the bridge notes</h4>
+<p class="text-sm text-neutral-400 mb-3"><strong>Objective:</strong> link the imported graph nodes to your actual project notes—without editing the originals.</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">prompt in Claude Code (inside the vault folder)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed bg-dark-800 rounded-lg p-4 border border-dark-600">Você está no meu vault. Compare a pasta
+imports/&lt;nome-do-grafo&gt;/ (notas geradas pelo Graphify)
+com a pasta projetos/&lt;meu-projeto&gt;/.
+
+Para cada conceito do import que for relevante ao
+projeto, crie UMA nota-ponte em pontes/ contendo:
+  - um wikilink [[...]] para a nota do import,
+  - um wikilink [[...]] para a nota do projeto,
+  - 1 frase explicando por que eles se conectam.
+
+Regras: não edite as notas originais; máximo 5 pontes;
+liste no fim as pontes criadas.</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong>How to verify:</strong> open the folder <code class="font-mono text-xs bg-dark-900 px-1 rounded">pontes/</code> in Obsidian and, in the graph view panel (graph view), confirm that the nodes of <em>import</em> and from <em>project</em> now appear connected by the new bridges. Text to replace: <code class="font-mono text-xs bg-dark-900 px-1 rounded">&lt;nome-do-grafo&gt;</code> e <code class="font-mono text-xs bg-dark-900 px-1 rounded">&lt;meu-projeto&gt;</code>.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Bridge note</div><div class="text-xs text-neutral-400">Connects two nodes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Wikilink</div><div class="text-xs text-neutral-400">[[ ]] between notes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Silo</div><div class="text-xs text-neutral-400">Graph in a vacuum</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Integration</div><div class="text-xs text-neutral-400">The video's thesis</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-3-2#topico-5" id="topico-5">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold">🤖 Claude Code as the center's copilot</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t5-p1">
+              A static command center is just a pretty dead file. What makes it <strong>live</strong> é o <strong class="text-purple-400">Claude Code as a copilot</strong>: it points to the vault folder and becomes <em>consult</em>, <em>summarize</em> e <em>update</em> the hub together with you. You ask; it reads the imports, cross-references your projects, and answers — and, when you ask, writes the note back.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is a "copilot"</h3>
+<p class="text-neutral-300 text-sm"><strong>Copilot</strong> here means: the agent doesn't replace you or make decisions on its own—it works alongside you inside the vault. You stay at the helm (what to connect, what to keep); it does the manual work of reading, linking, and writing. Vault open in Obsidian + Claude Code in the same folder = two pilots in the same cockpit.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-3">✓ Living center (with a copilot)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Answers in the context of your project, not scattered documentation.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Summarizes an entire graph in 3 lines on demand.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Writes and updates bridge notes with you reviewing them.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Static center (no copilot)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>You scan the folders by hand every time.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Knowledge gets stale if no one updates it.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Connections only exist if you remember to make them.</span></li>
+</ul>
+</div>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t5-p2">
+              In practice, ask in natural language: <em>"summarize what the claude-code-docs import says about hooks and link it to my app-mobile project"</em>. The agent reads, cross-references, and—if the connection makes sense—suggests a bridge note. You review and approve it. The hub stops being a museum and becomes a workbench.
+            </p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Copilot</div><div class="text-xs text-neutral-400">Works alongside you</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Query</div><div class="text-xs text-neutral-400">Ask the vault</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Summarize</div><div class="text-xs text-neutral-400">Graph in 3 lines</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Keep</div><div class="text-xs text-neutral-400">Living hub</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-3-2#topico-6" id="topico-6">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold">⚖️ When NOT to turn it into a command center</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-2-t6-p1">
+              Honesty wraps up the module: not everything deserves a command center. For a <strong>code base</strong> that you only want to explore once, or a <strong>quick lookup</strong>, stopping at Graphify is usually the right choice. Setting up a main vault, creating folders, and weaving links just to answer one question is <strong class="text-purple-400">overhead</strong> — effort that doesn’t pay off.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? What is "overhead"</h3>
+<p class="text-neutral-300 text-sm"><strong>Overhead</strong> is the fixed cost of setting up and maintaining a structure, regardless of how much you use it. A command center has real overhead (organization, curation, maintenance). It’s worth it when the knowledge gets reused many times; it’s not worth it for a one-time use—in that case, the <strong>silo</strong> (the isolated graph) is enough.</p>
+</div>
+<div class="space-y-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">🛑</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Stop at the silo when…</h4><p class="text-sm text-neutral-300">…it’s a one-off query, a codebase you won’t revisit, or a throwaway experiment. The <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> + one query are enough.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">🏛️</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Build the hub when…</h4><p class="text-sm text-neutral-300">…the knowledge needs to coexist with multiple projects, be revisited often, and be updated. That’s when the overhead pays off and the integration delivers.</p></div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-purple-400 mb-3 flex items-center"><span class="mr-2">💡</span> The trade-off rule</h3>
+<p class="text-neutral-300">The more often you’ll return to the knowledge and the more it overlaps with your projects, the more a command center pays off. One-time, isolated use → silo. Recurring, cross-cutting use → center. Module 3.3 explores this exact decision in more depth (code vs. documents).</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Trade-off</div><div class="text-xs text-neutral-400">Cost × returns</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Silo</div><div class="text-xs text-neutral-400">An isolated graph is enough</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Overhead</div><div class="text-xs text-neutral-400">Maintenance cost</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Simplicity</div><div class="text-xs text-neutral-400">Sometimes less wins</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- CHECAGEM LEVE -->
+<div class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-3-2#q1">
+<p class="font-medium mb-4">✋ Self-recovery (optional, non-blocking): what is the central thesis of the command center—why connect the imported graph to your broader context?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Because Obsidian runs faster with everything in a single vault.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Because knowledge integrated into your actual project is more valuable than an isolated graph in a silo.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Because Graphify requires all graphs to be in the same vault.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<!-- RESUMO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module summary</h2>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Command center:</strong> <span class="text-neutral-400">a main vault that brings together projects, imports, notes, and questions in a coherent system.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Organize by function:</strong> <span class="text-neutral-400">projects/areas on one side, isolated Graphify imports on the other.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Plug in, don’t dump:</strong> <span class="text-neutral-400">each new graph goes into a subfolder and is linked to what's already there, with curation.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Bridge notes take them out of the silo:</strong> <span class="text-neutral-400">the video’s thesis — knowledge integrated with your context is more valuable than knowledge in isolation.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Copilot keeps this alive:</strong> <span class="text-neutral-400">Claude Code queries, summarizes, and updates the hub together with you.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">It’s not always worth it:</strong> <span class="text-neutral-400">for one-time use, the silo is enough — the hub has overhead that only pays off with recurring use.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-purple-400 mb-2">Next module</h3>
+<p class="text-neutral-300">3.3 · Code vs. documents — when to stop at Graphify and when to move to Obsidian, deciding where each graph deserves to live.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track 3</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="modulo-3-3.html">Next: 3.3 Code vs. documents →</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</article>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Second Brain for Claude Code · Module 3.2 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-3-2#q1', { answer: 1, explain: { 0: 'Velocidade não é o ponto — o Obsidian aguenta vários vaults; a questão é o valor do conhecimento integrado.', 1: 'Isso. A tese do vídeo: tirar o grafo do silo e ligá-lo ao seu projeto real é o que faz o stack render de verdade.', 2: 'O Graphify não exige nada disso — você decide se leva pro Obsidian; o centro é uma escolha, não uma obrigação.' } });
+    }
+  </script>
+</body>
+</html>

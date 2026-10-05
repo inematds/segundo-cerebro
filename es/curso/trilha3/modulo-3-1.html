@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Módulo 3.1 · Preguntar usando el grafo | Segundo Cérebro pro Claude Code</title>
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+<style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-purple-400 { color:#7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124,58,237,.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124,58,237,.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124,58,237,.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124,58,237,.18); }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#c084fc; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#7c3aed; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha3/modulo-3-1.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha3/modulo-3-1.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha3/modulo-3-1.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha3/modulo-3-1.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha3/modulo-3-1.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="modulo-3-1.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<a class="skip" href="#conteudo">Saltar al contenido</a>
+<!-- NAV (T3 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo cerebro</span></a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Paso a paso</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avanzado</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>Mi recorrido</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Apariencia</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Tema</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Oscuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sepia</button><button data-inema-set-theme="foco">Enfoque</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Fuente</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Lectura</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Tamaño</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Anchura</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Estrecho</button><button data-inema-set-linewidth="68">Medio</button><button data-inema-set-linewidth="75">Ancho</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Interlineado</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Cómodo</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Verde azulado"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Alternar tema claro/oscuro">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav aria-label="Ruta de navegación" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-purple-400" href="../../index.html">Inicio</a><span>/</span>
+<a class="hover:text-purple-400" href="index.html">Ruta 3</a><span>/</span>
+<span class="text-purple-400">Módulo 3.1</span>
+</div>
+</nav>
+<main id="conteudo">
+<article data-inema-module="3-1" data-inema-track="3" id="modulo-3-1">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.1</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">💬 Preguntarle a Claude Code usando el grafo</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Con el vault montado en el proyecto, haz que el agente responda <em>por el mapa</em> — sin recorrer archivos a ciegas. God nodes como punto de entrada, backlinks para explorar el vecindario, prompts listos, MCP opcional y cómo comprobar la respuesta contra la fuente.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Temas</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Práctico</div><div class="text-xs text-neutral-400">Nivel</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+<div aria-label="Progreso del módulo 3.1" class="inema-ring inema-ring--sm" data-inema-meter="modulo:3-1"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400" data-inema-meter-frac="">0 de 6</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+<!-- TOC -->
+<aside class="hidden lg:block">
+<nav aria-label="Índice del módulo" class="sticky top-24" data-inema-toc="">
+<p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">En este módulo</p>
+<p class="text-sm text-neutral-400 mb-3">Sección <span data-inema-section-counter="">1 de 6</span></p>
+<ol class="space-y-1 text-sm">
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-1">1. Apuntar el agente al vault</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-2">2. Empezar por los god nodes</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-3">3. Seguir los backlinks</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-4">4. Prompts que usan el mapa</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-5">5. Servir el grafo mediante MCP</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-purple-400" href="#topico-6">6. Validar contra la fuente</a></li>
+</ol>
+</nav>
+</aside>
+<div class="inema-prose">
+<!-- TÓPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-3-1#topico-1" id="topico-1">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold">🧭 Indicarle al agente el vault</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar una duda en este tema" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tengo una duda</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t1-p1">
+              Claude Code solo usa lo que <strong>ve</strong>. Si tu segundo cerebro —el <strong class="text-purple-400">vault</strong> generado por Graphify: está en un rincón del disco que nunca revisa, como si no existiera. El primer paso siempre es dejar el vault dentro del proyecto (o junto a él) y <strong>decirle al agente dónde está</strong>, justo al comienzo de la sesión.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> ¿Eres nuevo aquí? Qué son «vault» y la carpeta de imports</h3>
+<p class="text-neutral-300 text-sm">O <strong>vault</strong> es la carpeta que generó la exportación de Obsidian: un <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> por concepto, con <strong>backlinks</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[nome-do-no]]</code>, más el <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>. La convención del curso es guardarlo en una carpeta tipo <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/&lt;nome-do-grafo&gt;/</code> dentro del proyecto, para que quede versionable y a la vista del agente.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t1-p2">
+              No basta con que el vault esté en el disco: el agente necesita estar <strong>dirigido</strong> antes de empezar a recorrer el repositorio. La forma más sencilla es una frase de apertura que establece el vault como <strong class="text-purple-400">fuente primaria</strong>. El bloque de abajo es un prompt listo para copiar y pegar.
+            </p>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-4">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">prompt de apertura (ilustrativo)</span></div>
+<p class="text-xs text-purple-400 font-semibold mb-2">🎯 Objetivo: establecer el vault como fuente antes de cualquier pregunta.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">O segundo cérebro deste projeto está em graph-imports/&lt;nome-do-grafo&gt;/ .
+Lá tem um .md por conceito (com backlinks [[...]]) e o GRAPH_REPORT.md
+com os god nodes. Use ESSE vault como fonte primária antes de varrer o repo.</pre>
+<p class="text-xs text-neutral-400 mt-3"><span class="text-purple-400 font-semibold">✔ Cómo verificar:</span> pide a continuación <em>"lista los 5 god nodes de GRAPH_REPORT.md"</em>. Si responde con nombres reales del <strong>tu</strong> grafo, encontró el vault. Si inventa nombres genéricos, el camino es incorrecto.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Conceptos clave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Vault</div><div class="text-xs text-neutral-400">Carpeta de .md</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">graph-imports/</div><div class="text-xs text-neutral-400">Dónde guardar</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Contexto</div><div class="text-xs text-neutral-400">En el campo de visión</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Dirigir</div><div class="text-xs text-neutral-400">Indicar = usar</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
+<span class="inema-label-todo">Marcar como leído</span><span class="inema-label-done">Leído</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-3-1#topico-2" id="topico-2">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold">⭐ Empezar por los god nodes</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar una duda en este tema" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tengo una duda</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t2-p1">
+              ¿Por dónde empezar una pregunta? Por los <strong class="text-purple-400">god nodes</strong> — las entidades más conectadas del grafo, listadas en el <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>. Son los <em>hubs</em>: entrar por uno de ellos arrastra el resto del mapa, porque casi todo pasa por ahí. Empezar por un nodo periférico es entrar por la puerta de atrás.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> ¿Eres nuevo aquí? Qué es un «god node»</h3>
+<p class="text-neutral-300 text-sm">En el grafo, cada <strong>entidad</strong> (nodo) tiene un número de <strong>conexiones</strong>. Los <strong>god nodes</strong> son los campeones de conexión — "Context Window", los "Hooks", el "MCP" de una documentación, por ejemplo. Graphify ya los calcula y los vuelca en el <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>, junto con <strong>preguntas sugeridas</strong>.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-3">✓ Entrar por un hub</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Abarca más terreno de una sola vez.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Trae consigo a los vecinos adecuados.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>El informe ya sugiere por dónde avanzar.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Entrar por un nodo aislado</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Solo ves una parte aislada.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Se necesitan muchos saltos para llegar a lo que importa.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Es fácil detenerse antes de encontrar el contexto.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Conceptos clave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Nodo God</div><div class="text-xs text-neutral-400">Más conectado</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Hub</div><div class="text-xs text-neutral-400">Punto de entrada</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">GRAPH_REPORT.md</div><div class="text-xs text-neutral-400">Lista + preguntas</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Cobertura</div><div class="text-xs text-neutral-400">Más con menos</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como leído</span><span class="inema-label-done">Leído</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-3-1#topico-3" id="topico-3">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold">🔗 Dejar que el agente siga los backlinks</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar una duda en este tema" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tengo una duda</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t3-p1">
+              Entró por un god node, ¿y ahora qué? El truco está en dejar que el agente <strong>seguir los backlinks</strong>: los <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[links]]</code> que cada nota transmite a los conceptos vecinos. En vez de detenerse en el primer nodo, recorre la <strong class="text-purple-400">vecindad</strong> y prepara una respuesta <em>conectada</em>, no aislada.
+            </p>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t3-p2">
+              Es exactamente lo que el vault está diseñado para permitir: cada <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> apunta a los vecinos, así que el agente navega por el <strong>sentido</strong> — no posiciones de texto sueltas. Visualmente, el camino es este:
+            </p>
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="Claude Code entra por un god node destacado y sigue los backlinks hasta los conceptos vecinos, y devuelve la respuesta conectada" class="w-full h-auto" role="img" viewbox="0 0 1000 260">
+<defs>
+<lineargradient id="m31a-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="m31a-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m31a-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m31a-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"></path></marker>
+<marker id="m31a-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m31a-grid)" height="260" width="1000" x="0" y="0"></rect>
+<!-- agente -->
+<g font-family="Inter,sans-serif">
+<rect fill="#1a1230" height="52" rx="12" stroke="#c084fc" stroke-width="2" width="118" x="24" y="104"></rect>
+<text fill="#c084fc" font-size="13" font-weight="600" text-anchor="middle" x="83" y="128">Claude Code</text>
+<text fill="#e6d4ff" font-size="12" text-anchor="middle" x="83" y="146">pregunta</text>
+</g>
+<path d="M142,130 L300,130" fill="none" marker-end="url(#m31a-ah)" opacity="0.6" stroke="#c084fc" stroke-width="1.8"></path>
+<!-- god node (foco com glow) -->
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="385" y="74">god node (entrada)</text>
+<g filter="url(#m31a-glow)"><rect fill="#1a1230" height="76" rx="14" stroke="url(#m31a-grad)" stroke-width="2.5" width="170" x="300" y="92"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="18" font-weight="700" text-anchor="middle" x="385" y="126">hub</text>
+<text fill="#e6d4ff" font-family="Inter,sans-serif" font-size="12.5" text-anchor="middle" x="385" y="148">más conectado</text>
+<!-- backlinks pra fora (roxo) -->
+<g fill="none" opacity="0.55" stroke="#c084fc" stroke-width="1.8">
+<path d="M470,114 C595,114 615,57  700,57" marker-end="url(#m31a-ah)"></path>
+<path d="M470,120 C595,120 615,105 700,105" marker-end="url(#m31a-ah)"></path>
+<path d="M470,126 C595,126 615,153 700,153" marker-end="url(#m31a-ah)"></path>
+<path d="M470,132 C595,132 615,201 700,201" marker-end="url(#m31a-ah)"></path>
+</g>
+<!-- vizinhos (ciano, pulsando) -->
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="775" y="30">vecinos mediante backlinks</text>
+<g font-family="Inter,sans-serif" font-size="13" font-weight="600">
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="700" y="40"></rect><text fill="#bfe6ff" text-anchor="middle" x="775" y="62">Hooks</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="700" y="88"></rect><text fill="#bfe6ff" text-anchor="middle" x="775" y="110">Subagents</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="700" y="136"></rect><text fill="#bfe6ff" text-anchor="middle" x="775" y="158">MCP</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="34" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="700" y="184"></rect><text fill="#bfe6ff" text-anchor="middle" x="775" y="206">Context Window</text></g>
+</g>
+<!-- resposta de volta pro agente (ciano) -->
+<path d="M312,162 C238,182 198,162 144,150" fill="none" marker-end="url(#m31a-ahc)" opacity="0.5" stroke="#38bdf8" stroke-width="1.6"></path>
+<text fill="#9ad6ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="228" y="196">respuesta conectada</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ La pregunta entra por el <strong class="text-purple-400">god node</strong> destacado; desde ahí, el agente sigue los <strong>backlinks</strong> hasta los vecinos (cian) y devuelve una respuesta que conecta los conceptos, no un párrafo aislado.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Conceptos clave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Backlink</div><div class="text-xs text-neutral-400">[[enlace]] para el vecino</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Vecindario</div><div class="text-xs text-neutral-400">Nodos alrededor</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Navegación</div><div class="text-xs text-neutral-400">Recorrer el mapa</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Conectada</div><div class="text-xs text-neutral-400">≠ respuesta aislada</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como leído</span><span class="inema-label-done">Leído</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-3-1#topico-4" id="topico-4">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold">💬 Prompts que usan el mapa</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar una duda en este tema" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tengo una duda</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t4-p1">
+              Todo esto se convierte en hábito con un <strong class="text-purple-400">prompt</strong> bien armado. La diferencia entre "explica X" y un prompt que <em>dirige al grafo</em> es enorme: el segundo indica al agente que entre por el hub, siga los backlinks, cite las notas y se mantenga dentro del <strong>alcance</strong> del vault. El bloque de abajo es el copy-run principal de este módulo.
+            </p>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-4">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">prompt-mapa (ilustrativo)</span></div>
+<p class="text-xs text-purple-400 font-semibold mb-2">🎯 Objetivo: responder usando el mapa y citar la procedencia, sin recorrer el repo.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">Use o vault em graph-imports/&lt;nome-do-grafo&gt;/ para explicar &lt;tema&gt;.
+Comece pelo god node mais ligado a ele, siga os backlinks [[...]] até os
+conceitos vizinhos e cite cada nota .md que usar. Não varra o resto do repo.</pre>
+<p class="text-xs text-neutral-400 mt-3"><span class="text-purple-400 font-semibold">✔ Cómo verificar:</span> la respuesta debe <strong>citar nombres de notas</strong> del vault (p. ej.: <code class="font-mono bg-dark-900 px-1 rounded">Context-Window.md</code>) y los conceptos vecinos, no un párrafo genérico sin fuente. Sin citas = no usó el mapa.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-5">
+<h4 class="font-bold text-purple-400 mb-3">✓ Prompt que usa el mapa</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Indica la carpeta exacta del vault.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Pide que empiece por el god node.</span></li>
+<li class="flex items-start gap-2"><span class="text-purple-400">✓</span><span>Exige citar las notas (procedencia).</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Prompt vago</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>"Explica X" — sin decir dónde buscar.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Deja que el agente recorra todo a ciegas.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Respuesta sin fuente, difícil de verificar.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Conceptos clave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Prompt</div><div class="text-xs text-neutral-400">Instrucción lista</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Alcance</div><div class="text-xs text-neutral-400">Quedarse en el vault</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Citar notas</div><div class="text-xs text-neutral-400">Procedencia</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">&lt;tema&gt;</div><div class="text-xs text-neutral-400">Cambias</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como leído</span><span class="inema-label-done">Leído</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-3-1#topico-5" id="topico-5">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold">🛰️ Servir el grafo vía MCP (opcional)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar una duda en este tema" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tengo una duda</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t5-p1">
+              Leer archivos markdown funciona, pero Graphify también puede servir el grafo como <strong class="text-purple-400">tools</strong> programáticas, mediante <strong>MCP</strong>. Así, el agente consulta el grafo de forma precisa (nodos vecinos de un nodo, camino más corto) en vez de depender solo del texto. Es opcional, pero muy útil para grafos grandes.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> ¿Eres nuevo aquí? Qué es «MCP»</h3>
+<p class="text-neutral-300 text-sm"><strong>MCP</strong> (Model Context Protocol) es el estándar que permite que Claude Code llame a <strong>tools</strong> y leer <strong>resources</strong> de un servidor externo. Aquí, el servidor es el propio grafo: expone funciones como <code class="font-mono text-xs bg-dark-900 px-1 rounded">query_graph</code> que el agente llama al responder.</p>
+</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-4">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-purple-500/60"></span><span class="ml-2 font-mono">iniciar el servidor MCP (ilustrativo)</span></div>
+<p class="text-xs text-purple-400 font-semibold mb-2">🎯 Objetivo: ofrecer el grafo como tools, no solo como archivos.</p>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># dentro do Claude Code (skill form):
+/graphify . --mcp
+
+# ou via terminal puro:
+graphify --mcp
+
+# tools expostas: query_graph · get_node · get_neighbors · shortest_path</pre>
+<p class="text-xs text-neutral-400 mt-3"><span class="text-purple-400 font-semibold">✔ Cómo verificar:</span> pídele <em>"usa query_graph para listar los vecinos de &lt;concepto&gt;"</em>. Si <strong>llamar a la tool</strong> y devuelve los nodos conectados, el MCP está activo. Si responde con texto sin invocar una tool, el servidor no se inició.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Conceptos clave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">MCP</div><div class="text-xs text-neutral-400">Tools + resources</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">query_graph</div><div class="text-xs text-neutral-400">Consulta el grafo</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">get_neighbors</div><div class="text-xs text-neutral-400">Vecinos de un nodo</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">shortest_path</div><div class="text-xs text-neutral-400">Ruta entre nodos</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como leído</span><span class="inema-label-done">Leído</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-3-1#topico-6" id="topico-6">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold">🧪 Validar la respuesta con la fuente</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar una duda en este tema" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tengo una duda</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m3-1-t6-p1">
+              Confía, pero verifica. El grafo guarda la <strong class="text-purple-400">procedencia</strong> de cada nodo —el archivo fuente del que salió la entidad— dentro del <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>. Cuando el agente afirma algo, cierras el ciclo yendo desde el concepto hasta el <strong>doc-fuente</strong> original y comprobando si coincide. Es la mejor defensa contra las alucinaciones.
+            </p>
+<div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="A partir de un concepto de la respuesta, sigues la procedencia registrada en graph.json hasta el documento fuente original y compruebas si la afirmación coincide" class="w-full h-auto" role="img" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="m31b-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c084fc"></stop><stop offset="1" stop-color="#a855f7"></stop></lineargradient>
+<filter height="180%" id="m31b-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m31b-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#a855f7" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m31b-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"></path></marker>
+<marker id="m31b-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m31b-grid)" height="200" width="1000" x="0" y="0"></rect>
+<!-- conceito (foco com glow) -->
+<g filter="url(#m31b-glow)"><rect fill="#1a1230" height="64" rx="14" stroke="url(#m31b-grad)" stroke-width="2.5" width="210" x="40" y="74"></rect></g>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="15" font-weight="700" text-anchor="middle" x="145" y="102">concepto en la respuesta</text>
+<text fill="#e6d4ff" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="145" y="122">lo que afirmó el agente</text>
+<path d="M250,106 L362,106" fill="none" marker-end="url(#m31b-ah)" opacity="0.6" stroke="#c084fc" stroke-width="1.8"></path>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="306" y="92">procedencia</text>
+<!-- graph.json -->
+<rect fill="#0e1b26" height="52" rx="11" stroke="#38bdf8" stroke-width="2" width="180" x="362" y="80"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="452" y="111">graph.json</text>
+<path d="M542,106 L662,106" fill="none" marker-end="url(#m31b-ahc)" opacity="0.6" stroke="#38bdf8" stroke-width="1.8"></path>
+<text fill="#9ad6ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="602" y="92">archivo fuente</text>
+<!-- doc-fonte -->
+<rect fill="#0e1b26" height="52" rx="11" stroke="#38bdf8" stroke-width="2" width="200" x="662" y="80"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="762" y="105">doc-fuente original</text>
+<text fill="#9ad6ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="762" y="122">está en el proyecto</text>
+<!-- checagem de volta -->
+<path d="M762,132 C762,178 240,178 150,140" fill="none" marker-end="url(#m31b-ah)" opacity="0.5" stroke="#c084fc" stroke-width="1.6"></path>
+<text fill="#c084fc" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="490" y="172">comprueba si coincide ✓</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ El concepto afirmado conduce, por la <strong class="text-purple-400">procedencia</strong> del <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>, hasta el documento fuente original, donde puedes verificar. Los documentos fuente no van al vault: se quedan en el proyecto.</p>
+<div class="space-y-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">1</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Toma el concepto afirmado</h4><p class="text-sm text-neutral-300">Anota la afirmación central de la respuesta y el nodo (nota) que la respalda.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">2</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Sigue la procedencia en graph.json</h4><p class="text-sm text-neutral-300">Cada entidad registra de qué archivo de origen proviene. Ese es el puntero a la evidencia.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">3</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1">Abre el doc fuente y revisa</h4><p class="text-sm text-neutral-300">Si coincide, confianza total. Si no coincide, es una alucinación: corrige la nota o vuelve a generar el grafo.</p></div>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-purple-400 mb-3">🔑 Conceptos clave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Procedencia</div><div class="text-xs text-neutral-400">De dónde viene</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">graph.json</div><div class="text-xs text-neutral-400">Fuente de verdad</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Documento fuente</div><div class="text-xs text-neutral-400">La evidencia</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-purple-400 font-bold">Verificación</div><div class="text-xs text-neutral-400">≠ alucinación</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como leído</span><span class="inema-label-done">Leído</span>
+</button>
+</div>
+</section>
+<!-- CHECAGEM LEVE -->
+<div class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-3-1#q1">
+<p class="font-medium mb-4">✋ Autorrecuperación (opcional, no bloquea): por qué empezar una pregunta por los <strong class="text-purple-400">god nodes</strong> ¿suele generar más valor?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Porque son los archivos más grandes del vault.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">Porque son los nodos más conectados: entrar por ellos también te lleva a los nodos cercanos adecuados.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Porque solo los god nodes tienen backlinks.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<!-- RESUMO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumen del módulo</h2>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Indicar es usar:</strong> <span class="text-neutral-400">deja el vault en <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/</code> y dile al agente dónde está.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Empieza por los god nodes:</strong> <span class="text-neutral-400">los hubs del <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> cubren más terreno.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Deja que siga los backlinks:</strong> <span class="text-neutral-400">respuesta conectada, no aislada.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Prompt que cita notas:</strong> <span class="text-neutral-400">dirige al grafo y aporta procedencia.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">MCP es opcional:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify --mcp</code> sirve el grafo como tools.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Valida con la fuente:</strong> <span class="text-neutral-400">la procedencia en el <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> te lleva de vuelta a la evidencia.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-purple-400 mb-2">Siguiente módulo</h3>
+<p class="text-neutral-300">3.2 · Claude OS command center — transforma el vault en un centro de comando con varios proyectos, conocimientos y dudas en un solo lugar.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Volver a la Ruta 3</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="modulo-3-2.html">Siguiente: 3.2 Claude OS command center →</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</article>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Segundo Cerebro para Claude Code · Módulo 3.1 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-3-1#q1', { answer: 1, explain: { 0: 'Tamanho do arquivo não importa aqui — o que conta é quantas conexões o nó tem.', 1: 'Isso. God node = nó mais conectado; entrar por ele puxa a vizinhança certa e cobre mais terreno.', 2: 'Não — qualquer nota do vault tem backlinks; os god nodes só têm mais conexões que as outras.' } });
+    }
+  </script>
+</body>
+</html>

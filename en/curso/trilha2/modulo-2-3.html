@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Module 2.3 · Run Graphify and Read the Graph | Second Brain for Claude Code</title>
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){ var r={}; for (var x in o) r[x]=o[x]; return r; }
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'}, 'claro':{dark:false,attr:null,cs:'light'}, 'sepia':{dark:false,attr:'sepia',cs:'light'}, 'foco':{dark:null,attr:'foco',cs:null}, 'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style; var scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
+  })();
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "segundo-cerebro",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "Por que um segundo cérebro", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Grafo de conhecimento", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Graphify por dentro", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Obsidian como memória", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Passo a passo prático", "modules": [
+        { "id": "2-1", "title": "Pré-requisitos e instalação", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Escolher e preparar a fonte", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Rodar o Graphify e ler o grafo", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Gerar o vault Obsidian", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" },
+        { "id": "2-5", "title": "Abrir no Obsidian e conectar fontes", "topics": 6, "href": "curso/trilha2/modulo-2-5.html" },
+        { "id": "2-6", "title": "As 4 estratégias de integração", "topics": 6, "href": "curso/trilha2/modulo-2-6.html" }
+      ]},
+      { "n": "3", "title": "Uso real e avançado", "modules": [
+        { "id": "3-1", "title": "Perguntar usando o grafo", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "Claude OS command center", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Código vs documentos", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Manutenção e troubleshooting", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+<style>
+    body { font-family: var(--font-body, 'Inter', sans-serif); }
+    .dark body { background-color: #111827; }
+    [id] { scroll-margin-top: 5rem; }
+    .skip { position:absolute; left:-999px; top:0; z-index:100; }
+    .skip:focus { left:8px; top:8px; padding:.5rem .75rem; background:#111827; color:#fff; border-radius:.5rem; }
+
+    html:not(.dark) body { background-color:#f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color:#ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color:#f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color:#f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color:#e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color:#111827; }
+    html:not(.dark) .text-neutral-300 { color:#4b5563; }
+    html:not(.dark) .text-neutral-400 { color:#6b7280; }
+    html:not(.dark) .text-neutral-500 { color:#9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color:#d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color:#e5e7eb; }
+
+    html:not(.dark) .text-blue-400 { color:#2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,.18); }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,.08); }
+    html:not(.dark) .hover\:text-emerald-400:hover { color:#059669; }
+    html:not(.dark) .hover\:text-blue-400:hover { color:#2563eb; }
+    html:not(.dark) .hover\:text-purple-400:hover { color:#7c3aed; }
+
+    html:not(.dark) [class*="bg-gradient-to"] { background-image:none !important; }
+    html:not(.dark) .text-primary { color:#a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,.25); }
+    html:not(.dark) .text-sky-400 { color:#0369a1; }
+    html:not(.dark) .text-yellow-400 { color:#a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color:#0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color:#854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,.95); }
+    html:not(.dark) .text-red-400 { color:#dc2626; }
+
+    .dark .border-dark-600 { border-color:#374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color:#374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+
+    /* Marcar-lido: estado por ícone + texto (garante alternância mesmo sem learn.css) */
+    [data-inema-read-toggle] .inema-ico-done, [data-inema-read-toggle] .inema-label-done { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-todo, [data-inema-read-toggle][aria-pressed="true"] .inema-label-todo { display:none; }
+    [data-inema-read-toggle][aria-pressed="true"] .inema-ico-done, [data-inema-read-toggle][aria-pressed="true"] .inema-label-done { display:inline; }
+    [data-inema-read-toggle][aria-pressed="true"] { opacity:.92; }
+    .inema-toc-link.is-active { color:#60a5fa; font-weight:600; }
+    html:not(.dark) .inema-toc-link.is-active { color:#2563eb; }
+
+    @keyframes wf-pulse { 0%,100% { opacity:.5 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
+    }
+  </style>
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha2/modulo-2-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha2/modulo-2-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha2/modulo-2-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha2/modulo-2-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="modulo-2-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../../../es/curso/trilha2/modulo-2-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Skip to content</a>
+<!-- NAV (T2 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Second Brain</span></a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentals</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Step by step</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Advanced use</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>My journey</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Appearance</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Theme</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Dark</button><button data-inema-set-theme="claro">Clear</button><button data-inema-set-theme="sepia">Sepia</button><button data-inema-set-theme="foco">Focus</button><button data-inema-set-theme="contraste">High contrast</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Source</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">System</button><button data-inema-set-font="leitura">Reading</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Size</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Width</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Narrow</button><button data-inema-set-linewidth="68">Medium</button><button data-inema-set-linewidth="75">Wide</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">In-between line</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compact</button><button data-inema-set-leading="1.7">Comfortable</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Accent</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Toggle light/dark theme">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav aria-label="Navigation path" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-blue-400" href="../../index.html">Start</a><span>/</span>
+<a class="hover:text-blue-400" href="index.html">Track 2</a><span>/</span>
+<span class="text-blue-400">Module 2.3</span>
+</div>
+</nav>
+<main id="conteudo">
+<article data-inema-module="2-3" data-inema-track="2" id="modulo-2-3">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MODULE 2.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🗺️ Run Graphify and read the graph</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">You already have the source ready. Now run the command, wait for extraction, and learn how to read the results — the interactive map, the report with the hubs and questions, and the commands for talking to the graph directly in the terminal.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Topics</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~50</div><div class="text-xs text-neutral-400">Minutes</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Practical</div><div class="text-xs text-neutral-400">Level</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+<div aria-label="Module 2.3 progress" class="inema-ring inema-ring--sm" data-inema-meter="modulo:2-3"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400" data-inema-meter-frac="">0 of 6</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+<!-- TOC -->
+<aside class="hidden lg:block">
+<nav aria-label="Module index" class="sticky top-24" data-inema-toc="">
+<p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">In this module</p>
+<p class="text-sm text-neutral-400 mb-3">Section <span data-inema-section-counter="">1 of 6</span></p>
+<ol class="space-y-1 text-sm">
+<li><a class="inema-toc-link text-neutral-400 hover:text-blue-400" href="#topico-1">1. Run /graphify or extract</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-blue-400" href="#topico-2">2. During extraction</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-blue-400" href="#topico-3">3. Open graph.html</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-blue-400" href="#topico-4">4. Read GRAPH_REPORT.md</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-blue-400" href="#topico-5">5. explain / path / query</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-blue-400" href="#topico-6">6. --update and --watch</a></li>
+</ol>
+</nav>
+</aside>
+<div class="inema-prose">
+<!-- TÓPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-2-3#topico-1" id="topico-1">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold">▶️ Run /graphify or graphify extract</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-3-t1-p1">
+              There are <strong class="text-blue-400">two paths</strong> to generate the same graph. Inside Claude Code, you use the <strong>skill</strong> (the slash command <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>; in a plain terminal, you use the subcommand <strong>headless</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify extract</code>. Both read the source and produce the folder <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> — choose what fits the moment.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? Skill vs. headless</h3>
+<p class="text-neutral-300 text-sm"><strong>Skill</strong> = the way it works inside Claude Code: the session provides the model, so <strong>doesn't need an API key</strong>, and you get extras like <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code>, <code class="font-mono text-xs bg-dark-900 px-1 rounded">--update</code> e <code class="font-mono text-xs bg-dark-900 px-1 rounded">--watch</code>. <strong>Headless</strong> = the same engine in a plain terminal (CI, script); for documents, it requires <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>.</p>
+</div>
+<!-- COPY-RUN A -->
+<div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-semibold">PRACTICAL · copy-run</span><span class="text-xs text-neutral-500">skill — inside Claude Code</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-blue-400">🎯 Objective:</strong> extract the graph from your documents folder without needing an API key.</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">Claude Code</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">/graphify ./claude-code-docs</pre>
+<p class="text-xs text-neutral-500 mt-2">Replace <code class="font-mono bg-dark-800 px-1 rounded">&lt;isto-voce-troca&gt;</code>: <code class="font-mono bg-dark-800 px-1 rounded">./claude-code-docs</code> → the path to YOUR source prepared in module 2.2.</p>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">✓ How to verify:</strong> when it finishes, the folder appears <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> with <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>, <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> e <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code>.</p>
+</div>
+<!-- COPY-RUN B -->
+<div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-semibold">PRACTICAL · copy-run</span><span class="text-xs text-neutral-500">headless — terminal only</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-blue-400">🎯 Objective:</strong> the same extraction outside Claude Code (useful in CI or in a script).</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">graphify extract ./claude-code-docs</pre>
+<p class="text-xs text-neutral-500 mt-2">In headless mode, documents require <code class="font-mono bg-dark-800 px-1 rounded">ANTHROPIC_API_KEY</code> in the environment. Pure code (tree-sitter) doesn’t need it.</p>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">✓ How to verify:</strong> same result as the skill—the folder <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> is created in the directory.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-blue-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">/graphify</div><div class="text-xs text-neutral-400">Skill (no key)</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">extract</div><div class="text-xs text-neutral-400">Headless</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Same output</div><div class="text-xs text-neutral-400">graphify-out/</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">API key</div><div class="text-xs text-neutral-400">Headless only</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
+<span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-2-3#topico-2" id="topico-2">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold">⏳ What happens during extraction</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-3-t2-p1">
+              That progress bar isn't just sitting there for nothing. While you wait, Graphify reads the files and extracts <strong class="text-blue-400">entities</strong> (the nodes) and <strong class="text-blue-400">relationships</strong> (the typed edges), and then groups everything into <strong>communities</strong> using the algorithm <strong>Leiden</strong>. Each processed file goes into a <strong>cache</strong>, so the next run doesn’t redo what hasn’t changed.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? Leiden and cache</h3>
+<p class="text-neutral-300 text-sm"><strong>Leiden</strong> is the algorithm that finds groups of nodes that are highly connected to one another — the <em>communities</em>, the graph’s “neighborhoods.” The <strong>cache</strong> stores the result per file (by content hash); if the file hasn't changed, Graphify reuses it and doesn't call the model again.</p>
+</div>
+<!-- SVG m23b: pipeline interno -->
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="Internal extraction pipeline: files become entities, then relationships, then communities via Leiden, and each stage is saved to cache" class="w-full h-auto" role="img" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="m23b-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<filter height="180%" id="m23b-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m23b-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m23b-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m23b-grid)" height="200" width="1000" x="0" y="0"></rect>
+<g fill="none" opacity="0.7" stroke="#38bdf8" stroke-width="1.8">
+<line marker-end="url(#m23b-ah)" x1="190" x2="250" y1="95" y2="95"></line>
+<line marker-end="url(#m23b-ah)" x1="420" x2="480" y1="95" y2="95"></line>
+<line marker-end="url(#m23b-ah)" x1="650" x2="710" y1="95" y2="95"></line>
+</g>
+<g font-family="Inter,sans-serif" font-size="13">
+<g class="wf-a"><rect fill="#0e1b26" height="54" rx="12" stroke="#38bdf8" stroke-width="1.8" width="150" x="40" y="68"></rect><text fill="#bfe6ff" font-weight="600" text-anchor="middle" x="115" y="92">files</text><text fill="#7fb6d6" font-size="11" text-anchor="middle" x="115" y="110">the source you read</text></g>
+<g filter="url(#m23b-glow)"><rect fill="#0e1622" height="54" rx="12" stroke="url(#m23b-grad)" stroke-width="2.4" width="168" x="252" y="68"></rect></g>
+<text fill="#60a5fa" font-weight="700" text-anchor="middle" x="336" y="92">entities</text><text fill="#93c5fd" font-size="11" text-anchor="middle" x="336" y="110">the nodes</text>
+<g filter="url(#m23b-glow)"><rect fill="#0e1622" height="54" rx="12" stroke="url(#m23b-grad)" stroke-width="2.4" width="168" x="482" y="68"></rect></g>
+<text fill="#60a5fa" font-weight="700" text-anchor="middle" x="566" y="92">relationships</text><text fill="#93c5fd" font-size="11" text-anchor="middle" x="566" y="110">typed edges</text>
+<g filter="url(#m23b-glow)"><rect fill="#0e1622" height="54" rx="12" stroke="url(#m23b-grad)" stroke-width="2.4" width="246" x="712" y="68"></rect></g>
+<text fill="#60a5fa" font-weight="700" text-anchor="middle" x="835" y="92">communities (Leiden)</text><text fill="#93c5fd" font-size="11" text-anchor="middle" x="835" y="110">the graph's "neighborhoods"</text>
+</g>
+<g font-family="Inter,sans-serif" font-size="12">
+<rect fill="#0e2233" height="26" opacity="0.8" rx="7" stroke="#38bdf8" stroke-dasharray="5 5" stroke-width="1.2" width="706" x="252" y="150"></rect>
+<text fill="#9fd4f5" text-anchor="middle" x="605" y="168">per-file cache (hash)—each step is saved so it doesn't have to be repeated on the next run</text>
+</g>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ Waiting is real work: files → entities → relationships → communities. The <strong class="text-blue-400">cache</strong> underneath is what makes the 2nd round cheap.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-blue-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Entities</div><div class="text-xs text-neutral-400">The nodes</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Relationships</div><div class="text-xs text-neutral-400">Typed edges</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Leiden</div><div class="text-xs text-neutral-400">Communities</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Cache</div><div class="text-xs text-neutral-400">Doesn’t redo things unnecessarily</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-2-3#topico-3" id="topico-3">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold">🖥️ Open graph.html</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-3-t3-p1">
+              Everything in the folder <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> derives from a single file: the <strong class="text-blue-400">graph.json</strong>, the source of truth. From it come the <strong>graph.html</strong> and the report <strong>GRAPH_REPORT.md</strong>. O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> é <strong>self-contained</strong>: opens directly in the browser, without starting any server.
+            </p>
+<!-- SVG m23a: run -> outputs flow -->
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="From the corpus to Graphify to the graphify-out folder: graph.json is the focus, and graph.html and GRAPH_REPORT.md are derived from it" class="w-full h-auto" role="img" viewbox="0 0 1000 270">
+<defs>
+<lineargradient id="m23a-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<filter height="180%" id="m23a-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m23a-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m23a-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m23a-grid)" height="270" width="1000" x="0" y="0"></rect>
+<!-- corpus -->
+<g font-family="Inter,sans-serif" font-size="12">
+<rect fill="#0e1b26" height="58" rx="12" stroke="#38bdf8" stroke-width="1.8" width="150" x="34" y="106"></rect>
+<text fill="#bfe6ff" font-size="13" font-weight="600" text-anchor="middle" x="109" y="132">corpus</text>
+<text fill="#7fb6d6" text-anchor="middle" x="109" y="150">./claude-code-docs</text>
+</g>
+<!-- graphify hub -->
+<g fill="none" opacity="0.7" stroke="#38bdf8" stroke-width="1.8"><line marker-end="url(#m23a-ah)" x1="184" x2="246" y1="135" y2="135"></line></g>
+<g filter="url(#m23a-glow)"><rect fill="#0e1622" height="62" rx="14" stroke="url(#m23a-grad)" stroke-width="2.5" width="146" x="248" y="104"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="321" y="132">graphify</text>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="321" y="151">extracts the graph</text>
+<!-- graph.json focus -->
+<g fill="none" opacity="0.7" stroke="#38bdf8" stroke-width="1.8"><line marker-end="url(#m23a-ah)" x1="394" x2="456" y1="135" y2="135"></line></g>
+<!-- graphify-out container -->
+<rect fill="none" height="200" opacity="0.55" rx="16" stroke="#3b82f6" stroke-dasharray="6 6" stroke-width="1.4" width="510" x="458" y="40"></rect>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="12" font-weight="600" x="476" y="62">graphify-out/</text>
+<g filter="url(#m23a-glow)"><rect fill="#0e1622" height="62" rx="14" stroke="url(#m23a-grad)" stroke-width="2.8" width="160" x="480" y="104"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="560" y="130">graph.json</text>
+<text fill="#93c5fd" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="560" y="149">source of truth</text>
+<!-- derivados -->
+<g fill="none" opacity="0.7" stroke="#38bdf8" stroke-width="1.8">
+<path d="M640,120 C690,98 720,90 770,86" marker-end="url(#m23a-ah)"></path>
+<path d="M640,150 C690,172 720,182 770,186" marker-end="url(#m23a-ah)"></path>
+</g>
+<g font-family="Inter,sans-serif" font-size="12">
+<g class="wf-a"><rect fill="#0e1b26" height="44" rx="10" stroke="#38bdf8" stroke-width="2" width="178" x="772" y="64"></rect><text fill="#bfe6ff" font-weight="600" text-anchor="middle" x="861" y="83">graph.html</text><text fill="#7fb6d6" font-size="10" text-anchor="middle" x="861" y="99">interactive map</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="44" rx="10" stroke="#38bdf8" stroke-width="2" width="178" x="772" y="164"></rect><text fill="#bfe6ff" font-weight="600" text-anchor="middle" x="861" y="183">GRAPH_REPORT.md</text><text fill="#7fb6d6" font-size="10" text-anchor="middle" x="861" y="199">god nodes + questions</text></g>
+</g>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ You run <strong class="text-blue-400">graphify</strong> about the corpus; it writes <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>; and from it derive the <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> (visual) and the <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> (text).</p>
+<!-- COPY-RUN C -->
+<div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-semibold">PRACTICAL · copy-run</span><span class="text-xs text-neutral-500">open the map in the browser</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-blue-400">🎯 Objective:</strong> see the actual graph — nodes, connections, and communities, interactive.</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># macOS
+open graphify-out/graph.html
+
+# Linux
+xdg-open graphify-out/graph.html</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">✓ How to verify:</strong> opens a page with the web of nodes; drag, zoom, and click a node — all without a server.</p>
+</div>
+<!-- TABELA de saídas -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6 overflow-x-auto">
+<h4 class="font-semibold text-blue-400 mb-3">📦 What's inside <code class="font-mono text-sm bg-dark-900 px-1 rounded">graphify-out/</code></h4>
+<table class="w-full text-sm text-left border-collapse">
+<thead>
+<tr class="text-neutral-400 border-b border-dark-600">
+<th class="py-2 pr-4 font-semibold">File</th>
+<th class="py-2 font-semibold">What it is</th>
+</tr>
+</thead>
+<tbody class="text-neutral-300">
+<tr class="border-b border-dark-700"><td class="py-2 pr-4 font-mono text-xs text-blue-400 whitespace-nowrap">graph.json</td><td class="py-2">Complete graph — the source of truth; everything else derives from it.</td></tr>
+<tr class="border-b border-dark-700"><td class="py-2 pr-4 font-mono text-xs text-blue-400 whitespace-nowrap">graph.html</td><td class="py-2">Self-contained interactive visualization; opens in the browser, no server needed.</td></tr>
+<tr class="border-b border-dark-700"><td class="py-2 pr-4 font-mono text-xs text-blue-400 whitespace-nowrap">GRAPH_REPORT.md</td><td class="py-2">Text audit: god nodes, connections between communities, and suggested questions.</td></tr>
+<tr><td class="py-2 pr-4 font-mono text-xs text-blue-400 whitespace-nowrap">cache/</td><td class="py-2">File-based cache (content hash) to avoid needlessly calling the LLM again.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-blue-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">graph.json</div><div class="text-xs text-neutral-400">Source of truth</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">graph.html</div><div class="text-xs text-neutral-400">Self-contained</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">No server</div><div class="text-xs text-neutral-400">Opens directly</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Interactive</div><div class="text-xs text-neutral-400">Zoom + click</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-2-3#topico-4" id="topico-4">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold">📋 Read GRAPH_REPORT.md</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-3-t4-p1">
+              O <code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> is your entry point into a large graph. Instead of guessing where to explore, it gives you the <strong class="text-blue-400">god nodes</strong> — the most connected entities, the hubs—and a list of <strong>suggested questions</strong> that the graph can answer well. It’s an index of what the map knows.
+            </p>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> New here? "God node"</h3>
+<p class="text-neutral-300 text-sm">A <strong>god node</strong> is the entity with the most connections in the graph — the hub. If a concept is linked to dozens of others, it's probably central to the project. Starting there is often the shortest path to understanding the whole.</p>
+</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">GRAPH_REPORT.md (illustrative excerpt)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># Graph Report
+
+## God nodes (mais conectados)
+1. Context Window   — 38 conexões
+2. Hooks            — 31 conexões
+3. Subagents        — 27 conexões
+
+## Perguntas sugeridas
+- Como funcionam os hooks?
+- O que liga Subagents a Context Window?
+- Quais comunidades giram em torno de MCP?</pre>
+</div>
+<!-- COPY-RUN D -->
+<div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-semibold">PRACTICAL · copy-run</span><span class="text-xs text-neutral-500">read the report</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-blue-400">🎯 Objective:</strong> see god nodes and suggested questions in plain text.</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">cat graphify-out/GRAPH_REPORT.md</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">✓ How to verify:</strong> the section appears <strong>God nodes</strong> with a connection count and the list of <strong>Suggested questions</strong>.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-blue-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">God node</div><div class="text-xs text-neutral-400">The hub</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Questions</div><div class="text-xs text-neutral-400">Ready-made suggestions</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Audit</div><div class="text-xs text-neutral-400">In text</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Entry point</div><div class="text-xs text-neutral-400">Where to start</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-2-3#topico-5" id="topico-5">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold">🔎 explain / path / query in the terminal</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-3-t5-p1">
+              Without opening the browser or the vault, you can talk to the graph directly in the terminal. <strong class="text-blue-400">explain</strong> describes a node in plain language; <strong class="text-blue-400">path</strong> shows the shortest path between two nodes; <strong class="text-blue-400">query</strong> answers an open-ended question. These answers come from the structure — fast and inexpensive.
+            </p>
+<!-- COPY-RUN E -->
+<div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-semibold">PRACTICAL · copy-run</span><span class="text-xs text-neutral-500">query the graph</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-blue-400">🎯 Objective:</strong> explain a concept, find the connection between two, and ask an open-ended question.</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">graphify explain "Context Window"
+graphify path "Hooks" "Subagents"
+graphify query "como funcionam os hooks?"</pre>
+<p class="text-xs text-neutral-500 mt-2">Replace <code class="font-mono bg-dark-800 px-1 rounded">&lt;isto-voce-troca&gt;</code>: the terms in quotes used by the nodes in YOUR graph (see the god nodes in the report).</p>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">✓ How to verify:</strong> each command responds in text—an explanation, a sequence of nodes along the path, or an answer to the question.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-4"><h4 class="font-bold text-blue-400 mb-1">explain</h4><p class="text-sm text-neutral-300">Describes a node in plain language.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-4"><h4 class="font-bold text-blue-400 mb-1">path</h4><p class="text-sm text-neutral-300">Shortest path between two nodes.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-4"><h4 class="font-bold text-blue-400 mb-1">query</h4><p class="text-sm text-neutral-300">Ask the graph a free-form question.</p></div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-blue-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">explain</div><div class="text-xs text-neutral-400">Explain a node</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">path</div><div class="text-xs text-neutral-400">Shortest path</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">query</div><div class="text-xs text-neutral-400">Open-ended question</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">No vault</div><div class="text-xs text-neutral-400">Straight from the structure</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-2-3#topico-6" id="topico-6">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold">🔁 --update and --watch (rerun cheaply)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Mark this topic as a question" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">I have a question</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m2-3-t6-p1">
+              The source changes over time—and you don't want to pay for the full extraction again. The <strong class="text-blue-400">--update</strong> reprocesses only the changed files (thanks to the cache); the <strong class="text-blue-400">--watch</strong> does this automatically every time you save. That’s what keeps the graph alive without incurring the full cost each time.
+            </p>
+<!-- COPY-RUN F -->
+<div class="bg-dark-900 rounded-xl border border-blue-500/30 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3"><span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-semibold">PRACTICAL · copy-run</span><span class="text-xs text-neutral-500">incremental update</span></div>
+<p class="text-sm text-neutral-300 mb-3"><strong class="text-blue-400">🎯 Objective:</strong> rerun only what changed — headlessly or inside Claude Code.</p>
+<div class="flex items-center gap-2 mb-2 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal / Claude Code</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># headless: só os arquivos alterados
+graphify update ./claude-code-docs
+
+# dentro do Claude Code
+/graphify ./claude-code-docs --update
+/graphify ./claude-code-docs --watch</pre>
+<p class="text-sm text-neutral-400 mt-3"><strong class="text-blue-400">✓ How to verify:</strong> the run finishes much faster than the 1st extraction — the cache reuses what hasn’t changed.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+<h4 class="font-bold text-blue-400 mb-3">✓ Incremental (--update / --watch)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Reprocesses only what changed.</span></li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Reuses the cache for each file.</span></li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Keeps the graph alive alongside the source.</span></li>
+</ul>
+</div>
+<div class="bg-red-900/20 rounded-xl border border-red-500/30 p-5">
+<h4 class="font-bold text-red-400 mb-3">✗ Extract from scratch every time</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Calls the LLM again on the entire corpus.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>It takes time and costs the full amount again.</span></li>
+<li class="flex items-start gap-2"><span class="text-red-400">✗</span><span>Discourages keeping the graph up to date.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-blue-400 mb-3">🔑 Key concepts</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">--update</div><div class="text-xs text-neutral-400">Only what changed</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">--watch</div><div class="text-xs text-neutral-400">When saving</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Incremental</div><div class="text-xs text-neutral-400">Low-cost</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-blue-400 font-bold">Cache</div><div class="text-xs text-neutral-400">Reuses</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Mark as read</span><span class="inema-label-done">Read</span>
+</button>
+</div>
+</section>
+<!-- CHECAGEM LEVE -->
+<div class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-2-3#q1">
+<p class="font-medium mb-4">✋ Self-recovery (optional, non-blocking): which <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> lists the god nodes and suggested questions?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">graph.json</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">graph.html</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">GRAPH_REPORT.md</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<!-- RESUMO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Module summary</h2>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Two paths, one graph:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> (skill, no key) and <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify extract</code> (headless).</span></div></div>
+<div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Waiting is work:</strong> <span class="text-neutral-400">entities, relationships, communities (Leiden), and per-file cache.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">graph.json is the source:</strong> <span class="text-neutral-400">it generates graph.html (visual) and GRAPH_REPORT.md (text).</span></div></div>
+<div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">The report guides you:</strong> <span class="text-neutral-400">god nodes + suggested questions = where to start.</span></div></div>
+<div class="flex items-start gap-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">explain / path / query and --update / --watch:</strong> <span class="text-neutral-400">talk with the graph and keep it alive at low cost.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-blue-400 mb-2">Next module</h3>
+<p class="text-neutral-300">2.4 · Generate the Obsidian vault — turn the graph into one Markdown file per concept, with wikilinks and backlinks.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Back to Track 2</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="modulo-2-4.html">Next: 2.4 →</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</article>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Second Brain for Claude Code · Module 2.3 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+    function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
+    (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
+  </script>
+<script src="../../../assets/learn.js"></script>
+<script>
+    if (window.INEMA && typeof window.INEMA.init === 'function') {
+      window.INEMA.init();
+      if (INEMA.registerCheck) INEMA.registerCheck('modulo-2-3#q1', { answer: 2, explain: { 0: 'O graph.json é a fonte de verdade do grafo, mas é dado bruto — quem resume god nodes e perguntas é o relatório.', 1: 'O graph.html é a visualização interativa; ele mostra o grafo, mas não a lista textual de god nodes e perguntas.', 2: 'Isso. O GRAPH_REPORT.md é a auditoria em texto: lista os god nodes e as perguntas sugeridas.' } });
+    }
+  </script>
+</body>
+</html>

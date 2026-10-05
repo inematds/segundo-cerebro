@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="segundo-cerebro">
-  <title>Trilha 2 · Passo a passo prático | Segundo Cérebro pro Claude Code</title>
 
-  <script>
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Trilha 2 · Passo a passo prático | Segundo Cérebro pro Claude Code</title>
+<script>
   (function () {
     try {
       var html = document.documentElement;
@@ -36,15 +36,13 @@
     } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
   })();
   </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/learn.css">
-
-  <script type="application/json" data-inema-manifest>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
   {
     "course": "segundo-cerebro",
     "tracks": [
@@ -71,8 +69,7 @@
     ]
   }
   </script>
-
-  <style>
+<style>
     body { font-family: var(--font-body, 'Inter', sans-serif); }
     .dark body { background-color: #111827; }
     .topic-explanation { display: none; }
@@ -126,645 +123,629 @@
       .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s} .wf-a:nth-child(5){animation-delay:1.2s}
     }
   </style>
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-
-  <!-- NAV (T2 ativa) -->
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
-          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
-          <div class="relative">
-            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
-            <div data-inema-appearance class="inema-appearance-pop">
-              <p class="text-xs text-neutral-400 mb-1">Tema</p>
-              <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
-              <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
-              <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
-              <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
-              <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
-              <div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
-            </div>
-          </div>
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Alternar tema claro/escuro">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <main id="conteudo">
-    <!-- HEADER -->
-    <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="2">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
-        <h1 class="text-3xl sm:text-4xl font-bold mb-4">🛠️ Passo a passo prático</h1>
-        <p class="text-lg text-neutral-400 max-w-3xl">Do zero ao vault, com cada comando pronto pra copiar e rodar. Você instala o Graphify, baixa uma fonte, gera o grafo, exporta pro Obsidian e decide como integrar ao seu cérebro principal.</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
-          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Módulos</div></div>
-          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">36</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~4h</div><div class="text-xs text-neutral-400">Duração</div></div>
-          <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-3">
-            <div data-inema-meter="trilha:2" class="inema-ring inema-ring--sm" aria-label="Progresso da trilha 2"><span class="inema-ring__value" data-inema-meter-pct>0%</span><svg viewBox="0 0 36 36"><circle class="inema-ring__track" r="16" cx="18" cy="18"/><circle data-inema-ring class="inema-ring__bar" r="16" cx="18" cy="18"/></svg></div>
-            <div class="text-xs text-neutral-400">Seu<br>progresso</div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-      <!-- HERO SVG -->
-      <section class="mb-12">
-        <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-5 overflow-hidden">
-          <svg viewBox="0 0 1000 175" class="w-full h-auto" role="img" aria-label="Pipeline da Trilha 2, da esquerda para a direita: a pasta-fonte alimenta o graphify, que gera a pasta graphify-out, exportada com a flag --obsidian para o vault final do Obsidian">
-            <defs>
-              <linearGradient id="t2h-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
-              <filter id="t2h-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <pattern id="t2h-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/></pattern>
-              <marker id="t2h-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
-            </defs>
-            <rect x="0" y="0" width="1000" height="175" fill="url(#t2h-grid)"/>
-            <text x="500" y="26" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="600">Pipeline: do corpus ao vault</text>
-            <!-- conectores -->
-            <g fill="none" stroke="#60a5fa" stroke-width="1.8" opacity="0.55">
-              <path d="M164,96 L222,96" marker-end="url(#t2h-ah)"/>
-              <path d="M362,96 L420,96" marker-end="url(#t2h-ah)"/>
-              <path d="M560,96 L618,96" marker-end="url(#t2h-ah)"/>
-              <path d="M758,96 L816,96" marker-end="url(#t2h-ah)"/>
-            </g>
-            <!-- box 1: pasta-fonte -->
-            <g font-family="Inter,sans-serif">
-              <rect x="24" y="68" width="140" height="56" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
-              <text x="94" y="92" text-anchor="middle" fill="#bcd7ff" font-size="13" font-weight="600">pasta-fonte</text>
-              <text x="94" y="110" text-anchor="middle" fill="#7db0f5" font-size="11">docs / código</text>
-            </g>
-            <!-- box 2: graphify (ciano = processo) -->
-            <g font-family="Inter,sans-serif">
-              <rect x="222" y="68" width="140" height="56" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
-              <text x="292" y="92" text-anchor="middle" fill="#bfe6ff" font-size="13" font-weight="600">graphify</text>
-              <text x="292" y="110" text-anchor="middle" fill="#9ad6ff" font-size="11">extrai o grafo</text>
-            </g>
-            <!-- box 3: graphify-out/ -->
-            <g font-family="Inter,sans-serif">
-              <rect x="420" y="68" width="140" height="56" rx="10" fill="#0e1622" stroke="#60a5fa" stroke-width="2"/>
-              <text x="490" y="92" text-anchor="middle" fill="#bcd7ff" font-size="12" font-weight="600">graphify-out/</text>
-              <text x="490" y="110" text-anchor="middle" fill="#7db0f5" font-size="11">graph.json · html</text>
-            </g>
-            <!-- box 4: --obsidian (ciano = processo) -->
-            <g font-family="Inter,sans-serif">
-              <rect x="618" y="68" width="140" height="56" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
-              <text x="688" y="92" text-anchor="middle" fill="#bfe6ff" font-size="13" font-weight="600">--obsidian</text>
-              <text x="688" y="110" text-anchor="middle" fill="#9ad6ff" font-size="11">exporta md</text>
-            </g>
-            <!-- box 5: vault (FOCO - glow) -->
-            <g filter="url(#t2h-glow)"><rect x="816" y="64" width="140" height="64" rx="12" fill="#0e1622" stroke="url(#t2h-grad)" stroke-width="2.5"/></g>
-            <text x="886" y="92" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="700">vault</text>
-            <text x="886" y="110" text-anchor="middle" fill="#bcd7ff" font-family="Inter,sans-serif" font-size="11">Obsidian</text>
-            <!-- rótulos de etapa -->
-            <g font-family="Inter,sans-serif" font-size="11" fill="#7db0f5" text-anchor="middle">
-              <text x="94" y="150">você escolhe</text>
-              <text x="292" y="150">você roda</text>
-              <text x="490" y="150">saída gerada</text>
-              <text x="688" y="150">flag da skill</text>
-              <text x="886" y="150">seu cérebro</text>
-            </g>
-          </svg>
-        </div>
-        <p class="text-sm text-neutral-400 mt-3">↑ O fluxo inteiro da trilha numa imagem: você aponta uma <strong class="text-blue-400">pasta-fonte</strong>, roda o <strong>graphify</strong> (sai a pasta <strong>graphify-out/</strong>), exporta com a flag <strong>--obsidian</strong> e abre o <strong>vault</strong> no Obsidian — cada caixa é um módulo desta trilha.</p>
-      </section>
-
-      <!-- MAPA DA TRILHA -->
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <a href="#modulo-2-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-            <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
-            <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🧰 Pré-requisitos</h3>
-            <p class="text-xs text-neutral-400">Uma vez só, pra sempre</p>
-          </a>
-          <a href="#modulo-2-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-            <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~35 min</span></div>
-            <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📥 Preparar a fonte</h3>
-            <p class="text-xs text-neutral-400">O que vira grafo</p>
-          </a>
-          <a href="#modulo-2-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-            <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
-            <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🗺️ Rodar o Graphify</h3>
-            <p class="text-xs text-neutral-400">Do corpus ao mapa</p>
-          </a>
-          <a href="#modulo-2-4" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-            <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.4</span><span class="text-xs text-neutral-500">~40 min</span></div>
-            <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📦 Gerar o vault</h3>
-            <p class="text-xs text-neutral-400">Grafo vira markdown</p>
-          </a>
-          <a href="#modulo-2-5" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-            <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
-            <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🔗 Abrir no Obsidian</h3>
-            <p class="text-xs text-neutral-400">Vault vira navegável</p>
-          </a>
-          <a href="#modulo-2-6" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
-            <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.6</span><span class="text-xs text-neutral-500">~35 min</span></div>
-            <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🧩 4 estratégias</h3>
-            <p class="text-xs text-neutral-400">Isolado a integrado</p>
-          </a>
-        </div>
-      </section>
-
-      <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
-
-      <!-- MÓDULO 2.1 -->
-      <div id="modulo-2-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-1" data-inema-track="2">
-        <div class="p-6 border-b border-dark-600">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
-          <h3 class="text-2xl font-bold mb-2">🧰 Pré-requisitos e instalação</h3>
-          <p class="text-neutral-400 text-sm">Instale a CLI do Graphify, registre a skill no Claude Code e abra o Obsidian. Tudo copy-run.</p>
-        </div>
-        <div class="divide-y divide-dark-600">
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🐍</span><div><span class="font-medium">Checar Python e instalar o uv</span><span class="text-neutral-500 text-sm ml-2">- Base de tudo</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Graphify é escrito em <strong>Python</strong> (precisa de 3.10+) e o <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv</code> é um instalador de ferramentas Python rápido. Confira sua versão com <code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code> antes de seguir.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A base certa garante que o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> instale limpo, sem conflito de versões. É o pré-requisito que evita a maioria dos erros de instalação.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code> · uv · PATH.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">📦</span><div><span class="font-medium">Instalar a CLI graphifyy</span><span class="text-neutral-500 text-sm ml-2">- Um comando</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rode <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool install graphifyy</code> (o pacote tem dois 'y'); como alternativa, <code class="font-mono text-xs bg-dark-900 px-1 rounded">pipx install graphifyy</code> ou <code class="font-mono text-xs bg-dark-900 px-1 rounded">pip install graphifyy</code>. Isso instala o binário <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> que você vai chamar.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o programa central do curso — sem ele, nada roda. Um único comando deixa o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> disponível no terminal.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graphifyy · uv tool · <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool update-shell</code>.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🔌</span><div><span class="font-medium">Registrar a skill (graphify install)</span><span class="text-neutral-500 text-sm ml-2">- Entra no Claude Code</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify install</code> escreve <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/SKILL.md</code>; com <code class="font-mono text-xs bg-dark-900 px-1 rounded">--project</code> ele grava dentro do repositório atual. É o que ensina o Claude Code a usar o Graphify.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É esse passo que ativa o comando <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code. Sem registrar a skill, só existe a CLI headless.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">skill · SKILL.md · <code class="font-mono text-xs bg-dark-900 px-1 rounded">--project</code>.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🔮</span><div><span class="font-medium">Instalar e abrir o Obsidian</span><span class="text-neutral-500 text-sm ml-2">- Grátis, desktop</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Baixe o Obsidian em <code class="font-mono text-xs bg-dark-900 px-1 rounded">obsidian.md</code>, instale e abra — é gratuito e roda no desktop. Ainda não precisa criar nada, só deixá-lo pronto.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É onde o vault gerado vai morar e ser navegado. Tê-lo aberto agora encurta o caminho quando o markdown chegar.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Obsidian · vault · desktop.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🔑</span><div><span class="font-medium">API keys: quando precisa (e quando não)</span><span class="text-neutral-500 text-sm ml-2">- Dentro do Claude Code, não</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rodando via <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code você NÃO precisa de chave; só o modo headless (terminal puro sobre documentos) pede a <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>. Extração de código por AST não usa chave nenhuma.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita travar achando que falta configurar uma chave. Saber quando ela entra poupa tempo e confusão.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">ANTHROPIC_API_KEY · skill vs headless · tree-sitter sem chave.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">✅</span><div><span class="font-medium">Verificar que tudo funciona</span><span class="text-neutral-500 text-sm ml-2">- Antes de seguir</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rode <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify --help</code> e confira que existe <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/SKILL.md</code>. Se os dois respondem, o ambiente está pronto.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pegar um problema agora é muito mais barato que descobrir no meio da extração. É o sanity check que fecha a instalação.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--help</code> · checklist · sanity check.</p></div>
-            </div></div>
-          </div>
-        </div>
-        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-          <button onclick="openModal('modal-2-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-          <a href="modulo-2-1.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-        </div>
-      </div>
-
-      <!-- MÓDULO 2.2 -->
-      <div id="modulo-2-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-2" data-inema-track="2">
-        <div class="p-6 border-b border-dark-600">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~35 min</span></div>
-          <h3 class="text-2xl font-bold mb-2">📥 Escolher e preparar a fonte</h3>
-          <p class="text-neutral-400 text-sm">Decida entre código e documentos, baixe o corpus e organize a pasta que o Graphify vai ler.</p>
-        </div>
-        <div class="divide-y divide-dark-600">
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🧭</span><div><span class="font-medium">Código ou documentos: o que apontar</span><span class="text-neutral-500 text-sm ml-2">- Dois caminhos</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Graphify aceita um <strong>code base</strong> OU um <strong>corpus de documentos</strong> (PDF, markdown). A escolha define o tipo de fonte que ele vai ler.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Muda como ele extrai — código vira grafo pela AST (sem chave), documentos passam por um LLM. Decidir cedo evita retrabalho.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">code base · corpus · escolha.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">⬇️</span><div><span class="font-medium">Baixar a documentação do Claude Code</span><span class="text-neutral-500 text-sm ml-2">- O exemplo do vídeo</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Peça ao próprio Claude Code para baixar a documentação oficial numa pasta local, por exemplo <code class="font-mono text-xs bg-dark-900 px-1 rounded">./claude-code-docs</code>. É o corpus usado no exemplo do vídeo.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ter um corpus real e conhecido facilita comparar seu resultado com o do vídeo (lá deram ~145 documentos). Bom ponto de partida antes de usar fontes próprias.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">pasta local · docs · 145 docs (exemplo).</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🗂️</span><div><span class="font-medium">Organizar a pasta-fonte</span><span class="text-neutral-500 text-sm ml-2">- Uma raiz limpa</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Junte os arquivos numa pasta dedicada e sem lixo (rascunhos, temporários). Essa pasta é exatamente o que o Graphify vai varrer.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Uma raiz limpa gera um grafo mais limpo, com menos ruído. O que entra na pasta vira nó no grafo.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">pasta dedicada · estrutura · ruído.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">📏</span><div><span class="font-medium">Tamanho e escopo (quantos arquivos)</span><span class="text-neutral-500 text-sm ml-2">- Comece pequeno</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Comece apontando para um subconjunto dos arquivos, não o corpus inteiro de uma vez. Você amplia o escopo depois que o fluxo funcionar.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Extração menor é mais rápida e barata para testar e ajustar. Iterar pequeno evita esperar (e pagar) por um grafo que talvez não sirva.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">escopo · subconjunto · iterar.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🧹</span><div><span class="font-medium">Limpeza: o que excluir do corpus</span><span class="text-neutral-500 text-sm ml-2">- Menos é mais</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Tire binários, builds, duplicatas e tudo que não carrega significado. Deixe só os arquivos que descrevem o conhecimento.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada arquivo a mais é ruído potencial no grafo. Menos lixo significa nós e relações mais relevantes.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">exclusões · estilo <code class="font-mono text-xs bg-dark-900 px-1 rounded">.gitignore</code> · sinal/ruído.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">📁</span><div><span class="font-medium">Onde rodar (estrutura de pastas)</span><span class="text-neutral-500 text-sm ml-2">- graphify-out fica aqui</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rode o Graphify na raiz do projeto; a saída vai para uma pasta <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> ali mesmo. O diretório atual (cwd) define onde os arquivos aparecem.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber de onde rodar dá previsibilidade aos caminhos das saídas. Você sempre sabe onde achar o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> depois.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">cwd · <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> · raiz do projeto.</p></div>
-            </div></div>
-          </div>
-        </div>
-        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-          <button onclick="openModal('modal-2-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-          <a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-        </div>
-      </div>
-
-      <!-- MÓDULO 2.3 -->
-      <div id="modulo-2-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-3" data-inema-track="2">
-        <div class="p-6 border-b border-dark-600">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
-          <h3 class="text-2xl font-bold mb-2">🗺️ Rodar o Graphify e ler o grafo</h3>
-          <p class="text-neutral-400 text-sm">Gere o grafo de conhecimento e aprenda a ler o que ele produziu — visual e relatório.</p>
-        </div>
-        <div class="divide-y divide-dark-600">
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">▶️</span><div><span class="font-medium">Rodar /graphify ou graphify extract</span><span class="text-neutral-500 text-sm ml-2">- Dois modos</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dentro do Claude Code use <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify ./claude-code-docs</code>; no terminal puro use <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify extract ./claude-code-docs</code>. Os dois geram o mesmo grafo por caminhos diferentes.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o comando que dá o pontapé na extração. Saber os dois modos deixa você escolher o que cabe no momento.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">skill vs headless · extract.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">⏳</span><div><span class="font-medium">O que acontece durante a extração</span><span class="text-neutral-500 text-sm ml-2">- Nós e arestas nascendo</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ele lê os arquivos, extrai entidades e relações e detecta comunidades com o algoritmo Leiden. O resultado é cacheado para não refazer tudo a cada vez.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender a espera e o cache evita ansiedade e re-execuções desnecessárias. Você sabe que o tempo está virando nós e arestas.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">extração · comunidades · cache.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🖥️</span><div><span class="font-medium">Abrir o graph.html</span><span class="text-neutral-500 text-sm ml-2">- O mapa interativo</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Abra <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/graph.html</code> no navegador — é um arquivo self-contained, sem servidor. Mostra os nós, conexões e comunidades de forma interativa.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a primeira vez que você vê o seu grafo de verdade. Explorar o visual cria a intuição que o resto do curso usa.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graph.html · navegador · interativo.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">📋</span><div><span class="font-medium">Ler o GRAPH_REPORT.md (god nodes, perguntas)</span><span class="text-neutral-500 text-sm ml-2">- Onde começar</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/GRAPH_REPORT.md</code> é uma auditoria em texto que lista os god nodes e sugere perguntas. Funciona como um índice do que o grafo sabe.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ele te diz por onde explorar sem adivinhar — os hubs e as boas perguntas já vêm prontos. Ótimo ponto de entrada num grafo grande.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">GRAPH_REPORT.md · god nodes · perguntas sugeridas.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🔎</span><div><span class="font-medium">explain/path/query no terminal</span><span class="text-neutral-500 text-sm ml-2">- Conversar com o grafo</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Use <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify explain "Context Window"</code>, <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify path "Hooks" "Subagents"</code> e <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify query "..."</code> para interrogar o grafo. São respostas direto da estrutura, sem abrir o vault.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dá respostas rápidas sobre conceitos e caminhos entre eles. É a forma mais leve de usar o conhecimento já extraído.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">explain · path · query.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🔁</span><div><span class="font-medium">--update e --watch (re-rodar barato)</span><span class="text-neutral-500 text-sm ml-2">- Só o que mudou</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify update .</code> reprocessa apenas os arquivos alterados; <code class="font-mono text-xs bg-dark-900 px-1 rounded">--watch</code> refaz automaticamente ao salvar. Os dois evitam reprocessar o corpus inteiro.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mantém o grafo vivo conforme a fonte muda, sem pagar o custo total toda vez. Atualização incremental é o que torna o stack sustentável.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">update · watch · incremental.</p></div>
-            </div></div>
-          </div>
-        </div>
-        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-          <button onclick="openModal('modal-2-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-          <a href="modulo-2-3.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-        </div>
-      </div>
-
-      <!-- MÓDULO 2.4 -->
-      <div id="modulo-2-4" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-4" data-inema-track="2">
-        <div class="p-6 border-b border-dark-600">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~40 min</span></div>
-          <h3 class="text-2xl font-bold mb-2">📦 Gerar o vault Obsidian</h3>
-          <p class="text-neutral-400 text-sm">Transforme o graph.json num vault de markdown com um arquivo por nó e um canvas de comunidades.</p>
-        </div>
-        <div class="divide-y divide-dark-600">
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🚩</span><div><span class="font-medium">O flag --obsidian e --obsidian-dir</span><span class="text-neutral-500 text-sm ml-2">- Só na skill</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dentro do Claude Code rode <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify ./claude-code-docs --obsidian --obsidian-dir ~/vault/graphify/claude-code</code>. O <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> liga o export de vault.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Esse flag só existe na skill, não no modo headless — é o detalhe que muita gente erra. É o que transforma o grafo em notas.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> · <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian-dir</code> · skill-only.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🎯</span><div><span class="font-medium">Escolher o destino do vault</span><span class="text-neutral-500 text-sm ml-2">- Onde ele nasce</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian-dir</code> define a pasta de saída; sem ele, a skill cria um diretório próprio (uma espécie de quarentena). Você controla onde os arquivos caem.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Apontar o destino evita espalhar markdown em lugar errado. O default isolado é seguro, mas escolher dá organização.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">destino · pasta dedicada · default isolado.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🧾</span><div><span class="font-medium">O que é gerado (md por nó + graph.canvas)</span><span class="text-neutral-500 text-sm ml-2">- Um arquivo por ideia</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Sai um arquivo <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> por nó, com <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[wikilinks]]</code> para os relacionados, mais um <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> com as comunidades agrupadas. É o vault navegável.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o que cada arquivo é tira o mistério do export. Um nó igual a uma nota é o modelo mental do vault inteiro.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">md por nó · wikilink · graph.canvas.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">♻️</span><div><span class="font-medium">Regeração: roda de novo, refaz tudo</span><span class="text-neutral-500 text-sm ml-2">- Sempre atual</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O export é regenerado do zero a cada execução, sempre a partir do <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>. Não há merge manual — o grafo é a fonte de verdade.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Significa que o vault sempre reflete o grafo atual, sem estados intermediários. Você pode re-rodar à vontade sem medo de inconsistência.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">regeneração · idempotente · fonte de verdade.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">📚</span><div><span class="font-medium">--wiki como alternativa</span><span class="text-neutral-500 text-sm ml-2">- Estilo Wikipédia</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify ./docs --wiki</code> gera artigos por comunidade com um <code class="font-mono text-xs bg-dark-900 px-1 rounded">index.md</code> de entrada. É outro formato de export, voltado a leitura.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É uma alternativa navegável por texto, boa para humanos e agentes que preferem ler artigos. Vale conhecer antes de decidir entre vault e wiki.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--wiki</code> · index.md · artigo por comunidade.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">👀</span><div><span class="font-medium">Conferir o vault gerado</span><span class="text-neutral-500 text-sm ml-2">- Antes de abrir</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Olhe a pasta de destino — conte os arquivos <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> e veja se o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> está lá. É uma checagem rápida no sistema de arquivos.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Confirma que o export funcionou antes de você investir tempo no Obsidian. Pega exportações vazias ou truncadas cedo.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">contagem de notas · canvas · verificação.</p></div>
-            </div></div>
-          </div>
-        </div>
-        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-          <button onclick="openModal('modal-2-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-          <a href="modulo-2-4.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-        </div>
-      </div>
-
-      <!-- MÓDULO 2.5 -->
-      <div id="modulo-2-5" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-5" data-inema-track="2">
-        <div class="p-6 border-b border-dark-600">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
-          <h3 class="text-2xl font-bold mb-2">🔗 Abrir no Obsidian e conectar as fontes</h3>
-          <p class="text-neutral-400 text-sm">Aponte o Obsidian para o vault, navegue os nós e ligue cada conceito ao seu documento de origem.</p>
-        </div>
-        <div class="divide-y divide-dark-600">
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">📂</span><div><span class="font-medium">Open folder as vault (manage vault)</span><span class="text-neutral-500 text-sm ml-2">- Obsidian reconhece</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">No Obsidian, no canto inferior esquerdo, abra <em>Manage vaults</em> → <em>Open folder as vault</em> e escolha a pasta gerada. O Obsidian passa a tratar aquela pasta como um vault.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O Obsidian precisa ser apontado ao diretório — ele não acha sozinho. É o passo que liga o markdown gerado à interface.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">manage vault · open folder as vault · reconhecer.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🧭</span><div><span class="font-medium">Navegar nós e backlinks</span><span class="text-neutral-500 text-sm ml-2">- Clicar e seguir</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Abra uma nota-nó e siga os <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[backlinks]]</code> para os conceitos ligados a ela. Cada clique te leva de uma ideia à sua vizinha.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o segundo cérebro em ação — você percorre o conhecimento pelas relações, não por busca. Treinar essa navegação é o objetivo do módulo.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">nota-nó · backlink · navegação.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🖼️</span><div><span class="font-medium">Abrir o graph.canvas (comunidades)</span><span class="text-neutral-500 text-sm ml-2">- Mapa visual</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Abra o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> no Obsidian e veja as comunidades como grupos nomeados num quadro. É a visão macro dos temas do corpus.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O canvas dá o panorama que as notas individuais não dão. Bom para escolher de qual tema começar a explorar.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">canvas · comunidade · grupo nomeado.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🧷</span><div><span class="font-medium">Trazer/linkar os documentos-fonte</span><span class="text-neutral-500 text-sm ml-2">- Do nó à origem</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada nó guarda sua procedência no <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>; traga os documentos-fonte para perto e ligue cada nó ao seu arquivo de origem (uma placa de sinalização). Assim o conceito aponta para o texto completo.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Permite que o agente vá do conceito ao documento inteiro quando precisar de detalhe. Fecha a lacuna entre resumo e fonte.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">procedência · doc-fonte · link de origem.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🌐</span><div><span class="font-medium">A graph view do Obsidian</span><span class="text-neutral-500 text-sm ml-2">- Não é o grafo original</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A graph view do Obsidian desenha os links entre as notas markdown — é um espelho, não o grafo do Graphify. Ela mostra ligações de notas, não as relações tipadas originais.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O vídeo alerta justamente para isso, para você não confundir uma coisa com a outra. Ajustar a expectativa evita frustração.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graph view · espelho · ≠ original.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">💬</span><div><span class="font-medium">Pedir ao Claude Code para 'wire' as fontes</span><span class="text-neutral-500 text-sm ml-2">- Um prompt resolve</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Há um prompt pronto: peça ao Claude Code para trazer os documentos-fonte e ligar cada nó à sua origem dentro da pasta do vault. Ele faz a etapa de linkar automaticamente.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automatiza o trabalho manual do tópico 4, em um comando. É o atalho que torna a conexão das fontes prática.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">prompt · wire · automação.</p></div>
-            </div></div>
-          </div>
-        </div>
-        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-          <button onclick="openModal('modal-2-5')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-          <a href="modulo-2-5.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-        </div>
-      </div>
-
-      <!-- MÓDULO 2.6 -->
-      <div id="modulo-2-6" class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-6" data-inema-track="2">
-        <div class="p-6 border-b border-dark-600">
-          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.6</span><span class="text-xs text-neutral-500">~35 min</span></div>
-          <h3 class="text-2xl font-bold mb-2">🧩 As 4 estratégias de integração</h3>
-          <p class="text-neutral-400 text-sm">Quanto desse conhecimento entra no seu vault principal? Quatro caminhos, do isolado ao totalmente integrado.</p>
-        </div>
-        <div class="divide-y divide-dark-600">
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🧪</span><div><span class="font-medium">Vault standalone (isolado)</span><span class="text-neutral-500 text-sm ml-2">- Fica no vácuo</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Mantenha o vault gerado como um vault próprio e separado do seu principal. Ele vive sozinho, sem se misturar ao resto.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É bom para quem só quer o conhecimento dentro do ecossistema Obsidian, sem integrar. É o comportamento padrão e o mais seguro.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">standalone · isolado · default.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🚧</span><div><span class="font-medium">Subpasta-quarentena (deletável)</span><span class="text-neutral-500 text-sm ml-2">- Saída fácil</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Jogue tudo numa subpasta do seu vault principal (ex.: <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/claude-code-docs</code>) que dá para apagar inteira. Fica no contexto, mas isolável.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Traz o conhecimento para perto sem risco — se não gostar, deleta a pasta e acabou. É o meio-termo entre isolado e integrado.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">quarentena · subpasta · deletável.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🌾</span><div><span class="font-medium">Importação seletiva (harvest)</span><span class="text-neutral-500 text-sm ml-2">- Só o que serve</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Peça ao Claude Code para trazer só as notas relevantes (ex.: as ~100 sobre subagents) e ignorar o resto. Você colhe um recorte, não o corpus inteiro.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita despejar 600 arquivos que você nunca vai usar. Curadoria mantém o vault principal enxuto.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">harvest · seleção · curadoria.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🔀</span><div><span class="font-medium">Redistribuição (case a case)</span><span class="text-neutral-500 text-sm ml-2">- Mais difícil de desfazer</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Claude Code redistribui cada nota para a subpasta do seu vault que faz mais sentido. O conhecimento se dilui na sua estrutura existente.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dá a máxima coerência com o que você já tem, mas é o mais difícil de reverter. É uma escolha consciente de trocar reversibilidade por integração.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">redistribuição · coerência · risco.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🚚</span><div><span class="font-medium">Mover pro vault principal (prompt)</span><span class="text-neutral-500 text-sm ml-2">- Um comando</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Prompt pronto: peça para mover a estrutura do vault gerado para dentro do principal, numa subpasta própria. Ele transfere os arquivos por você.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Integra o conteúdo em menos de um minuto, sem arrastar pasta a pasta. É a execução prática da estratégia de quarentena.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">mover · subpasta · prompt.</p></div>
-            </div></div>
-          </div>
-          <div class="topic-item">
-            <button onclick="toggleTopic(this)" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-              <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🌳</span><div><span class="font-medium">Qual escolher (árvore de decisão)</span><span class="text-neutral-500 text-sm ml-2">- Decida rápido</span></div>
-            </button>
-            <div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-              <div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Regra prática — code base? pare no Graphify. Quer no Obsidian isolado? standalone. Integrar com segurança? quarentena. Curar? harvest. Coerência total? redistribuição.</p></div>
-              <div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Te dá um caminho de decisão para não travar na hora de integrar. Cada opção é um trade-off entre coerência e reversibilidade.</p></div>
-              <div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">decisão · trade-off · reversibilidade.</p></div>
-            </div></div>
-          </div>
-        </div>
-        <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-          <button onclick="openModal('modal-2-6')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
-          <a href="modulo-2-6.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-        </div>
-      </div>
-
-      <!-- NAV TRILHAS -->
-      <div class="flex flex-col sm:flex-row gap-4 mt-10">
-        <a href="../trilha1/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha 1 · Fundamentos</a>
-        <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Trilha 3 · Uso avançado →</a>
-      </div>
-    </div>
-  </main>
-
-  <!-- MODAIS -->
-  <div id="modal-2-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Pré-requisitos e instalação</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-1.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
-  <div id="modal-2-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Escolher e preparar a fonte</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-2.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
-  <div id="modal-2-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.3</span><span class="font-semibold">Rodar o Graphify e ler o grafo</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-3.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
-  <div id="modal-2-4" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.4</span><span class="font-semibold">Gerar o vault Obsidian</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-4.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
-  <div id="modal-2-5" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.5</span><span class="font-semibold">Abrir no Obsidian e conectar as fontes</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-5.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
-  <div id="modal-2-6" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.6</span><span class="font-semibold">As 4 estratégias de integração</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-6.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
-
-  <footer class="border-t border-dark-600 py-8 mt-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>Segundo Cérebro pro Claude Code · Trilha 2 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
-    </div>
-  </footer>
-
-  <script>
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha2/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha2/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha2/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha2/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha2/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<!-- NAV (T2 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Tema</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Alternar tema claro/escuro">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main id="conteudo">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600" data-inema-track="2">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🛠️ Passo a passo prático</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Do zero ao vault, com cada comando pronto pra copiar e rodar. Você instala o Graphify, baixa uma fonte, gera o grafo, exporta pro Obsidian e decide como integrar ao seu cérebro principal.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">36</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~4h</div><div class="text-xs text-neutral-400">Duração</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-3">
+<div aria-label="Progresso da trilha 2" class="inema-ring inema-ring--sm" data-inema-meter="trilha:2"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400">Seu<br/>progresso</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<!-- HERO SVG -->
+<section class="mb-12">
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-5 overflow-hidden">
+<svg aria-label="Pipeline da Trilha 2, da esquerda para a direita: a pasta-fonte alimenta o graphify, que gera a pasta graphify-out, exportada com a flag --obsidian para o vault final do Obsidian" class="w-full h-auto" role="img" viewbox="0 0 1000 175">
+<defs>
+<lineargradient id="t2h-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<filter height="180%" id="t2h-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t2h-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t2h-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"></path></marker>
+</defs>
+<rect fill="url(#t2h-grid)" height="175" width="1000" x="0" y="0"></rect>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="500" y="26">Pipeline: do corpus ao vault</text>
+<!-- conectores -->
+<g fill="none" opacity="0.55" stroke="#60a5fa" stroke-width="1.8">
+<path d="M164,96 L222,96" marker-end="url(#t2h-ah)"></path>
+<path d="M362,96 L420,96" marker-end="url(#t2h-ah)"></path>
+<path d="M560,96 L618,96" marker-end="url(#t2h-ah)"></path>
+<path d="M758,96 L816,96" marker-end="url(#t2h-ah)"></path>
+</g>
+<!-- box 1: pasta-fonte -->
+<g font-family="Inter,sans-serif">
+<rect fill="#0e1622" height="56" rx="10" stroke="#60a5fa" stroke-width="2" width="140" x="24" y="68"></rect>
+<text fill="#bcd7ff" font-size="13" font-weight="600" text-anchor="middle" x="94" y="92">pasta-fonte</text>
+<text fill="#7db0f5" font-size="11" text-anchor="middle" x="94" y="110">docs / código</text>
+</g>
+<!-- box 2: graphify (ciano = processo) -->
+<g font-family="Inter,sans-serif">
+<rect fill="#0e1b26" height="56" rx="10" stroke="#38bdf8" stroke-width="2" width="140" x="222" y="68"></rect>
+<text fill="#bfe6ff" font-size="13" font-weight="600" text-anchor="middle" x="292" y="92">graphify</text>
+<text fill="#9ad6ff" font-size="11" text-anchor="middle" x="292" y="110">extrai o grafo</text>
+</g>
+<!-- box 3: graphify-out/ -->
+<g font-family="Inter,sans-serif">
+<rect fill="#0e1622" height="56" rx="10" stroke="#60a5fa" stroke-width="2" width="140" x="420" y="68"></rect>
+<text fill="#bcd7ff" font-size="12" font-weight="600" text-anchor="middle" x="490" y="92">graphify-out/</text>
+<text fill="#7db0f5" font-size="11" text-anchor="middle" x="490" y="110">graph.json · html</text>
+</g>
+<!-- box 4: --obsidian (ciano = processo) -->
+<g font-family="Inter,sans-serif">
+<rect fill="#0e1b26" height="56" rx="10" stroke="#38bdf8" stroke-width="2" width="140" x="618" y="68"></rect>
+<text fill="#bfe6ff" font-size="13" font-weight="600" text-anchor="middle" x="688" y="92">--obsidian</text>
+<text fill="#9ad6ff" font-size="11" text-anchor="middle" x="688" y="110">exporta md</text>
+</g>
+<!-- box 5: vault (FOCO - glow) -->
+<g filter="url(#t2h-glow)"><rect fill="#0e1622" height="64" rx="12" stroke="url(#t2h-grad)" stroke-width="2.5" width="140" x="816" y="64"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="14" font-weight="700" text-anchor="middle" x="886" y="92">vault</text>
+<text fill="#bcd7ff" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="886" y="110">Obsidian</text>
+<!-- rótulos de etapa -->
+<g fill="#7db0f5" font-family="Inter,sans-serif" font-size="11" text-anchor="middle">
+<text x="94" y="150">você escolhe</text>
+<text x="292" y="150">você roda</text>
+<text x="490" y="150">saída gerada</text>
+<text x="688" y="150">flag da skill</text>
+<text x="886" y="150">seu cérebro</text>
+</g>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mt-3">↑ O fluxo inteiro da trilha numa imagem: você aponta uma <strong class="text-blue-400">pasta-fonte</strong>, roda o <strong>graphify</strong> (sai a pasta <strong>graphify-out/</strong>), exporta com a flag <strong>--obsidian</strong> e abre o <strong>vault</strong> no Obsidian — cada caixa é um módulo desta trilha.</p>
+</section>
+<!-- MAPA DA TRILHA -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-1">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🧰 Pré-requisitos</h3>
+<p class="text-xs text-neutral-400">Uma vez só, pra sempre</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-2">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📥 Preparar a fonte</h3>
+<p class="text-xs text-neutral-400">O que vira grafo</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-3">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🗺️ Rodar o Graphify</h3>
+<p class="text-xs text-neutral-400">Do corpus ao mapa</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-4">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.4</span><span class="text-xs text-neutral-500">~40 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📦 Gerar o vault</h3>
+<p class="text-xs text-neutral-400">Grafo vira markdown</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-5">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🔗 Abrir no Obsidian</h3>
+<p class="text-xs text-neutral-400">Vault vira navegável</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-6">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.6</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🧩 4 estratégias</h3>
+<p class="text-xs text-neutral-400">Isolado a integrado</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+<!-- MÓDULO 2.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-1" data-inema-track="2" id="modulo-2-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~45 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🧰 Pré-requisitos e instalação</h3>
+<p class="text-neutral-400 text-sm">Instale a CLI do Graphify, registre a skill no Claude Code e abra o Obsidian. Tudo copy-run.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🐍</span><div><span class="font-medium">Checar Python e instalar o uv</span><span class="text-neutral-500 text-sm ml-2">- Base de tudo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Graphify é escrito em <strong>Python</strong> (precisa de 3.10+) e o <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv</code> é um instalador de ferramentas Python rápido. Confira sua versão com <code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code> antes de seguir.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A base certa garante que o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> instale limpo, sem conflito de versões. É o pré-requisito que evita a maioria dos erros de instalação.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">python --version</code> · uv · PATH.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">📦</span><div><span class="font-medium">Instalar a CLI graphifyy</span><span class="text-neutral-500 text-sm ml-2">- Um comando</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rode <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool install graphifyy</code> (o pacote tem dois 'y'); como alternativa, <code class="font-mono text-xs bg-dark-900 px-1 rounded">pipx install graphifyy</code> ou <code class="font-mono text-xs bg-dark-900 px-1 rounded">pip install graphifyy</code>. Isso instala o binário <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> que você vai chamar.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o programa central do curso — sem ele, nada roda. Um único comando deixa o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> disponível no terminal.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graphifyy · uv tool · <code class="font-mono text-xs bg-dark-900 px-1 rounded">uv tool update-shell</code>.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🔌</span><div><span class="font-medium">Registrar a skill (graphify install)</span><span class="text-neutral-500 text-sm ml-2">- Entra no Claude Code</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify install</code> escreve <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/SKILL.md</code>; com <code class="font-mono text-xs bg-dark-900 px-1 rounded">--project</code> ele grava dentro do repositório atual. É o que ensina o Claude Code a usar o Graphify.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É esse passo que ativa o comando <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code. Sem registrar a skill, só existe a CLI headless.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">skill · SKILL.md · <code class="font-mono text-xs bg-dark-900 px-1 rounded">--project</code>.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🔮</span><div><span class="font-medium">Instalar e abrir o Obsidian</span><span class="text-neutral-500 text-sm ml-2">- Grátis, desktop</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Baixe o Obsidian em <code class="font-mono text-xs bg-dark-900 px-1 rounded">obsidian.md</code>, instale e abra — é gratuito e roda no desktop. Ainda não precisa criar nada, só deixá-lo pronto.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É onde o vault gerado vai morar e ser navegado. Tê-lo aberto agora encurta o caminho quando o markdown chegar.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Obsidian · vault · desktop.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🔑</span><div><span class="font-medium">API keys: quando precisa (e quando não)</span><span class="text-neutral-500 text-sm ml-2">- Dentro do Claude Code, não</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rodando via <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code você NÃO precisa de chave; só o modo headless (terminal puro sobre documentos) pede a <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>. Extração de código por AST não usa chave nenhuma.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita travar achando que falta configurar uma chave. Saber quando ela entra poupa tempo e confusão.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">ANTHROPIC_API_KEY · skill vs headless · tree-sitter sem chave.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">✅</span><div><span class="font-medium">Verificar que tudo funciona</span><span class="text-neutral-500 text-sm ml-2">- Antes de seguir</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rode <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify --help</code> e confira que existe <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/SKILL.md</code>. Se os dois respondem, o ambiente está pronto.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pegar um problema agora é muito mais barato que descobrir no meio da extração. É o sanity check que fecha a instalação.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--help</code> · checklist · sanity check.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-1')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-1.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-2" data-inema-track="2" id="modulo-2-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="text-2xl font-bold mb-2">📥 Escolher e preparar a fonte</h3>
+<p class="text-neutral-400 text-sm">Decida entre código e documentos, baixe o corpus e organize a pasta que o Graphify vai ler.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🧭</span><div><span class="font-medium">Código ou documentos: o que apontar</span><span class="text-neutral-500 text-sm ml-2">- Dois caminhos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Graphify aceita um <strong>code base</strong> OU um <strong>corpus de documentos</strong> (PDF, markdown). A escolha define o tipo de fonte que ele vai ler.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Muda como ele extrai — código vira grafo pela AST (sem chave), documentos passam por um LLM. Decidir cedo evita retrabalho.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">code base · corpus · escolha.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">⬇️</span><div><span class="font-medium">Baixar a documentação do Claude Code</span><span class="text-neutral-500 text-sm ml-2">- O exemplo do vídeo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Peça ao próprio Claude Code para baixar a documentação oficial numa pasta local, por exemplo <code class="font-mono text-xs bg-dark-900 px-1 rounded">./claude-code-docs</code>. É o corpus usado no exemplo do vídeo.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ter um corpus real e conhecido facilita comparar seu resultado com o do vídeo (lá deram ~145 documentos). Bom ponto de partida antes de usar fontes próprias.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">pasta local · docs · 145 docs (exemplo).</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🗂️</span><div><span class="font-medium">Organizar a pasta-fonte</span><span class="text-neutral-500 text-sm ml-2">- Uma raiz limpa</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Junte os arquivos numa pasta dedicada e sem lixo (rascunhos, temporários). Essa pasta é exatamente o que o Graphify vai varrer.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Uma raiz limpa gera um grafo mais limpo, com menos ruído. O que entra na pasta vira nó no grafo.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">pasta dedicada · estrutura · ruído.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">📏</span><div><span class="font-medium">Tamanho e escopo (quantos arquivos)</span><span class="text-neutral-500 text-sm ml-2">- Comece pequeno</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Comece apontando para um subconjunto dos arquivos, não o corpus inteiro de uma vez. Você amplia o escopo depois que o fluxo funcionar.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Extração menor é mais rápida e barata para testar e ajustar. Iterar pequeno evita esperar (e pagar) por um grafo que talvez não sirva.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">escopo · subconjunto · iterar.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🧹</span><div><span class="font-medium">Limpeza: o que excluir do corpus</span><span class="text-neutral-500 text-sm ml-2">- Menos é mais</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Tire binários, builds, duplicatas e tudo que não carrega significado. Deixe só os arquivos que descrevem o conhecimento.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada arquivo a mais é ruído potencial no grafo. Menos lixo significa nós e relações mais relevantes.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">exclusões · estilo <code class="font-mono text-xs bg-dark-900 px-1 rounded">.gitignore</code> · sinal/ruído.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">📁</span><div><span class="font-medium">Onde rodar (estrutura de pastas)</span><span class="text-neutral-500 text-sm ml-2">- graphify-out fica aqui</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Rode o Graphify na raiz do projeto; a saída vai para uma pasta <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> ali mesmo. O diretório atual (cwd) define onde os arquivos aparecem.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber de onde rodar dá previsibilidade aos caminhos das saídas. Você sempre sabe onde achar o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> depois.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">cwd · <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> · raiz do projeto.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-2')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-2.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.3 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-3" data-inema-track="2" id="modulo-2-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🗺️ Rodar o Graphify e ler o grafo</h3>
+<p class="text-neutral-400 text-sm">Gere o grafo de conhecimento e aprenda a ler o que ele produziu — visual e relatório.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">▶️</span><div><span class="font-medium">Rodar /graphify ou graphify extract</span><span class="text-neutral-500 text-sm ml-2">- Dois modos</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dentro do Claude Code use <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify ./claude-code-docs</code>; no terminal puro use <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify extract ./claude-code-docs</code>. Os dois geram o mesmo grafo por caminhos diferentes.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o comando que dá o pontapé na extração. Saber os dois modos deixa você escolher o que cabe no momento.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">skill vs headless · extract.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">⏳</span><div><span class="font-medium">O que acontece durante a extração</span><span class="text-neutral-500 text-sm ml-2">- Nós e arestas nascendo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ele lê os arquivos, extrai entidades e relações e detecta comunidades com o algoritmo Leiden. O resultado é cacheado para não refazer tudo a cada vez.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender a espera e o cache evita ansiedade e re-execuções desnecessárias. Você sabe que o tempo está virando nós e arestas.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">extração · comunidades · cache.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🖥️</span><div><span class="font-medium">Abrir o graph.html</span><span class="text-neutral-500 text-sm ml-2">- O mapa interativo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Abra <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/graph.html</code> no navegador — é um arquivo self-contained, sem servidor. Mostra os nós, conexões e comunidades de forma interativa.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a primeira vez que você vê o seu grafo de verdade. Explorar o visual cria a intuição que o resto do curso usa.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graph.html · navegador · interativo.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">📋</span><div><span class="font-medium">Ler o GRAPH_REPORT.md (god nodes, perguntas)</span><span class="text-neutral-500 text-sm ml-2">- Onde começar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/GRAPH_REPORT.md</code> é uma auditoria em texto que lista os god nodes e sugere perguntas. Funciona como um índice do que o grafo sabe.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ele te diz por onde explorar sem adivinhar — os hubs e as boas perguntas já vêm prontos. Ótimo ponto de entrada num grafo grande.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">GRAPH_REPORT.md · god nodes · perguntas sugeridas.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🔎</span><div><span class="font-medium">explain/path/query no terminal</span><span class="text-neutral-500 text-sm ml-2">- Conversar com o grafo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Use <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify explain "Context Window"</code>, <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify path "Hooks" "Subagents"</code> e <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify query "..."</code> para interrogar o grafo. São respostas direto da estrutura, sem abrir o vault.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dá respostas rápidas sobre conceitos e caminhos entre eles. É a forma mais leve de usar o conhecimento já extraído.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">explain · path · query.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🔁</span><div><span class="font-medium">--update e --watch (re-rodar barato)</span><span class="text-neutral-500 text-sm ml-2">- Só o que mudou</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify update .</code> reprocessa apenas os arquivos alterados; <code class="font-mono text-xs bg-dark-900 px-1 rounded">--watch</code> refaz automaticamente ao salvar. Os dois evitam reprocessar o corpus inteiro.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mantém o grafo vivo conforme a fonte muda, sem pagar o custo total toda vez. Atualização incremental é o que torna o stack sustentável.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">update · watch · incremental.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-3')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-3.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.4 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-4" data-inema-track="2" id="modulo-2-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~40 min</span></div>
+<h3 class="text-2xl font-bold mb-2">📦 Gerar o vault Obsidian</h3>
+<p class="text-neutral-400 text-sm">Transforme o graph.json num vault de markdown com um arquivo por nó e um canvas de comunidades.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🚩</span><div><span class="font-medium">O flag --obsidian e --obsidian-dir</span><span class="text-neutral-500 text-sm ml-2">- Só na skill</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dentro do Claude Code rode <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify ./claude-code-docs --obsidian --obsidian-dir ~/vault/graphify/claude-code</code>. O <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> liga o export de vault.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Esse flag só existe na skill, não no modo headless — é o detalhe que muita gente erra. É o que transforma o grafo em notas.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> · <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian-dir</code> · skill-only.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🎯</span><div><span class="font-medium">Escolher o destino do vault</span><span class="text-neutral-500 text-sm ml-2">- Onde ele nasce</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian-dir</code> define a pasta de saída; sem ele, a skill cria um diretório próprio (uma espécie de quarentena). Você controla onde os arquivos caem.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Apontar o destino evita espalhar markdown em lugar errado. O default isolado é seguro, mas escolher dá organização.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">destino · pasta dedicada · default isolado.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🧾</span><div><span class="font-medium">O que é gerado (md por nó + graph.canvas)</span><span class="text-neutral-500 text-sm ml-2">- Um arquivo por ideia</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Sai um arquivo <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> por nó, com <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[wikilinks]]</code> para os relacionados, mais um <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> com as comunidades agrupadas. É o vault navegável.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Entender o que cada arquivo é tira o mistério do export. Um nó igual a uma nota é o modelo mental do vault inteiro.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">md por nó · wikilink · graph.canvas.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">♻️</span><div><span class="font-medium">Regeração: roda de novo, refaz tudo</span><span class="text-neutral-500 text-sm ml-2">- Sempre atual</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O export é regenerado do zero a cada execução, sempre a partir do <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>. Não há merge manual — o grafo é a fonte de verdade.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Significa que o vault sempre reflete o grafo atual, sem estados intermediários. Você pode re-rodar à vontade sem medo de inconsistência.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">regeneração · idempotente · fonte de verdade.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">📚</span><div><span class="font-medium">--wiki como alternativa</span><span class="text-neutral-500 text-sm ml-2">- Estilo Wikipédia</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify ./docs --wiki</code> gera artigos por comunidade com um <code class="font-mono text-xs bg-dark-900 px-1 rounded">index.md</code> de entrada. É outro formato de export, voltado a leitura.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É uma alternativa navegável por texto, boa para humanos e agentes que preferem ler artigos. Vale conhecer antes de decidir entre vault e wiki.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--wiki</code> · index.md · artigo por comunidade.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">👀</span><div><span class="font-medium">Conferir o vault gerado</span><span class="text-neutral-500 text-sm ml-2">- Antes de abrir</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Olhe a pasta de destino — conte os arquivos <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> e veja se o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> está lá. É uma checagem rápida no sistema de arquivos.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Confirma que o export funcionou antes de você investir tempo no Obsidian. Pega exportações vazias ou truncadas cedo.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">contagem de notas · canvas · verificação.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-4')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-4.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.5 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-5" data-inema-track="2" id="modulo-2-5">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🔗 Abrir no Obsidian e conectar as fontes</h3>
+<p class="text-neutral-400 text-sm">Aponte o Obsidian para o vault, navegue os nós e ligue cada conceito ao seu documento de origem.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">📂</span><div><span class="font-medium">Open folder as vault (manage vault)</span><span class="text-neutral-500 text-sm ml-2">- Obsidian reconhece</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">No Obsidian, no canto inferior esquerdo, abra <em>Manage vaults</em> → <em>Open folder as vault</em> e escolha a pasta gerada. O Obsidian passa a tratar aquela pasta como um vault.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O Obsidian precisa ser apontado ao diretório — ele não acha sozinho. É o passo que liga o markdown gerado à interface.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">manage vault · open folder as vault · reconhecer.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🧭</span><div><span class="font-medium">Navegar nós e backlinks</span><span class="text-neutral-500 text-sm ml-2">- Clicar e seguir</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Abra uma nota-nó e siga os <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[backlinks]]</code> para os conceitos ligados a ela. Cada clique te leva de uma ideia à sua vizinha.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o segundo cérebro em ação — você percorre o conhecimento pelas relações, não por busca. Treinar essa navegação é o objetivo do módulo.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">nota-nó · backlink · navegação.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🖼️</span><div><span class="font-medium">Abrir o graph.canvas (comunidades)</span><span class="text-neutral-500 text-sm ml-2">- Mapa visual</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Abra o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code> no Obsidian e veja as comunidades como grupos nomeados num quadro. É a visão macro dos temas do corpus.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O canvas dá o panorama que as notas individuais não dão. Bom para escolher de qual tema começar a explorar.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">canvas · comunidade · grupo nomeado.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🧷</span><div><span class="font-medium">Trazer/linkar os documentos-fonte</span><span class="text-neutral-500 text-sm ml-2">- Do nó à origem</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada nó guarda sua procedência no <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>; traga os documentos-fonte para perto e ligue cada nó ao seu arquivo de origem (uma placa de sinalização). Assim o conceito aponta para o texto completo.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Permite que o agente vá do conceito ao documento inteiro quando precisar de detalhe. Fecha a lacuna entre resumo e fonte.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">procedência · doc-fonte · link de origem.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🌐</span><div><span class="font-medium">A graph view do Obsidian</span><span class="text-neutral-500 text-sm ml-2">- Não é o grafo original</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A graph view do Obsidian desenha os links entre as notas markdown — é um espelho, não o grafo do Graphify. Ela mostra ligações de notas, não as relações tipadas originais.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O vídeo alerta justamente para isso, para você não confundir uma coisa com a outra. Ajustar a expectativa evita frustração.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">graph view · espelho · ≠ original.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">💬</span><div><span class="font-medium">Pedir ao Claude Code para 'wire' as fontes</span><span class="text-neutral-500 text-sm ml-2">- Um prompt resolve</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Há um prompt pronto: peça ao Claude Code para trazer os documentos-fonte e ligar cada nó à sua origem dentro da pasta do vault. Ele faz a etapa de linkar automaticamente.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Automatiza o trabalho manual do tópico 4, em um comando. É o atalho que torna a conexão das fontes prática.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">prompt · wire · automação.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-5')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-5.html">Ver Completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.6 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" data-inema-module="2-6" data-inema-track="2" id="modulo-2-6">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.6</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🧩 As 4 estratégias de integração</h3>
+<p class="text-neutral-400 text-sm">Quanto desse conhecimento entra no seu vault principal? Quatro caminhos, do isolado ao totalmente integrado.</p>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🧪</span><div><span class="font-medium">Vault standalone (isolado)</span><span class="text-neutral-500 text-sm ml-2">- Fica no vácuo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Mantenha o vault gerado como um vault próprio e separado do seu principal. Ele vive sozinho, sem se misturar ao resto.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É bom para quem só quer o conhecimento dentro do ecossistema Obsidian, sem integrar. É o comportamento padrão e o mais seguro.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">standalone · isolado · default.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">🚧</span><div><span class="font-medium">Subpasta-quarentena (deletável)</span><span class="text-neutral-500 text-sm ml-2">- Saída fácil</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Jogue tudo numa subpasta do seu vault principal (ex.: <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph-imports/claude-code-docs</code>) que dá para apagar inteira. Fica no contexto, mas isolável.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Traz o conhecimento para perto sem risco — se não gostar, deleta a pasta e acabou. É o meio-termo entre isolado e integrado.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">quarentena · subpasta · deletável.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🌾</span><div><span class="font-medium">Importação seletiva (harvest)</span><span class="text-neutral-500 text-sm ml-2">- Só o que serve</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Peça ao Claude Code para trazer só as notas relevantes (ex.: as ~100 sobre subagents) e ignorar o resto. Você colhe um recorte, não o corpus inteiro.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita despejar 600 arquivos que você nunca vai usar. Curadoria mantém o vault principal enxuto.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">harvest · seleção · curadoria.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🔀</span><div><span class="font-medium">Redistribuição (case a case)</span><span class="text-neutral-500 text-sm ml-2">- Mais difícil de desfazer</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Claude Code redistribui cada nota para a subpasta do seu vault que faz mais sentido. O conhecimento se dilui na sua estrutura existente.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Dá a máxima coerência com o que você já tem, mas é o mais difícil de reverter. É uma escolha consciente de trocar reversibilidade por integração.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">redistribuição · coerência · risco.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🚚</span><div><span class="font-medium">Mover pro vault principal (prompt)</span><span class="text-neutral-500 text-sm ml-2">- Um comando</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Prompt pronto: peça para mover a estrutura do vault gerado para dentro do principal, numa subpasta própria. Ele transfere os arquivos por você.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Integra o conteúdo em menos de um minuto, sem arrastar pasta a pasta. É a execução prática da estratégia de quarentena.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">mover · subpasta · prompt.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🌳</span><div><span class="font-medium">Qual escolher (árvore de decisão)</span><span class="text-neutral-500 text-sm ml-2">- Decida rápido</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Regra prática — code base? pare no Graphify. Quer no Obsidian isolado? standalone. Integrar com segurança? quarentena. Curar? harvest. Coerência total? redistribuição.</p></div>
+<div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Te dá um caminho de decisão para não travar na hora de integrar. Cada opção é um trade-off entre coerência e reversibilidade.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">decisão · trade-off · reversibilidade.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-6')">Ver em Modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-6.html">Ver Completo</a>
+</div>
+</div>
+<!-- NAV TRILHAS -->
+<div class="flex flex-col sm:flex-row gap-4 mt-10">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha1/index.html">← Trilha 1 · Fundamentos</a>
+<a class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors" href="../trilha3/index.html">Trilha 3 · Uso avançado →</a>
+</div>
+</div>
+</main>
+<!-- MODAIS -->
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-1" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Pré-requisitos e instalação</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div><iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-1.html"></iframe></div></div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-2" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Escolher e preparar a fonte</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div><iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-2.html"></iframe></div></div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-3" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.3</span><span class="font-semibold">Rodar o Graphify e ler o grafo</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div><iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-3.html"></iframe></div></div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-4" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.4</span><span class="font-semibold">Gerar o vault Obsidian</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div><iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-4.html"></iframe></div></div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-5" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.5</span><span class="font-semibold">Abrir no Obsidian e conectar as fontes</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div><iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-5.html"></iframe></div></div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-6" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.6</span><span class="font-semibold">As 4 estratégias de integração</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div><iframe class="flex-1 w-full rounded-b-xl" src="modulo-2-6.html"></iframe></div></div>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Segundo Cérebro pro Claude Code · Trilha 2 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
     function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
     (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
     function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
@@ -772,7 +753,7 @@
     document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
     document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
   </script>
-  <script src="../../assets/learn.js"></script>
-  <script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+<script src="../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
 </body>
 </html>

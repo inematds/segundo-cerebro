@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="segundo-cerebro">
-  <title>Módulo 1.3 · Graphify por dentro | Segundo Cérebro pro Claude Code</title>
 
-  <script>
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="segundo-cerebro" name="inema-course"/>
+<title>Módulo 1.3 · Graphify por dentro | Segundo Cérebro pro Claude Code</title>
+<script>
   (function () {
     try {
       var html = document.documentElement;
@@ -36,15 +36,13 @@
     } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch (e) {} }
   })();
   </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{ primary:'#FACC15', dark:{900:'#111827',800:'#1f2937',700:'#374151',600:'#4b5563'} } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/learn.css">
-
-  <script type="application/json" data-inema-manifest>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
   {
     "course": "segundo-cerebro",
     "tracks": [
@@ -71,8 +69,7 @@
     ]
   }
   </script>
-
-  <style>
+<style>
     body { font-family: var(--font-body, 'Inter', sans-serif); }
     .dark body { background-color: #111827; }
     [id] { scroll-margin-top: 5rem; }
@@ -130,581 +127,523 @@
       .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s} .wf-a:nth-child(4){animation-delay:.9s}
     }
   </style>
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-
-  <!-- NAV (T1 ativa) -->
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span></a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
-          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
-          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
-          <button type="button" data-inema-journey-open class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
-          <div class="relative">
-            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
-            <div data-inema-appearance class="inema-appearance-pop">
-              <p class="text-xs text-neutral-400 mb-1">Tema</p>
-              <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
-              <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
-              <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
-              <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
-              <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
-              <p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
-              <div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
-            </div>
-          </div>
-          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Alternar tema claro/escuro">
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- BREADCRUMB -->
-  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Trilha de navegação">
-    <div class="flex items-center space-x-2 text-sm text-neutral-400">
-      <a href="../../index.html" class="hover:text-emerald-400">Início</a><span>/</span>
-      <a href="index.html" class="hover:text-emerald-400">Trilha 1</a><span>/</span>
-      <span class="text-emerald-400">Módulo 1.3</span>
-    </div>
-  </nav>
-
-  <main id="conteudo">
-    <article id="modulo-1-3" data-inema-module="1-3" data-inema-track="1">
-      <!-- HEADER -->
-      <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.3</span>
-          <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Graphify por dentro</h1>
-          <p class="text-lg text-neutral-400 max-w-3xl">O que a ferramenta faz, como ela extrai conhecimento, o que ela cospe e onde ela esbarra. Sem jargão solto: cada termo (CLI, skill, AST, tree-sitter, graph.json) é definido na hora.</p>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
-            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
-            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
-            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
-            <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
-              <div data-inema-meter="modulo:1-3" class="inema-ring inema-ring--sm" aria-label="Progresso do módulo 1.3"><span class="inema-ring__value" data-inema-meter-pct>0%</span><svg viewBox="0 0 36 36"><circle class="inema-ring__track" r="16" cx="18" cy="18"/><circle data-inema-ring class="inema-ring__bar" r="16" cx="18" cy="18"/></svg></div>
-              <div class="text-xs text-neutral-400" data-inema-meter-frac>0 de 6</div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
-        <!-- TOC -->
-        <aside class="hidden lg:block">
-          <nav data-inema-toc aria-label="Índice do módulo" class="sticky top-24">
-            <p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">Neste módulo</p>
-            <p class="text-sm text-neutral-400 mb-3">Seção <span data-inema-section-counter>1 de 6</span></p>
-            <ol class="space-y-1 text-sm">
-              <li><a href="#topico-1" class="inema-toc-link text-neutral-400 hover:text-emerald-400">1. O que é o Graphify</a></li>
-              <li><a href="#topico-2" class="inema-toc-link text-neutral-400 hover:text-emerald-400">2. Como ele extrai</a></li>
-              <li><a href="#topico-3" class="inema-toc-link text-neutral-400 hover:text-emerald-400">3. As saídas</a></li>
-              <li><a href="#topico-4" class="inema-toc-link text-neutral-400 hover:text-emerald-400">4. Código vs documentos</a></li>
-              <li><a href="#topico-5" class="inema-toc-link text-neutral-400 hover:text-emerald-400">5. Modo Obsidian e wiki</a></li>
-              <li><a href="#topico-6" class="inema-toc-link text-neutral-400 hover:text-emerald-400">6. O grafo no vácuo</a></li>
-            </ol>
-          </nav>
-        </aside>
-
-        <div class="inema-prose">
-          <!-- TÓPICO 1 -->
-          <section id="topico-1" data-inema-topic="modulo-1-3#topico-1" class="mb-16">
-            <div class="flex items-center justify-between mb-6 gap-4">
-              <div class="flex items-center space-x-4">
-                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
-                <h2 class="text-2xl font-bold">⚙️ O que é o Graphify (CLI + skill)</h2>
-              </div>
-              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t1-p1">
+<link href="https://inematds.github.io/segundo-cerebro/curso/trilha1/modulo-1-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/en/curso/trilha1/modulo-1-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/segundo-cerebro/es/curso/trilha1/modulo-1-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-1-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha1/modulo-1-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha1/modulo-1-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<!-- NAV (T1 ativa) -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Segundo Cérebro</span></a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10" href="index.html"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="../trilha2/index.html"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Passo a passo</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Uso avançado</span></a>
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors ml-1" data-inema-journey-open="" type="button"><span aria-hidden="true">◷</span><span>Minha jornada</span><span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span></button>
+<div class="relative">
+<button aria-expanded="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-appearance-toggle="[data-inema-appearance]" type="button"><span aria-hidden="true">◑</span><span class="hidden sm:inline">Aparência</span></button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<p class="text-xs text-neutral-400 mb-1">Tema</p>
+<div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Fonte</p>
+<div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Tamanho</p>
+<div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Largura</p>
+<div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Entrelinha</p>
+<div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+<p class="text-xs text-neutral-400 mt-3 mb-1">Acento</p>
+<div class="inema-accent-grid"><button data-inema-set-accent="emerald" title="Emerald"></button><button data-inema-set-accent="blue" title="Blue"></button><button data-inema-set-accent="purple" title="Purple"></button><button data-inema-set-accent="amber" title="Amber"></button><button data-inema-set-accent="teal" title="Teal"></button><button data-inema-set-accent="rose" title="Rose"></button></div>
+</div>
+</div>
+<button class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Alternar tema claro/escuro">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- BREADCRUMB -->
+<nav aria-label="Trilha de navegação" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center space-x-2 text-sm text-neutral-400">
+<a class="hover:text-emerald-400" href="../../index.html">Início</a><span>/</span>
+<a class="hover:text-emerald-400" href="index.html">Trilha 1</a><span>/</span>
+<span class="text-emerald-400">Módulo 1.3</span>
+</div>
+</nav>
+<main id="conteudo">
+<article data-inema-module="1-3" data-inema-track="1" id="modulo-1-3">
+<!-- HEADER -->
+<header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">MÓDULO 1.3</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Graphify por dentro</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">O que a ferramenta faz, como ela extrai conhecimento, o que ela cospe e onde ela esbarra. Sem jargão solto: cada termo (CLI, skill, AST, tree-sitter, graph.json) é definido na hora.</p>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">~40</div><div class="text-xs text-neutral-400">Minutos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-emerald-400">Básico</div><div class="text-xs text-neutral-400">Nível</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600 flex items-center gap-2">
+<div aria-label="Progresso do módulo 1.3" class="inema-ring inema-ring--sm" data-inema-meter="modulo:1-3"><span class="inema-ring__value" data-inema-meter-pct="">0%</span><svg viewbox="0 0 36 36"><circle class="inema-ring__track" cx="18" cy="18" r="16"></circle><circle class="inema-ring__bar" cx="18" cy="18" data-inema-ring="" r="16"></circle></svg></div>
+<div class="text-xs text-neutral-400" data-inema-meter-frac="">0 de 6</div>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10">
+<!-- TOC -->
+<aside class="hidden lg:block">
+<nav aria-label="Índice do módulo" class="sticky top-24" data-inema-toc="">
+<p class="text-xs uppercase tracking-wide text-neutral-500 mb-2">Neste módulo</p>
+<p class="text-sm text-neutral-400 mb-3">Seção <span data-inema-section-counter="">1 de 6</span></p>
+<ol class="space-y-1 text-sm">
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-1">1. O que é o Graphify</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-2">2. Como ele extrai</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-3">3. As saídas</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-4">4. Código vs documentos</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-5">5. Modo Obsidian e wiki</a></li>
+<li><a class="inema-toc-link text-neutral-400 hover:text-emerald-400" href="#topico-6">6. O grafo no vácuo</a></li>
+</ol>
+</nav>
+</aside>
+<div class="inema-prose">
+<!-- TÓPICO 1 -->
+<section class="mb-16" data-inema-topic="modulo-1-3#topico-1" id="topico-1">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">1</span>
+<h2 class="text-2xl font-bold">⚙️ O que é o Graphify (CLI + skill)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t1-p1">
               O <strong class="text-emerald-400">Graphify</strong> é a ferramenta que constrói o segundo cérebro. Ele tem <strong>duas faces</strong> que parecem a mesma coisa, mas fazem trabalhos diferentes: uma <strong>CLI</strong> (um programa que você roda no terminal — o pacote se chama <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code>, com dois "y") e uma <strong>skill</strong> que ela instala <em>dentro</em> do Claude Code. Entender essa dualidade evita 90% da confusão das próximas trilhas.
             </p>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é uma "CLI"</h3>
-              <p class="text-neutral-300 text-sm">CLI = <em>Command Line Interface</em>, ou "programa de linha de comando". É um programa sem janelas: você digita o nome dele no terminal e ele faz o trabalho. Aqui o programa se chama <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> (o pacote que você instala é o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code>).</p>
-            </div>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é uma "skill"</h3>
-              <p class="text-neutral-300 text-sm">Uma <strong>skill</strong> é um arquivo de instruções (<code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code>) que ensina o Claude Code a fazer uma tarefa. Depois de instalada, você a chama por um <strong>slash command</strong> — um comando que começa com "/", como <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>. A skill é a face "de dentro do Claude Code"; a CLT pura é a face "do terminal".</p>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t1-p2">
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é uma "CLI"</h3>
+<p class="text-neutral-300 text-sm">CLI = <em>Command Line Interface</em>, ou "programa de linha de comando". É um programa sem janelas: você digita o nome dele no terminal e ele faz o trabalho. Aqui o programa se chama <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify</code> (o pacote que você instala é o <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code>).</p>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é uma "skill"</h3>
+<p class="text-neutral-300 text-sm">Uma <strong>skill</strong> é um arquivo de instruções (<code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code>) que ensina o Claude Code a fazer uma tarefa. Depois de instalada, você a chama por um <strong>slash command</strong> — um comando que começa com "/", como <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>. A skill é a face "de dentro do Claude Code"; a CLT pura é a face "do terminal".</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t1-p2">
               Na prática você instala uma vez e ganha as duas faces. O comando de instalação coloca a CLI no sistema; um segundo comando registra a skill no Claude Code (ele escreve um <code class="font-mono text-xs bg-dark-900 px-1 rounded">SKILL.md</code> em <code class="font-mono text-xs bg-dark-900 px-1 rounded">~/.claude/skills/graphify/</code>). Dentro do Claude Code você <strong>não precisa de chave de API</strong>: a própria sessão fornece o modelo.
             </p>
-
-            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
-              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal — instalar (ilustrativo)</span></div>
-              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># 1) instala a CLI (recomendado, com uv)
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal — instalar (ilustrativo)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># 1) instala a CLI (recomendado, com uv)
 uv tool install graphifyy
 
 # 2) registra a skill /graphify dentro do Claude Code
 graphify install</pre>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t1-p3">
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t1-p3">
               Feito isso, dentro do Claude Code você dispara a skill apontando uma pasta. O <code class="font-mono text-xs bg-dark-900 px-1 rounded">&lt;isto-voce-troca&gt;</code> é o caminho da fonte que você quer mapear:
             </p>
-
-            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
-              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">dentro do Claude Code — skill (ilustrativo)</span></div>
-              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">/graphify &lt;./pasta-da-fonte&gt;</pre>
-            </div>
-
-            <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
-              <svg viewBox="0 0 1000 250" class="w-full h-auto" role="img" aria-label="O pipeline do Graphify: uma fonte entra, o graphify processa, e a pasta graphify-out recebe o graph.json em destaque, do qual derivam graph.html e GRAPH_REPORT.md">
-                <defs>
-                  <linearGradient id="m13a-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
-                  <filter id="m13a-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                  <pattern id="m13a-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
-                  <marker id="m13a-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
-                  <marker id="m13a-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
-                </defs>
-                <rect x="0" y="0" width="1000" height="250" fill="url(#m13a-grid)"/>
-                <!-- fonte -->
-                <rect x="32" y="98" width="140" height="54" rx="12" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
-                <text x="102" y="122" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600">fonte</text>
-                <text x="102" y="140" text-anchor="middle" fill="#7fb6d6" font-family="Inter,sans-serif" font-size="11">código ou docs</text>
-                <!-- seta para graphify -->
-                <line x1="172" y1="125" x2="240" y2="125" stroke="#34d399" stroke-width="1.8" opacity="0.55" marker-end="url(#m13a-ah)"/>
-                <!-- graphify -->
-                <g filter="url(#m13a-glow)"><rect x="244" y="92" width="150" height="66" rx="14" fill="#0e2018" stroke="url(#m13a-grad)" stroke-width="2.5"/></g>
-                <text x="319" y="120" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="15" font-weight="600">graphify</text>
-                <text x="319" y="140" text-anchor="middle" fill="#9fe6c8" font-family="Inter,sans-serif" font-size="11">extrai o grafo</text>
-                <!-- seta para out -->
-                <line x1="394" y1="125" x2="462" y2="125" stroke="#34d399" stroke-width="1.8" opacity="0.55" marker-end="url(#m13a-ah)"/>
-                <!-- pasta graphify-out -->
-                <rect x="466" y="34" width="500" height="182" rx="16" fill="#0e2018" stroke="#34d399" stroke-width="1.6" opacity="0.9"/>
-                <text x="500" y="58" text-anchor="start" fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="600">graphify-out/</text>
-                <!-- graph.json (foco) -->
-                <g filter="url(#m13a-glow)"><rect x="500" y="74" width="180" height="50" rx="11" fill="#0e2018" stroke="url(#m13a-grad)" stroke-width="2.5"/></g>
-                <text x="590" y="95" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700">graph.json</text>
-                <text x="590" y="113" text-anchor="middle" fill="#9fe6c8" font-family="Inter,sans-serif" font-size="10.5">fonte de verdade</text>
-                <!-- setas json -> derivados -->
-                <g stroke="#38bdf8" stroke-width="1.8" fill="none" opacity="0.55">
-                  <path d="M680,99 C730,99 740,150 790,150" marker-end="url(#m13a-ahc)"/>
-                  <path d="M680,99 C730,99 740,186 790,186" marker-end="url(#m13a-ahc)"/>
-                </g>
-                <g font-family="Inter,sans-serif" font-size="12">
-                  <g class="wf-a"><rect x="790" y="134" width="150" height="32" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="865" y="155" text-anchor="middle" fill="#bfe6ff">graph.html</text></g>
-                  <g class="wf-a"><rect x="790" y="170" width="150" height="32" rx="9" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="865" y="191" text-anchor="middle" fill="#bfe6ff">GRAPH_REPORT.md</text></g>
-                </g>
-              </svg>
-            </div>
-            <p class="text-sm text-neutral-400 mb-6">↑ Uma fonte entra, o <strong class="text-emerald-400">graphify</strong> processa, e tudo cai em <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code>. O <strong class="text-emerald-400">graph.json</strong> é o centro: dele derivam o visual e o relatório (tópico 3).</p>
-
-            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
-              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">CLI</div><div class="text-xs text-neutral-400">Programa de terminal</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">skill</div><div class="text-xs text-neutral-400">SKILL.md no Claude</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graphifyy</div><div class="text-xs text-neutral-400">O pacote (2 "y")</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">/graphify</div><div class="text-xs text-neutral-400">O slash command</div></div>
-              </div>
-            </div>
-
-            <div class="flex justify-start mt-6">
-              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
-                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
-                <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- TÓPICO 2 -->
-          <section id="topico-2" data-inema-topic="modulo-1-3#topico-2" class="mb-16">
-            <div class="flex items-center justify-between mb-6 gap-4">
-              <div class="flex items-center space-x-4">
-                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
-                <h2 class="text-2xl font-bold">🌳 Como ele extrai (AST vs LLM)</h2>
-              </div>
-              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t2-p1">
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">dentro do Claude Code — skill (ilustrativo)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">/graphify &lt;./pasta-da-fonte&gt;</pre>
+</div>
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="O pipeline do Graphify: uma fonte entra, o graphify processa, e a pasta graphify-out recebe o graph.json em destaque, do qual derivam graph.html e GRAPH_REPORT.md" class="w-full h-auto" role="img" viewbox="0 0 1000 250">
+<defs>
+<lineargradient id="m13a-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#34d399"></stop><stop offset="1" stop-color="#10b981"></stop></lineargradient>
+<filter height="180%" id="m13a-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m13a-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#10b981" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m13a-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"></path></marker>
+<marker id="m13a-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m13a-grid)" height="250" width="1000" x="0" y="0"></rect>
+<!-- fonte -->
+<rect fill="#0e1b26" height="54" rx="12" stroke="#38bdf8" stroke-width="2" width="140" x="32" y="98"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="102" y="122">fonte</text>
+<text fill="#7fb6d6" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="102" y="140">código ou docs</text>
+<!-- seta para graphify -->
+<line marker-end="url(#m13a-ah)" opacity="0.55" stroke="#34d399" stroke-width="1.8" x1="172" x2="240" y1="125" y2="125"></line>
+<!-- graphify -->
+<g filter="url(#m13a-glow)"><rect fill="#0e2018" height="66" rx="14" stroke="url(#m13a-grad)" stroke-width="2.5" width="150" x="244" y="92"></rect></g>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="15" font-weight="600" text-anchor="middle" x="319" y="120">graphify</text>
+<text fill="#9fe6c8" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="319" y="140">extrai o grafo</text>
+<!-- seta para out -->
+<line marker-end="url(#m13a-ah)" opacity="0.55" stroke="#34d399" stroke-width="1.8" x1="394" x2="462" y1="125" y2="125"></line>
+<!-- pasta graphify-out -->
+<rect fill="#0e2018" height="182" opacity="0.9" rx="16" stroke="#34d399" stroke-width="1.6" width="500" x="466" y="34"></rect>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="start" x="500" y="58">graphify-out/</text>
+<!-- graph.json (foco) -->
+<g filter="url(#m13a-glow)"><rect fill="#0e2018" height="50" rx="11" stroke="url(#m13a-grad)" stroke-width="2.5" width="180" x="500" y="74"></rect></g>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="700" text-anchor="middle" x="590" y="95">graph.json</text>
+<text fill="#9fe6c8" font-family="Inter,sans-serif" font-size="10.5" text-anchor="middle" x="590" y="113">fonte de verdade</text>
+<!-- setas json -> derivados -->
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="1.8">
+<path d="M680,99 C730,99 740,150 790,150" marker-end="url(#m13a-ahc)"></path>
+<path d="M680,99 C730,99 740,186 790,186" marker-end="url(#m13a-ahc)"></path>
+</g>
+<g font-family="Inter,sans-serif" font-size="12">
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="790" y="134"></rect><text fill="#bfe6ff" text-anchor="middle" x="865" y="155">graph.html</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="150" x="790" y="170"></rect><text fill="#bfe6ff" text-anchor="middle" x="865" y="191">GRAPH_REPORT.md</text></g>
+</g>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ Uma fonte entra, o <strong class="text-emerald-400">graphify</strong> processa, e tudo cai em <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code>. O <strong class="text-emerald-400">graph.json</strong> é o centro: dele derivam o visual e o relatório (tópico 3).</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">CLI</div><div class="text-xs text-neutral-400">Programa de terminal</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">skill</div><div class="text-xs text-neutral-400">SKILL.md no Claude</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graphifyy</div><div class="text-xs text-neutral-400">O pacote (2 "y")</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">/graphify</div><div class="text-xs text-neutral-400">O slash command</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
+<span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 2 -->
+<section class="mb-16" data-inema-topic="modulo-1-3#topico-2" id="topico-2">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">2</span>
+<h2 class="text-2xl font-bold">🌳 Como ele extrai (AST vs LLM)</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t2-p1">
               O Graphify usa <strong>dois motores de extração</strong>, e qual deles roda depende do que você apontou. Se a fonte é <strong>código</strong>, ele lê a <strong class="text-emerald-400">AST</strong> via <strong>tree-sitter</strong> — rápido, determinístico e <strong>sem chave de API</strong>. Se a fonte é <strong>documento</strong> (markdown, PDF, imagem), ele usa um <strong class="text-emerald-400">LLM</strong> para entender o <em>sentido</em> do texto e tirar dali as entidades e relações.
             </p>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "AST" e "tree-sitter"</h3>
-              <p class="text-neutral-300 text-sm"><strong>AST</strong> = <em>Abstract Syntax Tree</em>, a "árvore de sintaxe" do código: uma representação estruturada que diz "isto é uma função", "isto é uma chamada", "isto importa aquilo". O <strong>tree-sitter</strong> é a biblioteca que lê o código e monta essa árvore — entende <strong>12 linguagens</strong>. Como é só estrutura (não interpretação), <strong>não precisa de LLM nem de chave</strong>.</p>
-            </div>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? Por que documento precisa de LLM</h3>
-              <p class="text-neutral-300 text-sm">Texto em prosa não tem uma "árvore" mecânica como código. Para saber que "janela de contexto" se relaciona com "tokens", é preciso <em>entender</em> o que está escrito — e isso é trabalho de um <strong>LLM</strong> (o modelo de IA). Por isso a extração de documentos é chamada de <strong>semântica</strong>: ela vai pelo significado, não pela forma.</p>
-            </div>
-
-            <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
-              <svg viewBox="0 0 1000 250" class="w-full h-auto" role="img" aria-label="Painel dividido: à esquerda, código passa por tree-sitter gerando uma AST sem chave de API; à direita, documentos passam por um LLM gerando extração semântica">
-                <defs>
-                  <linearGradient id="m13b-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/></linearGradient>
-                  <filter id="m13b-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                  <pattern id="m13b-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/></pattern>
-                  <marker id="m13b-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"/></marker>
-                  <marker id="m13b-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
-                </defs>
-                <rect x="0" y="0" width="1000" height="250" fill="url(#m13b-grid)"/>
-                <line x1="500" y1="22" x2="500" y2="228" stroke="#9ca3af" stroke-width="1.4" stroke-dasharray="6 7" opacity="0.4"/>
-                <!-- esquerda: código -> tree-sitter (AST) -->
-                <text x="250" y="36" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="14" font-weight="600">Código → AST (sem chave)</text>
-                <rect x="40" y="96" width="120" height="50" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
-                <text x="100" y="126" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600">código</text>
-                <line x1="160" y1="121" x2="214" y2="121" stroke="#34d399" stroke-width="1.8" opacity="0.55" marker-end="url(#m13b-ah)"/>
-                <g filter="url(#m13b-glow)"><rect x="218" y="92" width="130" height="58" rx="13" fill="#0e2018" stroke="url(#m13b-grad)" stroke-width="2.5"/></g>
-                <text x="283" y="116" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="600">tree-sitter</text>
-                <text x="283" y="134" text-anchor="middle" fill="#9fe6c8" font-family="Inter,sans-serif" font-size="10.5">AST · 12 linguagens</text>
-                <line x1="348" y1="121" x2="402" y2="121" stroke="#34d399" stroke-width="1.8" opacity="0.55" marker-end="url(#m13b-ah)"/>
-                <rect x="406" y="100" width="80" height="42" rx="10" fill="#0e2018" stroke="#34d399" stroke-width="1.6"/>
-                <text x="446" y="120" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-size="11" font-weight="600">grafo</text>
-                <text x="446" y="134" text-anchor="middle" fill="#9fe6c8" font-family="Inter,sans-serif" font-size="9.5">rápido</text>
-                <text x="250" y="190" text-anchor="middle" fill="#9fe6c8" font-family="Inter,sans-serif" font-size="11">estrutura · determinístico · sem API key</text>
-                <!-- direita: docs -> LLM (semântica) -->
-                <text x="752" y="36" text-anchor="middle" fill="#38bdf8" font-family="Inter,sans-serif" font-size="14" font-weight="600">Documentos → LLM (semântica)</text>
-                <rect x="540" y="96" width="120" height="50" rx="11" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
-                <text x="600" y="120" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600">docs</text>
-                <text x="600" y="136" text-anchor="middle" fill="#7fb6d6" font-family="Inter,sans-serif" font-size="10">md · PDF · img</text>
-                <line x1="660" y1="121" x2="714" y2="121" stroke="#38bdf8" stroke-width="1.8" opacity="0.55" marker-end="url(#m13b-ahc)"/>
-                <g class="wf-a"><rect x="718" y="92" width="130" height="58" rx="13" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/><text x="783" y="116" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600">LLM</text><text x="783" y="134" text-anchor="middle" fill="#7fb6d6" font-family="Inter,sans-serif" font-size="10.5">pelo sentido</text></g>
-                <line x1="848" y1="121" x2="902" y2="121" stroke="#38bdf8" stroke-width="1.8" opacity="0.55" marker-end="url(#m13b-ahc)"/>
-                <rect x="906" y="100" width="62" height="42" rx="10" fill="#0e1b26" stroke="#38bdf8" stroke-width="1.6"/>
-                <text x="937" y="125" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="11" font-weight="600">grafo</text>
-                <text x="752" y="190" text-anchor="middle" fill="#7fb6d6" font-family="Inter,sans-serif" font-size="11">significado · headless pede ANTHROPIC_API_KEY</text>
-              </svg>
-            </div>
-            <p class="text-sm text-neutral-400 mb-6">↑ Dois caminhos, um mesmo destino (o grafo). Código vai pela <strong class="text-emerald-400">forma</strong> (AST, sem chave); documento vai pelo <strong>sentido</strong> (LLM). Dentro do Claude Code o modelo já vem da sessão — <strong class="text-emerald-400">sem chave</strong>; só o uso headless no terminal puro pede <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>.</p>
-
-            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
-              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">AST</div><div class="text-xs text-neutral-400">Árvore do código</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">tree-sitter</div><div class="text-xs text-neutral-400">Lê 12 linguagens</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Semântica</div><div class="text-xs text-neutral-400">LLM, pelo sentido</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Sem chave</div><div class="text-xs text-neutral-400">Código no Claude</div></div>
-              </div>
-            </div>
-
-            <div class="flex justify-start mt-6">
-              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
-                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- TÓPICO 3 -->
-          <section id="topico-3" data-inema-topic="modulo-1-3#topico-3" class="mb-16">
-            <div class="flex items-center justify-between mb-6 gap-4">
-              <div class="flex items-center space-x-4">
-                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
-                <h2 class="text-2xl font-bold">📂 As saídas: graph.json, graph.html, GRAPH_REPORT.md</h2>
-              </div>
-              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t3-p1">
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "AST" e "tree-sitter"</h3>
+<p class="text-neutral-300 text-sm"><strong>AST</strong> = <em>Abstract Syntax Tree</em>, a "árvore de sintaxe" do código: uma representação estruturada que diz "isto é uma função", "isto é uma chamada", "isto importa aquilo". O <strong>tree-sitter</strong> é a biblioteca que lê o código e monta essa árvore — entende <strong>12 linguagens</strong>. Como é só estrutura (não interpretação), <strong>não precisa de LLM nem de chave</strong>.</p>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? Por que documento precisa de LLM</h3>
+<p class="text-neutral-300 text-sm">Texto em prosa não tem uma "árvore" mecânica como código. Para saber que "janela de contexto" se relaciona com "tokens", é preciso <em>entender</em> o que está escrito — e isso é trabalho de um <strong>LLM</strong> (o modelo de IA). Por isso a extração de documentos é chamada de <strong>semântica</strong>: ela vai pelo significado, não pela forma.</p>
+</div>
+<div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-6 overflow-hidden">
+<svg aria-label="Painel dividido: à esquerda, código passa por tree-sitter gerando uma AST sem chave de API; à direita, documentos passam por um LLM gerando extração semântica" class="w-full h-auto" role="img" viewbox="0 0 1000 250">
+<defs>
+<lineargradient id="m13b-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#34d399"></stop><stop offset="1" stop-color="#10b981"></stop></lineargradient>
+<filter height="180%" id="m13b-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="m13b-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#10b981" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="m13b-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#34d399"></path></marker>
+<marker id="m13b-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#m13b-grid)" height="250" width="1000" x="0" y="0"></rect>
+<line opacity="0.4" stroke="#9ca3af" stroke-dasharray="6 7" stroke-width="1.4" x1="500" x2="500" y1="22" y2="228"></line>
+<!-- esquerda: código -> tree-sitter (AST) -->
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="250" y="36">Código → AST (sem chave)</text>
+<rect fill="#0e1b26" height="50" rx="11" stroke="#38bdf8" stroke-width="2" width="120" x="40" y="96"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="100" y="126">código</text>
+<line marker-end="url(#m13b-ah)" opacity="0.55" stroke="#34d399" stroke-width="1.8" x1="160" x2="214" y1="121" y2="121"></line>
+<g filter="url(#m13b-glow)"><rect fill="#0e2018" height="58" rx="13" stroke="url(#m13b-grad)" stroke-width="2.5" width="130" x="218" y="92"></rect></g>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="283" y="116">tree-sitter</text>
+<text fill="#9fe6c8" font-family="Inter,sans-serif" font-size="10.5" text-anchor="middle" x="283" y="134">AST · 12 linguagens</text>
+<line marker-end="url(#m13b-ah)" opacity="0.55" stroke="#34d399" stroke-width="1.8" x1="348" x2="402" y1="121" y2="121"></line>
+<rect fill="#0e2018" height="42" rx="10" stroke="#34d399" stroke-width="1.6" width="80" x="406" y="100"></rect>
+<text fill="#34d399" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="446" y="120">grafo</text>
+<text fill="#9fe6c8" font-family="Inter,sans-serif" font-size="9.5" text-anchor="middle" x="446" y="134">rápido</text>
+<text fill="#9fe6c8" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="250" y="190">estrutura · determinístico · sem API key</text>
+<!-- direita: docs -> LLM (semântica) -->
+<text fill="#38bdf8" font-family="Inter,sans-serif" font-size="14" font-weight="600" text-anchor="middle" x="752" y="36">Documentos → LLM (semântica)</text>
+<rect fill="#0e1b26" height="50" rx="11" stroke="#38bdf8" stroke-width="2" width="120" x="540" y="96"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="600" y="120">docs</text>
+<text fill="#7fb6d6" font-family="Inter,sans-serif" font-size="10" text-anchor="middle" x="600" y="136">md · PDF · img</text>
+<line marker-end="url(#m13b-ahc)" opacity="0.55" stroke="#38bdf8" stroke-width="1.8" x1="660" x2="714" y1="121" y2="121"></line>
+<g class="wf-a"><rect fill="#0e1b26" height="58" rx="13" stroke="#38bdf8" stroke-width="2" width="130" x="718" y="92"></rect><text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="13" font-weight="600" text-anchor="middle" x="783" y="116">LLM</text><text fill="#7fb6d6" font-family="Inter,sans-serif" font-size="10.5" text-anchor="middle" x="783" y="134">pelo sentido</text></g>
+<line marker-end="url(#m13b-ahc)" opacity="0.55" stroke="#38bdf8" stroke-width="1.8" x1="848" x2="902" y1="121" y2="121"></line>
+<rect fill="#0e1b26" height="42" rx="10" stroke="#38bdf8" stroke-width="1.6" width="62" x="906" y="100"></rect>
+<text fill="#bfe6ff" font-family="Inter,sans-serif" font-size="11" font-weight="600" text-anchor="middle" x="937" y="125">grafo</text>
+<text fill="#7fb6d6" font-family="Inter,sans-serif" font-size="11" text-anchor="middle" x="752" y="190">significado · headless pede ANTHROPIC_API_KEY</text>
+</svg>
+</div>
+<p class="text-sm text-neutral-400 mb-6">↑ Dois caminhos, um mesmo destino (o grafo). Código vai pela <strong class="text-emerald-400">forma</strong> (AST, sem chave); documento vai pelo <strong>sentido</strong> (LLM). Dentro do Claude Code o modelo já vem da sessão — <strong class="text-emerald-400">sem chave</strong>; só o uso headless no terminal puro pede <code class="font-mono text-xs bg-dark-900 px-1 rounded">ANTHROPIC_API_KEY</code>.</p>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">AST</div><div class="text-xs text-neutral-400">Árvore do código</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">tree-sitter</div><div class="text-xs text-neutral-400">Lê 12 linguagens</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Semântica</div><div class="text-xs text-neutral-400">LLM, pelo sentido</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Sem chave</div><div class="text-xs text-neutral-400">Código no Claude</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 3 -->
+<section class="mb-16" data-inema-topic="modulo-1-3#topico-3" id="topico-3">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">3</span>
+<h2 class="text-2xl font-bold">📂 As saídas: graph.json, graph.html, GRAPH_REPORT.md</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t3-p1">
               Quando o Graphify termina, ele não devolve "uma resposta" — ele cria uma <strong>pasta</strong> chamada <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code> com vários arquivos. Saber qual é qual evita o pânico de "e agora, o que eu abro?" na primeira execução. São três protagonistas e um coadjuvante.
             </p>
-
-            <div class="space-y-5 mb-6">
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">1</div>
-                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1"><code class="font-mono text-sm text-emerald-400">graph.json</code> — a fonte de verdade</h4><p class="text-sm text-neutral-300">O grafo completo: todas as entidades, relações e comunidades. <strong>Tudo o resto deriva dele.</strong> É o arquivo que o Obsidian e o Claude Code vão consultar.</p></div>
-              </div>
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">2</div>
-                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1"><code class="font-mono text-sm text-emerald-400">graph.html</code> — o visual interativo</h4><p class="text-sm text-neutral-300">Uma página self-contained: abre direto no navegador, <strong>sem servidor</strong>. É onde você "vê" o grafo, arrasta nós e explora as conexões com o mouse.</p></div>
-              </div>
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">3</div>
-                <div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1"><code class="font-mono text-sm text-emerald-400">GRAPH_REPORT.md</code> — a auditoria em texto</h4><p class="text-sm text-neutral-300">Um relatório legível: os <strong>god nodes</strong> (nós mais conectados), as pontes entre comunidades e — o ouro — uma lista de <strong>perguntas sugeridas</strong> para começar a explorar.</p></div>
-              </div>
-            </div>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "self-contained"</h3>
-              <p class="text-neutral-300 text-sm"><strong>Self-contained</strong> = "tudo num arquivo só". O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> já carrega dentro de si todo o JavaScript e os dados de que precisa, então você dá dois cliques e ele abre — não precisa instalar nada nem subir um servidor.</p>
-            </div>
-
-            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
-              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">graphify-out/ (ilustrativo)</span></div>
-              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">graphify-out/
+<div class="space-y-5 mb-6">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">1</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1"><code class="font-mono text-sm text-emerald-400">graph.json</code> — a fonte de verdade</h4><p class="text-sm text-neutral-300">O grafo completo: todas as entidades, relações e comunidades. <strong>Tudo o resto deriva dele.</strong> É o arquivo que o Obsidian e o Claude Code vão consultar.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">2</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1"><code class="font-mono text-sm text-emerald-400">graph.html</code> — o visual interativo</h4><p class="text-sm text-neutral-300">Uma página self-contained: abre direto no navegador, <strong>sem servidor</strong>. É onde você "vê" o grafo, arrasta nós e explora as conexões com o mouse.</p></div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">3</div>
+<div class="flex-1 bg-dark-800 rounded-xl p-5 border border-dark-600"><h4 class="font-semibold mb-1"><code class="font-mono text-sm text-emerald-400">GRAPH_REPORT.md</code> — a auditoria em texto</h4><p class="text-sm text-neutral-300">Um relatório legível: os <strong>god nodes</strong> (nós mais conectados), as pontes entre comunidades e — o ouro — uma lista de <strong>perguntas sugeridas</strong> para começar a explorar.</p></div>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "self-contained"</h3>
+<p class="text-neutral-300 text-sm"><strong>Self-contained</strong> = "tudo num arquivo só". O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> já carrega dentro de si todo o JavaScript e os dados de que precisa, então você dá dois cliques e ele abre — não precisa instalar nada nem subir um servidor.</p>
+</div>
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">graphify-out/ (ilustrativo)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed">graphify-out/
 ├── graph.json          # fonte de verdade — tudo deriva daqui
 ├── graph.html          # visual interativo (abre no navegador)
 ├── GRAPH_REPORT.md     # auditoria: god nodes + perguntas sugeridas
 └── cache/              # cache por arquivo (não re-chama o LLM à toa)</pre>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t3-p2">
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t3-p2">
               O coadjuvante é a pasta <code class="font-mono text-xs bg-dark-900 px-1 rounded">cache/</code>: ela guarda o resultado por arquivo (identificado pelo <em>hash</em> do conteúdo) para não pagar de novo a chamada ao LLM quando nada mudou. Por isso a segunda execução costuma ser bem mais rápida que a primeira.
             </p>
-
-            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
-              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graph.json</div><div class="text-xs text-neutral-400">Fonte de verdade</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graph.html</div><div class="text-xs text-neutral-400">Visual no navegador</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">GRAPH_REPORT.md</div><div class="text-xs text-neutral-400">Auditoria + perguntas</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">cache/</div><div class="text-xs text-neutral-400">Não re-chama o LLM</div></div>
-              </div>
-            </div>
-
-            <div class="flex justify-start mt-6">
-              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
-                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- TÓPICO 4 -->
-          <section id="topico-4" data-inema-topic="modulo-1-3#topico-4" class="mb-16">
-            <div class="flex items-center justify-between mb-6 gap-4">
-              <div class="flex items-center space-x-4">
-                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
-                <h2 class="text-2xl font-bold">🧱 Código vs documentos</h2>
-              </div>
-              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t4-p1">
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graph.json</div><div class="text-xs text-neutral-400">Fonte de verdade</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graph.html</div><div class="text-xs text-neutral-400">Visual no navegador</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">GRAPH_REPORT.md</div><div class="text-xs text-neutral-400">Auditoria + perguntas</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">cache/</div><div class="text-xs text-neutral-400">Não re-chama o LLM</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 4 -->
+<section class="mb-16" data-inema-topic="modulo-1-3#topico-4" id="topico-4">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">4</span>
+<h2 class="text-2xl font-bold">🧱 Código vs documentos</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t4-p1">
               O Graphify aponta para <strong>dois tipos de fonte</strong>, e a escolha muda tudo o que vem depois. Você pode mapear um <strong class="text-emerald-400">code base</strong> (um repositório de código) ou um <strong class="text-emerald-400">corpus de documentos</strong> (uma coleção de PDFs, markdown, notas). Não é "melhor ou pior" — são objetivos diferentes.
             </p>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? "code base" e "corpus"</h3>
-              <p class="text-neutral-300 text-sm">Um <strong>code base</strong> (ou "base de código") é o conjunto de arquivos de programa de um projeto. Um <strong>corpus</strong> é uma coleção de textos tratada como um todo — aqui, a documentação que você quer transformar em mapa. No curso usamos um corpus: a <strong>documentação oficial do Claude Code</strong>.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-              <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
-                <h4 class="font-bold text-emerald-400 mb-3">🧩 Code base (código)</h4>
-                <ul class="space-y-2 text-neutral-300 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Extração por <strong>AST</strong> (tree-sitter), sem chave.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Nós como <code class="font-mono text-xs bg-dark-900 px-1 rounded">Function</code>, <code class="font-mono text-xs bg-dark-900 px-1 rounded">Module</code>.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Bom para entender uma arquitetura.</span></li>
-                </ul>
-              </div>
-              <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
-                <h4 class="font-bold text-blue-400 mb-3">📄 Corpus (documentos)</h4>
-                <ul class="space-y-2 text-neutral-300 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Extração <strong>semântica</strong> via LLM.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Nós como <code class="font-mono text-xs bg-dark-900 px-1 rounded">Concept</code> (conceitos).</span></li>
-                  <li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Bom para entender um assunto/documentação.</span></li>
-                </ul>
-              </div>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t4-p2">
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? "code base" e "corpus"</h3>
+<p class="text-neutral-300 text-sm">Um <strong>code base</strong> (ou "base de código") é o conjunto de arquivos de programa de um projeto. Um <strong>corpus</strong> é uma coleção de textos tratada como um todo — aqui, a documentação que você quer transformar em mapa. No curso usamos um corpus: a <strong>documentação oficial do Claude Code</strong>.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-3">🧩 Code base (código)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Extração por <strong>AST</strong> (tree-sitter), sem chave.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Nós como <code class="font-mono text-xs bg-dark-900 px-1 rounded">Function</code>, <code class="font-mono text-xs bg-dark-900 px-1 rounded">Module</code>.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">✓</span><span>Bom para entender uma arquitetura.</span></li>
+</ul>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+<h4 class="font-bold text-blue-400 mb-3">📄 Corpus (documentos)</h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Extração <strong>semântica</strong> via LLM.</span></li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Nós como <code class="font-mono text-xs bg-dark-900 px-1 rounded">Concept</code> (conceitos).</span></li>
+<li class="flex items-start gap-2"><span class="text-blue-400">✓</span><span>Bom para entender um assunto/documentação.</span></li>
+</ul>
+</div>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t4-p2">
               Para mapear um repositório de código no terminal puro, o comando é a face headless da CLI. Troque o <code class="font-mono text-xs bg-dark-900 px-1 rounded">&lt;.&gt;</code> pelo caminho do projeto (o ponto significa "pasta atual"):
             </p>
-
-            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
-              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal — extrair de código (ilustrativo)</span></div>
-              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># extrai o grafo do repositório na pasta atual
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">terminal — extrair de código (ilustrativo)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># extrai o grafo do repositório na pasta atual
 graphify extract &lt;.&gt;
 
 # ou de uma pasta específica
 graphify extract &lt;./src&gt;</pre>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t4-p3">
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t4-p3">
               A escolha entre os dois corpora também decide o destino: código costuma render um grafo que você consulta no próprio Graphify (tema da Trilha 3); documentação é o que vale a pena levar pro Obsidian, para encaixar no contexto maior do projeto. No curso seguimos o caminho dos documentos.
             </p>
-
-            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
-              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Code base</div><div class="text-xs text-neutral-400">Repositório</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Corpus</div><div class="text-xs text-neutral-400">Coleção de docs</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Ontologia</div><div class="text-xs text-neutral-400">O tipo do nó</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">extract</div><div class="text-xs text-neutral-400">Subcomando headless</div></div>
-              </div>
-            </div>
-
-            <div class="flex justify-start mt-6">
-              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
-                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- TÓPICO 5 -->
-          <section id="topico-5" data-inema-topic="modulo-1-3#topico-5" class="mb-16">
-            <div class="flex items-center justify-between mb-6 gap-4">
-              <div class="flex items-center space-x-4">
-                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
-                <h2 class="text-2xl font-bold">📦 O modo Obsidian e o modo wiki</h2>
-              </div>
-              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t5-p1">
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Code base</div><div class="text-xs text-neutral-400">Repositório</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Corpus</div><div class="text-xs text-neutral-400">Coleção de docs</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Ontologia</div><div class="text-xs text-neutral-400">O tipo do nó</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">extract</div><div class="text-xs text-neutral-400">Subcomando headless</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 5 -->
+<section class="mb-16" data-inema-topic="modulo-1-3#topico-5" id="topico-5">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">5</span>
+<h2 class="text-2xl font-bold">📦 O modo Obsidian e o modo wiki</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t5-p1">
               O grafo bruto (<code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code>) é ótimo para máquinas, mas você ainda quer <em>navegar</em> esse conhecimento. É aí que entram dois modos de export — e eles só existem na <strong>skill</strong> (<code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code>, dentro do Claude Code), não na CLI headless. São o <strong class="text-emerald-400">--obsidian</strong> e o <strong class="text-emerald-400">--wiki</strong>.
             </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-              <div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
-                <h4 class="font-bold text-emerald-400 mb-3"><code class="font-mono text-sm">--obsidian</code></h4>
-                <ul class="space-y-2 text-neutral-300 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-emerald-400">•</span><span><strong>Um <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> por nó</strong>, com <strong>wikilinks</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[nome]]</code> para os vizinhos.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-emerald-400">•</span><span>Gera um <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code>: as comunidades viram grupos no Canvas do Obsidian.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-emerald-400">•</span><span>É o pulo do gato do curso: o grafo vira um <strong>vault</strong> navegável.</span></li>
-                </ul>
-              </div>
-              <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
-                <h4 class="font-bold text-blue-400 mb-3"><code class="font-mono text-sm">--wiki</code></h4>
-                <ul class="space-y-2 text-neutral-300 text-sm">
-                  <li class="flex items-start gap-2"><span class="text-blue-400">•</span><span><strong>Artigos por comunidade</strong>, em estilo Wikipédia.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-blue-400">•</span><span>Menos atômico que o Obsidian: agrupa conceitos relacionados num texto.</span></li>
-                  <li class="flex items-start gap-2"><span class="text-blue-400">•</span><span>Bom para leitura corrida; não para o grafo de backlinks.</span></li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? "wikilink" e "backlink"</h3>
-              <p class="text-neutral-300 text-sm">Um <strong>wikilink</strong> é um link no formato <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[nome-da-nota]]</code> que o Obsidian entende. Quando a nota A aponta para a B, a B ganha automaticamente um <strong>backlink</strong> ("quem me cita") — é assim que o grafo de conexões aparece sozinho no Obsidian.</p>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t5-p2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+<div class="bg-emerald-900/20 rounded-xl border border-emerald-500/30 p-5">
+<h4 class="font-bold text-emerald-400 mb-3"><code class="font-mono text-sm">--obsidian</code></h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400">•</span><span><strong>Um <code class="font-mono text-xs bg-dark-900 px-1 rounded">.md</code> por nó</strong>, com <strong>wikilinks</strong> <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[nome]]</code> para os vizinhos.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">•</span><span>Gera um <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.canvas</code>: as comunidades viram grupos no Canvas do Obsidian.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400">•</span><span>É o pulo do gato do curso: o grafo vira um <strong>vault</strong> navegável.</span></li>
+</ul>
+</div>
+<div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-5">
+<h4 class="font-bold text-blue-400 mb-3"><code class="font-mono text-sm">--wiki</code></h4>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-blue-400">•</span><span><strong>Artigos por comunidade</strong>, em estilo Wikipédia.</span></li>
+<li class="flex items-start gap-2"><span class="text-blue-400">•</span><span>Menos atômico que o Obsidian: agrupa conceitos relacionados num texto.</span></li>
+<li class="flex items-start gap-2"><span class="text-blue-400">•</span><span>Bom para leitura corrida; não para o grafo de backlinks.</span></li>
+</ul>
+</div>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? "wikilink" e "backlink"</h3>
+<p class="text-neutral-300 text-sm">Um <strong>wikilink</strong> é um link no formato <code class="font-mono text-xs bg-dark-900 px-1 rounded">[[nome-da-nota]]</code> que o Obsidian entende. Quando a nota A aponta para a B, a B ganha automaticamente um <strong>backlink</strong> ("quem me cita") — é assim que o grafo de conexões aparece sozinho no Obsidian.</p>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t5-p2">
               O comando do modo Obsidian dentro do Claude Code aponta a fonte e diz onde gravar o vault. Troque o caminho da fonte e o <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian-dir</code> pelo destino que você quiser:
             </p>
-
-            <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
-              <div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">dentro do Claude Code — export (ilustrativo)</span></div>
-              <pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># exporta um vault Obsidian (um .md por nó + canvas)
+<div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
+<div class="flex items-center gap-2 mb-3 text-xs text-neutral-500"><span class="w-3 h-3 rounded-full bg-red-500/60"></span><span class="w-3 h-3 rounded-full bg-yellow-500/60"></span><span class="w-3 h-3 rounded-full bg-emerald-500/60"></span><span class="ml-2 font-mono">dentro do Claude Code — export (ilustrativo)</span></div>
+<pre class="font-mono text-xs sm:text-sm text-neutral-300 overflow-x-auto leading-relaxed"># exporta um vault Obsidian (um .md por nó + canvas)
 /graphify &lt;./docs&gt; --obsidian --obsidian-dir &lt;~/vault/graphify/claude-code&gt;
 
 # ou: artigos por comunidade, estilo Wikipédia
 /graphify &lt;./docs&gt; --wiki</pre>
-            </div>
-
-            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
-              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">--obsidian</div><div class="text-xs text-neutral-400">1 md por nó</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">--wiki</div><div class="text-xs text-neutral-400">Artigo por comunidade</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graph.canvas</div><div class="text-xs text-neutral-400">Comunidades no Canvas</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">backlink</div><div class="text-xs text-neutral-400">"Quem me cita"</div></div>
-              </div>
-            </div>
-
-            <div class="flex justify-start mt-6">
-              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
-                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- TÓPICO 6 -->
-          <section id="topico-6" data-inema-topic="modulo-1-3#topico-6" class="mb-16">
-            <div class="flex items-center justify-between mb-6 gap-4">
-              <div class="flex items-center space-x-4">
-                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
-                <h2 class="text-2xl font-bold">🫙 O grafo no vácuo: a limitação que o Obsidian resolve</h2>
-              </div>
-              <button type="button" data-inema-doubt-toggle aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" title="Marcar dúvida neste tópico"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t6-p1">
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">--obsidian</div><div class="text-xs text-neutral-400">1 md por nó</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">--wiki</div><div class="text-xs text-neutral-400">Artigo por comunidade</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">graph.canvas</div><div class="text-xs text-neutral-400">Comunidades no Canvas</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">backlink</div><div class="text-xs text-neutral-400">"Quem me cita"</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+</button>
+</div>
+</section>
+<!-- TÓPICO 6 -->
+<section class="mb-16" data-inema-topic="modulo-1-3#topico-6" id="topico-6">
+<div class="flex items-center justify-between mb-6 gap-4">
+<div class="flex items-center space-x-4">
+<span class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xl flex-shrink-0">6</span>
+<h2 class="text-2xl font-bold">🫙 O grafo no vácuo: a limitação que o Obsidian resolve</h2>
+</div>
+<button aria-pressed="false" class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span class="hidden sm:inline">Tenho dúvida</span></button>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t6-p1">
               Aqui está a honestidade do módulo: sozinho, o grafo do Graphify vive num <strong>vácuo</strong>. Ele conhece a fundo aquele corpus que você mandou — e <em>só</em> ele. Não sabe das suas outras notas, dos outros projetos, do contexto maior em que esse conhecimento deveria viver. É um silo: completo por dentro, isolado por fora.
             </p>
-
-            <div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">💡</span> A limitação, em uma frase</h3>
-              <p class="text-neutral-300 mb-4">O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> guarda a <strong>procedência</strong> (de qual arquivo-fonte veio cada entidade), mas os documentos-fonte <strong>não</strong> são copiados para junto do grafo — eles ficam no projeto. O grafo aponta para fora, mas não traz o resto para dentro.</p>
-              <ul class="space-y-2 text-neutral-300 text-sm">
-                <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Completo:</strong> sabe tudo sobre o corpus que recebeu.</span></li>
-                <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Isolado:</strong> não enxerga nada além daquele corpus.</span></li>
-                <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Estático:</strong> não se liga sozinho ao seu fluxo de trabalho.</span></li>
-              </ul>
-            </div>
-
-            <p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t6-p2">
+<div class="bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-xl border border-emerald-500/30 p-6 mb-6">
+<h3 class="text-lg font-semibold text-emerald-400 mb-3 flex items-center"><span class="mr-2">💡</span> A limitação, em uma frase</h3>
+<p class="text-neutral-300 mb-4">O <code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> guarda a <strong>procedência</strong> (de qual arquivo-fonte veio cada entidade), mas os documentos-fonte <strong>não</strong> são copiados para junto do grafo — eles ficam no projeto. O grafo aponta para fora, mas não traz o resto para dentro.</p>
+<ul class="space-y-2 text-neutral-300 text-sm">
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Completo:</strong> sabe tudo sobre o corpus que recebeu.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Isolado:</strong> não enxerga nada além daquele corpus.</span></li>
+<li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">•</span><span><strong>Estático:</strong> não se liga sozinho ao seu fluxo de trabalho.</span></li>
+</ul>
+</div>
+<p class="text-neutral-300 mb-5 leading-relaxed" data-inema-block="m1-3-t6-p2">
               E é exatamente por isso que o curso não para no Graphify. Levar o grafo pro <strong class="text-emerald-400">Obsidian</strong> (o modo <code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> do tópico 5) é o que tira o conhecimento do vácuo: dentro do vault ele encaixa no <strong>contexto maior</strong> — junto das suas outras notas, ligável, integrável. O grafo deixa de ser uma ilha e vira um bairro do seu segundo cérebro.
             </p>
-
-            <div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
-              <h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "silo"</h3>
-              <p class="text-neutral-300 text-sm">Em tecnologia, <strong>silo</strong> é informação que fica fechada num lugar só, sem conversar com o resto. O grafo isolado é um silo de conhecimento; o Obsidian é o que abre as portas desse silo e conecta com o que você já tem.</p>
-            </div>
-
-            <div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
-              <h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Silo</div><div class="text-xs text-neutral-400">Fechado em si</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Vácuo</div><div class="text-xs text-neutral-400">Sem contexto externo</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Procedência</div><div class="text-xs text-neutral-400">De onde o nó veio</div></div>
-                <div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Integração</div><div class="text-xs text-neutral-400">O que o Obsidian dá</div></div>
-              </div>
-            </div>
-
-            <div class="flex justify-start mt-6">
-              <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors">
-                <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
-              </button>
-            </div>
-          </section>
-
-          <!-- CHECAGEM LEVE -->
-          <div data-inema-check="modulo-1-3#q1" class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6">
-            <p class="font-medium mb-4">✋ Auto-recuperação (opcional, não bloqueia): das três saídas do Graphify, qual é a <strong>fonte de verdade</strong> da qual todo o resto deriva?</p>
-            <div class="inema-check-options space-y-2">
-              <button type="button" data-inema-check-option="0" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> — porque é o que você abre primeiro no navegador.</button>
-              <button type="button" data-inema-check-option="1" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> — o grafo completo; o visual e o relatório derivam dele.</button>
-              <button type="button" data-inema-check-option="2" class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm"><code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> — porque tem as perguntas sugeridas.</button>
-            </div>
-            <div data-inema-check-feedback class="mt-4 text-sm" role="status" aria-live="polite"></div>
-          </div>
-
-          <!-- RESUMO -->
-          <section class="mb-12">
-            <div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
-              <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do módulo</h2>
-              <div class="space-y-3 mb-8">
-                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Duas faces:</strong> <span class="text-neutral-400">a CLI <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code> no terminal e a skill <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code (sem chave).</span></div></div>
-                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Dois motores:</strong> <span class="text-neutral-400">código vai por AST/tree-sitter (sem chave); documento vai por LLM (semântico).</span></div></div>
-                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Três saídas em <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code>:</strong> <span class="text-neutral-400">graph.json (verdade), graph.html (visual), GRAPH_REPORT.md (auditoria).</span></div></div>
-                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Export navegável:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> (1 md por nó + canvas) ou <code class="font-mono text-xs bg-dark-900 px-1 rounded">--wiki</code> (artigos por comunidade).</span></div></div>
-                <div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">A limitação:</strong> <span class="text-neutral-400">sozinho o grafo é um silo; o Obsidian o tira do vácuo e o encaixa no contexto maior.</span></div></div>
-              </div>
-              <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
-                <h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo</h3>
-                <p class="text-neutral-300">1.4 · Obsidian como memória — por que o vault é o lugar certo para o grafo viver e como o agente o consulta.</p>
-              </div>
-              <div class="flex flex-col sm:flex-row gap-4">
-                <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para a Trilha 1</a>
-                <a href="modulo-1-4.html" class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors">Próximo: 1.4 Obsidian como memória →</a>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </article>
-  </main>
-
-  <footer class="border-t border-dark-600 py-8 mt-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p>Segundo Cérebro pro Claude Code · Módulo 1.3 · <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
-    </div>
-  </footer>
-
-  <script>
+<div class="bg-primary/10 rounded-xl border border-primary/30 p-5 mb-6">
+<h3 class="text-base font-semibold text-primary mb-2 flex items-center"><span class="mr-2">🔰</span> Novo aqui? O que é "silo"</h3>
+<p class="text-neutral-300 text-sm">Em tecnologia, <strong>silo</strong> é informação que fica fechada num lugar só, sem conversar com o resto. O grafo isolado é um silo de conhecimento; o Obsidian é o que abre as portas desse silo e conecta com o que você já tem.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5 mb-6">
+<h4 class="font-semibold text-emerald-400 mb-3">🔑 Conceitos-chave</h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-sm">
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Silo</div><div class="text-xs text-neutral-400">Fechado em si</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Vácuo</div><div class="text-xs text-neutral-400">Sem contexto externo</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Procedência</div><div class="text-xs text-neutral-400">De onde o nó veio</div></div>
+<div class="bg-dark-700/50 rounded-lg p-3"><div class="text-emerald-400 font-bold">Integração</div><div class="text-xs text-neutral-400">O que o Obsidian dá</div></div>
+</div>
+</div>
+<div class="flex justify-start mt-6">
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30 transition-colors" data-inema-read-toggle="" type="button">
+<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+</button>
+</div>
+</section>
+<!-- CHECAGEM LEVE -->
+<div class="inema-check mb-12 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-1-3#q1">
+<p class="font-medium mb-4">✋ Auto-recuperação (opcional, não bloqueia): das três saídas do Graphify, qual é a <strong>fonte de verdade</strong> da qual todo o resto deriva?</p>
+<div class="inema-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.html</code> — porque é o que você abre primeiro no navegador.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button"><code class="font-mono text-xs bg-dark-900 px-1 rounded">graph.json</code> — o grafo completo; o visual e o relatório derivam dele.</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button"><code class="font-mono text-xs bg-dark-900 px-1 rounded">GRAPH_REPORT.md</code> — porque tem as perguntas sugeridas.</button>
+</div>
+<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+</div>
+<!-- RESUMO -->
+<section class="mb-12">
+<div class="bg-gradient-to-br from-emerald-900/40 via-dark-800 to-dark-800 rounded-xl border border-emerald-500/30 p-8">
+<h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">📌</span> Resumo do módulo</h2>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Duas faces:</strong> <span class="text-neutral-400">a CLI <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphifyy</code> no terminal e a skill <code class="font-mono text-xs bg-dark-900 px-1 rounded">/graphify</code> dentro do Claude Code (sem chave).</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Dois motores:</strong> <span class="text-neutral-400">código vai por AST/tree-sitter (sem chave); documento vai por LLM (semântico).</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Três saídas em <code class="font-mono text-xs bg-dark-900 px-1 rounded">graphify-out/</code>:</strong> <span class="text-neutral-400">graph.json (verdade), graph.html (visual), GRAPH_REPORT.md (auditoria).</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">Export navegável:</strong> <span class="text-neutral-400"><code class="font-mono text-xs bg-dark-900 px-1 rounded">--obsidian</code> (1 md por nó + canvas) ou <code class="font-mono text-xs bg-dark-900 px-1 rounded">--wiki</code> (artigos por comunidade).</span></div></div>
+<div class="flex items-start gap-3"><span class="text-emerald-400 mt-1">✓</span><div><strong class="text-white">A limitação:</strong> <span class="text-neutral-400">sozinho o grafo é um silo; o Obsidian o tira do vácuo e o encaixa no contexto maior.</span></div></div>
+</div>
+<div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+<h3 class="font-semibold text-emerald-400 mb-2">Próximo módulo</h3>
+<p class="text-neutral-300">1.4 · Obsidian como memória — por que o vault é o lugar certo para o grafo viver e como o agente o consulta.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="index.html">← Voltar para a Trilha 1</a>
+<a class="flex-1 text-center px-6 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-500 transition-colors" href="modulo-1-4.html">Próximo: 1.4 Obsidian como memória →</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</article>
+</main>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p>Segundo Cérebro pro Claude Code · Módulo 1.3 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
     function toggleTopic(button){ const it=button.closest('.topic-item'); if(!it) return; const ex=it.querySelector('.topic-explanation'); const card=button.closest('.bg-dark-800')||document; card.querySelectorAll('.topic-explanation.active').forEach(e=>{ if(e!==ex) e.classList.remove('active'); }); const open=!ex.classList.contains('active'); ex.classList.toggle('active'); button.setAttribute('aria-expanded', open?'true':'false'); }
     (function(){ const tt=document.getElementById('theme-toggle'); const di=document.getElementById('theme-toggle-dark-icon'); const li=document.getElementById('theme-toggle-light-icon'); const h=document.documentElement; function sync(){ const d=h.classList.contains('dark'); if(d){ li.classList.remove('hidden'); di.classList.add('hidden'); } else { di.classList.remove('hidden'); li.classList.add('hidden'); } } sync(); tt&&tt.addEventListener('click',()=>{ const goDark=!h.classList.contains('dark'); h.classList.toggle('dark',goDark); try{ if(window.INEMA&&INEMA.setPref) INEMA.setPref('theme', goDark?'inema-dark':'claro'); else localStorage.setItem('theme', goDark?'dark':'light'); }catch(e){} sync(); }); })();
     function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
@@ -712,8 +651,8 @@ graphify extract &lt;./src&gt;</pre>
     document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
     document.addEventListener('click', e=>{ const b=e.target.closest('[data-inema-resume]'); if(b&&window.INEMA&&INEMA.resume) INEMA.resume(); });
   </script>
-  <script src="../../assets/learn.js"></script>
-  <script>
+<script src="../../assets/learn.js"></script>
+<script>
     if (window.INEMA && typeof window.INEMA.init === 'function') {
       window.INEMA.init();
       if (INEMA.registerCheck) INEMA.registerCheck('modulo-1-3#q1', { answer: 1, explain: { 0: 'O graph.html é onde você visualiza, mas ele é gerado a partir do graph.json — não é a origem.', 1: 'Isso. O graph.json é o grafo completo (entidades, relações, comunidades); o visual e o relatório derivam dele.', 2: 'O GRAPH_REPORT.md é a auditoria em texto (god nodes, perguntas sugeridas), mas também deriva do graph.json.' } });
